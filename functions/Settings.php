@@ -194,8 +194,6 @@ function render_tabbed_settings_nav_tabs(&$tabs, $active_tab) {
         <?php
     }
 
-    require_once( get_stylesheet_directory(). '/vendor/autoload.php' );
-    use Underscore\Types\Arrays;
     /** Render HTML for the submenu page 'tabbed_settings'. */
     function render_tabbed_settings() {
         if( isset( $_GET[ 'slug' ] ) ) {
