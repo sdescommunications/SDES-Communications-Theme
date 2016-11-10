@@ -838,6 +838,8 @@ class News extends CustomPostType {
 		 */
 		private static function get_archive_link( $option_id = 'sdes_rev_2015-newsArchiveUrl', $posttype_name = 'News' ) {	
 			
+			$archive_url = '';
+
 			//add a check for news page
 			if ( 'http://' !== $archive_url ) {
 				$archive_link = '<div class="datestamp"><a href="' . get_home_url() . '/news">»News Archive</a></div>';
