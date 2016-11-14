@@ -24,6 +24,9 @@ use SDES\Metafields\EditorMetaField as EditorMetaField;
 require_once( 'class-sdes-static.php' );
 use SDES\SDES_Static as SDES_Static;
 
+require_once( get_stylesheet_directory().'/vendor/autoload.php' );
+use Underscore\Types\Arrays;
+
 use \Exception as Exception;
 
 /**

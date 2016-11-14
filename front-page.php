@@ -12,7 +12,7 @@ if ( $hideBillboard ) {
 } else {
 	/* If using the WP Nivo Plugin, use the following code instead: */
 	// if ( function_exists('show_nivo_slider') ) { show_nivo_slider(); } 
-	echo do_shortcode( "[billboard-list limit='-1' tags='home']" );
+	echo do_shortcode( "[billboard-list]" );
 }
 ?>
 <!-- content area -->
