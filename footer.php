@@ -17,27 +17,7 @@ namespace SDES\BaseTheme;
 				?> 
 				
 				<p class="nav navbar-text navbar-right icons">
-				<?php
-					use SDES\SDES_Static as SDES_Static;
-					$url_facebook = SDES_Static::url_ensure_prefix( SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-facebook', '' ) );
-					$url_twitter = SDES_Static::url_ensure_prefix( SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-twitter', '' ) );
-					$url_youtube = SDES_Static::url_ensure_prefix( SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-youtube', '' ) );
-				if ( '' !== $url_facebook && 'http://' !== $url_facebook ) {
-					?>
-					<a href="<?= $url_facebook ?>">
-					<img src="<?= get_stylesheet_directory_uri(); ?>/images/facebook.png" class="icon" alt="facebook icon" title="Facebook">
-					</a>
-				<?php }
-				if ( '' !== $url_twitter && 'http://' !== $url_twitter ) { ?>
-					<a href="<?= $url_twitter ?>">
-						<img src="<?= get_stylesheet_directory_uri(); ?>/images/twitter.png" class="icon" alt="twitter icon" title="Twitter">
-					</a>
-				<?php }
-				if ( '' !== $url_youtube && 'http://' !== $url_youtube ) {?>
-					<a href="<?= $url_youtube ?>">
-						<img src="<?= get_stylesheet_directory_uri(); ?>/images/youtube.png" class="icon" alt="youtube icon" title="YouTube">
-					</a>
-				<?php } ?>
+				
 					<a href="http://get.adobe.com/reader/"><img src="<?= get_stylesheet_directory_uri(); ?>/images/content-end-pdf.jpg" alt="adobe acrobat icon" title="Get Adobe Reader"></a>
 				</p>
 			</div>
@@ -45,6 +25,7 @@ namespace SDES\BaseTheme;
 	</div>
 
 <?php
+	use SDES\SDES_Static as SDES_Static;
 	require_once( 'functions/class-sdes-helper.php' );
 		use SDES\BaseTheme\SDES_Helper;
 	require_once( 'functions/class-render-template.php' );
