@@ -191,14 +191,11 @@ class Footer {
 		<div class="site-sub-footer">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8">
-						Copyright &copy; 2015 <a href="http://www.sdes.ucf.edu/">Student Development and Enrollment Services</a> &bull;
-						Designed by <a href="http://it.sdes.ucf.edu/">SDES Information Technology</a>
+					<div class="col-sm-11">
+						<div id="accessibility"><a href="http://www.sdes.ucf.edu/accessibility"><i class="fa fa-universal-access" aria-hidden="true"></i> Accessibility Statement</a></div>
+						<div id="copyright">Copyright &copy; <?= date('Y'); ?> <a href="http://www.sdes.ucf.edu/">Student Development and Enrollment Services</a></div>
 					</div>
-					<div class="col-md-4 text-right">
-						<a href="http://validator.w3.org/check?uri=referer">Valid HTML 5</a> &bull;
-						<a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">Valid CSS 3</a>
-					</div>
+					<div id="sdes_promo" class="col-sm-1"></div>
 				</div>
 			</div>
 		</div>
