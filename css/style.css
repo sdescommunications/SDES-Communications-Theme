@@ -1,14 +1,13 @@
 @charset "utf-8";
-@import 'https://fonts.googleapis.com/css?family=Roboto';
-/* generics -------------------------------------------------------------------------------------------------------- */
 
+/* generics -------------------------------------------------------------------------------------------------------- */
 a{
 	color: #0074d9;
 	text-decoration: none;
 }
 
 a:hover, a:focus{
-
+	color: #5a1414;
 	text-decoration: underline;
 }
 
@@ -20,7 +19,7 @@ a:hover, a:focus{
 body{
 	background: #fff url('../images/ucf.png') repeat-x 0 20px;
 	background-size: 100% 139px;
-	color: #101010;
+}
 
 /* Hide noscript content without DOM flickering (and avoid WebAIM WAVE alert for <noscript> tags).
  * http://askthecssguy.com/articles/getting-around-the-flicker-of-javascript-modifying-the-dom-while-the-page-is-loading/ */
@@ -68,7 +67,7 @@ li:empty{
 
 .site-title{
 	font-size: 3.5em;
-	letter-spacing: -1px;
+	letter-spacing: -2px;
 	line-height: 1em;
 }
 
@@ -123,7 +122,7 @@ li:empty{
 .site-nav.navbar-default .navbar-nav > li.active > a,
 .site-nav.navbar-default .navbar-nav > li.active > a:hover,
 .site-nav.navbar-default .navbar-nav > li.active > a:focus {
-	background-color: rgba(50,50,50,0.1);
+	background-color: #e8dda9; /* rgba(50,50,50,0.1); */
 	transition: .2s ease;
 }
 
@@ -251,6 +250,10 @@ li:empty{
 	margin-right: 0.5em;
 }
 
+.site-nav-repeated .icons a{
+	text-decoration: none;
+}
+
 .site-nav-repeated .icons img{
 	margin-left: 4px;
 	border: 1px solid #ccc;
@@ -259,6 +262,7 @@ li:empty{
 .site-footer{
 	background: #222 url('../images/footer-bg.png') repeat-x;
 	padding: 1em 0;
+	color: #ccc;  /* All text should be visible in footer, not just text in <P> tags.*/
 }
 
 .site-footer h2{
@@ -335,10 +339,13 @@ li:empty{
 	float: left;
 	margin-right: 10px;
 	border-radius: 50%;
-	box-shadow: 0 1px 2px #ccc;
+	box-shadow: 0 2px 5px #ccc;
 	border: 3px solid #fff;
 }
 
+.staff:hover img{
+	border-width: 2px;
+}
 
 .staff .staff-content{
 	margin-left: 150px;
@@ -370,8 +377,8 @@ li:empty{
 	overflow: hidden;
 }
 
-.staff .staff-more {
-    font-size: 1em;
+.staff .staff-more{
+	font-size: 0.75em;
 }
 
 
@@ -387,22 +394,21 @@ li:empty{
 	width: 100px;
 	float: left;
 	margin-right: 10px;
-	margin-top: 6px;
-	box-shadow: 0 1px 2px #ccc;
+	border-radius: 10px;
+	box-shadow: 0 2px 3px #ccc;
 }
 
 .news-content{
 	margin-left: 120px;
 }
 
-.news .news-title {
-    font-size: 26px;
+.news .news-title{
+	font-size: 2em;
 }
 
 .news .news-title a{
-/*	padding-left: 15px;
+	padding-left: 15px;
 	background: url('../images/3bul.png') no-repeat center left;
-	letter-spacing: -1px;*/
 }
 
 .news .news-strapline{
@@ -811,6 +817,7 @@ div.hr-clear{
 }
 
 div.top, div.top-b{
+	border-bottom: 1px solid #eee;
 	padding-top: 0;
 	clear: both;
 }
@@ -841,8 +848,4 @@ img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
 
 .adminmsg {
 	color: #e90000;
-}
-.news {
-    border-bottom: 1px solid #f1f1f1;
-    margin: 0 0 20px 0;
 }
