@@ -50,9 +50,7 @@ class SDES_Helper
 		$shouldWarn = null, $get_query_var = 'get_query_var', $esc_attr = 'esc_attr' ) {
 		SDES_Static::set_default_keyValue( $args, 'echo', false );
 		SDES_Static::set_default_keyValue( $args, 'warn', true );
-		SDES_Static::set_default_keyValue( $args, 'warn_message',
-			'<li><a class="text-warning adminmsg" style="color: #8a6d3b !important;" href="/wp-admin/nav-menus.php?action=locations#locations-%1$s">Admin Warning: No menu set for "%1$s" menu location.</a></li>'
-			);
+		SDES_Static::set_default_keyValue( $args, 'warn_message','');
 
 		if ( 1 !== $args['depth'] ) {
 			trigger_error( "Calling 'fallback_navpills_warning' with a depth that is not 1. The SDES base-theme CSS does not currently support multi-level menus." ); }

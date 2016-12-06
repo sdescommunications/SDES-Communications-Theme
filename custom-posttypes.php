@@ -966,7 +966,7 @@ class Contact extends CustomPostType {
 		$use_shortcode  = false, // Auto generate a shortcode for the post type
 		                         // (see also objectsToHTML and toHTML methods).
 		$taxonomies     = array(),
-		$menu_icon      = 'dashicons-dashboard',
+		$menu_icon      = 'dashicons-phone',
 		$built_in       = false,
 		// Optional default ordering for generic shortcode if not specified by user.
 		$default_orderby = null,
