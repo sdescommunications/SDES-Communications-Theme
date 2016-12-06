@@ -195,7 +195,7 @@ class Footer {
 						<div id="accessibility"><a href="http://www.sdes.ucf.edu/accessibility"><i class="fa fa-universal-access" aria-hidden="true"></i> Accessibility Statement</a></div>
 						<div id="copyright">Copyright &copy; <?= date('Y'); ?> <a href="http://www.sdes.ucf.edu/">Student Development and Enrollment Services</a></div>
 					</div>
-					<div id="sdes_promo" class="col-sm-1"></div>
+					<div id="sdes_promo" class="col-sm-1"><a href="http://undergrad.ucf.edu/whatsnext" title="Undergrad - What's Next"><img src="https://assets.sdes.ucf.edu/images/qep-logo-dark.png" alt="what\'s next" /></a></div>
 				</div>
 			</div>
 		</div>
