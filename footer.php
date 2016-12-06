@@ -151,7 +151,7 @@ class Footer {
 						?>
 						<h2>Search</h2>
 						<span id="footer-search">
-						<form action="http://google.cc.ucf.edu/search">
+						<form action="https://google.cc.ucf.edu/search">
 							<label for="footer-search-field">Search UCF</label>
 							<input type="hidden" name="output" value="xml_no_dtd">
 							<input type="hidden" name="proxystylesheet" value="UCF_Main">
