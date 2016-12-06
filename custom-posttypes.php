@@ -838,6 +838,8 @@ class News extends CustomPostType {
 		 */
 		private static function get_archive_link( $option_id = 'sdes_rev_2015-newsArchiveUrl', $posttype_name = 'News' ) {	
 			
+			$archive_url = '';
+
 			//add a check for news page
 			if ( 'http://' !== $archive_url ) {
 				$archive_link = '<div class="datestamp"><a href="' . get_home_url() . '/news">»News Archive</a></div>';
@@ -964,7 +966,7 @@ class Contact extends CustomPostType {
 		$use_shortcode  = false, // Auto generate a shortcode for the post type
 		                         // (see also objectsToHTML and toHTML methods).
 		$taxonomies     = array(),
-		$menu_icon      = 'dashicons-dashboard',
+		$menu_icon      = 'dashicons-phone',
 		$built_in       = false,
 		// Optional default ordering for generic shortcode if not specified by user.
 		$default_orderby = null,
@@ -1047,188 +1049,6 @@ class Contact extends CustomPostType {
 }
 
 /**
-* Card posttype
-*/
-class Card extends CustomPostType {
-	public
-		$name           = 'card',
-		$plural_name    = 'Cards',
-		$singular_name  = 'Card',
-		$add_new_item   = 'Add New Card',
-		$edit_item      = 'Edit Card',
-		$new_item       = 'New Card',
-		$public         = true,  // I dunno...leave it true
-		$use_title      = true,  // Title field
-		$use_editor     = true,  // WYSIWYG editor, post content field
-		$use_revisions  = true,  // Revisions on post content and titles
-		$use_thumbnails = true,  // Featured images
-		$use_order      = true, // Wordpress built-in order meta data
-		$use_metabox    = true, // Enable if you have custom fields to display in admin
-		$use_shortcode  = true, // Auto generate a shortcode for the post type
-		                         // (see also objectsToHTML and toHTML methods).
-		$taxonomies     = array( 'post_tag', 'org_groups' ),
-		$menu_icon      = 'dashicons-images-alt',
-		$built_in       = false,
-		// Optional default ordering for generic shortcode if not specified by user.
-		$default_orderby = null,
-		$default_order   = null,
-		$sc_interface_fields = array(array(
-				'name' => 'Header',
-				'id' => 'header',
-				'help_text' => 'Show a header for above the Card list.',
-				'type' => 'text',
-				'default' => 'Title',
-			),);
-
-		public function fields() {
-			$prefix = $this->options( 'name' ).'_';
-			return array(
-			array(
-				'name' => 'CTA Button Text',
-				'descr' => 'Text for Call to action button',
-				'id' => $prefix.'cta_text',
-				'type' => 'text',
-			),
-			array(
-				'name' => 'Call to action link',
-				'descr' => 'URL for call to action',
-				'id' => $prefix.'cta',
-				'type' => 'text',
-				'default' => 'http://',
-			),
-			);
-		}
-
-		public function metabox() {
-			if ( $this->options( 'use_metabox' ) ) {
-				return array(
-				'id'       => 'custom_'.$this->options( 'name' ).'_metabox',
-				'title'    => __( $this->options( 'singular_name' ).' Fields' ),
-				'page'     => $this->options( 'name' ),
-				'context'  => 'after_title',
-				'priority' => 'high',
-				'fields'   => $this->fields(),
-				);
-			}
-			return null;
-		}
-
-		public function register_metaboxes() {
-			// Move and Rename the Featured Image Metabox.
-			remove_meta_box( 'postimagediv', $this->name, 'side' );
-			add_meta_box('postimagediv', __( "{$this->singular_name} Image" ),
-			'post_thumbnail_meta_box', $this->name, 'after_title', 'high');
-			CustomPostType::register_meta_boxes_after_title();
-
-			parent::register_metaboxes();
-		}
-
-		public function shortcode( $attr ) {
-
-			$prefix = $this->options( 'name' ).'_';
-			$default_attrs = array(
-			'type' => $this->options( 'name' ),
-			'header' => '',
-			'css_classes' => '',
-			
-			);
-			if ( is_array( $attr ) ) {
-				$attr = array_merge( $default_attrs, $attr );
-			} else {
-				$attr = $default_attrs;
-			}
-
-			$context['header'] = $attr['header'];
-			$context['css_classes'] = ( $attr['css_classes'] ) ? $attr['css_classes'] : $this->options( 'name' ).'-list';
-			unset( $attr['header'] );
-			unset( $attr['css_classes'] );
-			$args = array( 'classname' => __CLASS__, 'objects_only' => true );
-			$objects = parent::sc_object_list( $attr, $args );
-
-			$context['objects'] = $objects;
-			return static::render_objects_to_html( $context );
-		}
-
-		public function objectsToHTML( $objects, $css_classes ) {
-			if ( count( $objects ) < 1 ) { return (WP_DEBUG) ? '<!-- No objects were provided to objectsToHTML. -->' : '';}
-			$context['css_classes'] = ( $css_classes ) ? $css_classes : $this->options( 'name' ).'-list';
-			$context['archiveUrl'] = '';
-			$context['objects'] = $objects;
-			return static::render_objects_to_html( $context );
-		}
-
-		protected static function render_objects_to_html( $context ) {
-			$count = 0;
-			ob_start();
-			?>			
-			<?php if ( $context['header'] ) { ?>
-				<div class="staff-role"><?= $context['header'] ?></div>
-			<?php }else { ?>
-				<div class="blank"></div>
-			<?php } ?>
-				<span class="<?= $context['css_classes'] ?>">
-					<div class="row">
-					<?php foreach ( $context['objects'] as $o ) : ?>					
-					<?= static::toHTML( $o ) ?>
-					<?php 
-						//every 3rd item new row is added
-						++$count;
-						if ($count % 3 == 0){
-							echo '</div><div class="row">';
-						}
-					?>
-				<?php endforeach;?>
-					</div>
-				</span>
-			<?php
-
-			return ob_get_clean();			
-		}
-
-		public static function toHTML( $post_object ) {
-			$context['Post_ID'] = $post_object->ID;
-			$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
-			$context['thumbnail']
-			= has_post_thumbnail( $post_object )
-				? get_the_post_thumbnail( $post_object, 'post-thumbnail', array( 'class' => 'img-responsive' ) )
-				: "<img src='".$thumbnailUrl."' alt='thumb' class='img-responsive'>";
-			$context['title'] = get_the_title( $post_object );
-			$context['card_cta'] = get_post_meta( $post_object->ID, 'card_cta_text', true );
-			$context['card_cta_url'] = get_post_meta( $post_object->ID, 'card_cta', true );			
-			$context['content'] = wpautop($post_object->post_content);
-			return static::render_to_html( $context );
-		}
-
-		protected static function render_to_html( $context ) {
-			ob_start();			
-			?>			
-			<div class="col-sm-4 col-xs-12">
-				<div class="thumbnail">
-					<?= $context['thumbnail'] ?>
-				<div class="caption">
-					<h3>
-						<?php 
-							if (!empty($context['card_cta_url'])){
-									echo '<a href="'. $context['card_cta_url']. '">'. $context['title'] . '</a>';
-								}
-							else echo $context['title']; 
-						?>							
-					</h3>
-					<?= $context['content'] ?>
-					<?php
-						if(!empty($context['card_cta_url']) && (!empty($context['card_cta']))) {
-							echo '<a class="btn btn-lg btn-block btn-default" href="'. $context['card_cta_url']. '">'. $context['card_cta']. '</a>';
-						} 
-					?>					
-				</div>	
-				</div>	
-			</div>
-			<?php			
-			return ob_get_clean();
-		}
-}
-
-/**
  * Register custom post types when the theme is initialized.
  * @see http://codex.wordpress.org/Plugin_API/Action_Reference/init WP-Codex: init action hook.
  */
@@ -1241,7 +1061,6 @@ function register_custom_posttypes() {
 		__NAMESPACE__.'\News',
 		__NAMESPACE__.'\Staff',
 		__NAMESPACE__.'\Contact',
-		__NAMESPACE__.'\Card',
 	));
 }
 add_action( 'init', __NAMESPACE__.'\register_custom_posttypes' );

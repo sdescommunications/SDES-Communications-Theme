@@ -1,7 +1,7 @@
 <?php
 /**
- * Display the Front Page of the site, per the WordPress Template Hierarchy.
- */
+* Template Name: Content Page Billboard
+*/
 use SDES\SDES_Static as SDES_Static;
 
 get_header();
@@ -12,8 +12,11 @@ if ( $hideBillboard ) {
 } else {
 	/* If using the WP Nivo Plugin, use the following code instead: */
 	// if ( function_exists('show_nivo_slider') ) { show_nivo_slider(); } 
-	echo do_shortcode( "[billboard-list tags='home']" );
+	echo do_shortcode( "[billboard-list tags='". get_post_meta($post->ID, "billboard-meta-box-text", true) ."']" );
+
 }
+
+
 ?>
 <!-- content area -->
 <div class="container site-content" id="content">
@@ -24,20 +27,12 @@ if ( $hideBillboard ) {
 		<br>
 		<div class="col-sm-8">
 			<?php if ( have_posts() ) :
-			while ( have_posts() ) : the_post();
-			the_content();
-			endwhile;
-			else:
-				$qNews = array('post_type' => 'news');
-			$loop = new WP_Query($qNews);
-			if ( $loop->have_posts() ) : ?>
-			<h2 class="page-header">News and Announcements</h2>
-			<?php echo do_shortcode("[news-list]"); 
-			else:
-				SDES_Static::Get_No_Posts_Message();
+				while ( have_posts() ) : the_post();
+					the_content();
+				endwhile;			
 			endif;
 			wp_reset_query();
-			endif; ?>
+			?>
 		</div>
 		<div class="col-sm-4">
 			<?php		
