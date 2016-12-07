@@ -167,21 +167,54 @@ class Footer {
 						</form>
 						</span>
 						<?php
-						
-						require_once( 'functions/class-sdes-helper.php' );
-						$directory_cms_acronym = esc_attr( get_option( 'sdes_theme_settings_dir_acronym' ) );
-						$dept_feed = SDES_Helper::get_sdes_directory_department( $directory_cms_acronym,
-							array( 'name' => get_bloginfo( 'name' ), 'email' => 'sdes@ucf.edu' )
-						);
 
-						$ctx_contact['departmentName'] = SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-departmentName', $dept_feed['name'] );
-						$ctx_contact['phone'] = SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-phone', $dept_feed['phone'] );
-						$ctx_contact['email'] = SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-email', $dept_feed['email'] );
-						$ctx_contact['buildingNumber'] = SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-buildingNumber', $dept_feed['location']['buildingNumber'] );
-						$ctx_contact['buildingName'] = SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-buildingName', $dept_feed['location']['building'] );
-						$ctx_contact['roomNumber'] = SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-roomNumber', $dept_feed['location']['roomNumber'] );
-						Render_Template::footer_contact( $ctx_contact );
+							//Gets main contact info and desplays it
+							$id = get_posts(array(
+								'post_type' => 'contact',
+								'post_status' => 'publish',
+								'posts_per_page' => -1,
+								), 'OBJECT');
+							if(!empty($id)){
+								foreach($id as $item){			
+									if(strtolower($item->post_title) == "main"){	
+										$info = $item->ID;
+									}	//end of if		
+								}	//end of for
+							}
+
+							$data = get_post_meta($info);						
+
 						?>
+							<h2>Contact</h2>
+							<p>
+								<?= bloginfo( 'name' ) ?><br>
+								<?php if(!empty($data)){ ?>
+
+									<?php if(!empty($data['contact_phone'][0])) { ?>
+										Phone:<?= $data['contact_phone'][0] ?> 
+									<?php } ?>
+
+									<?php if(!empty($data['contact_fax'][0])) { ?>
+										&#8226; Fax: <?= $data['contact_fax'][0] ?>
+									<?php } ?>
+
+									<?php if(!empty($data['contact_email'][0])) { ?>
+										&#8226; Email: <a href="mailto:<?= $data['contact_email'][0] ?>"> <?= $data['contact_email'][0] ?></a>
+									<?php } ?>
+
+									<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
+										&#8226; Location: <a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>" class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a>
+									<?php } ?>	
+
+								<?php } else{ ?>
+									<a href="http://www.ucf.edu/phonebook/">UCF Phonebook</a> &#8226; 
+									<a href="http://events.ucf.edu/">UCF Events</a> &#8226; 
+									<a href="http://map.ucf.edu/">UCF Map</a> &#8226; 
+									<a href="http://ucf.custhelp.com/">Ask UCF</a>
+								<?php	} ?>
+
+								
+							</p>
 						<?php } ?>
 					</div>
 				</div>
