@@ -47,7 +47,7 @@ use SDES\SDES_Static as SDES_Static;
 		</script>
 	<?php } ?>
 	<?php
-		$sdes_theme_settings_ga_id = esc_attr(get_option('sdes_theme_settings_ga_id', ''));
+		$sdes_theme_settings_ga_id = esc_attr(get_option('google_id', ''));
 		if ( '' != $sdes_theme_settings_ga_id ) : ?>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
