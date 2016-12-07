@@ -18,6 +18,7 @@ use SDES\SDES_Static as SDES_Static;
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/nivoslider/3.2/nivo-slider.css" integrity="sha256-ozCgGW2jByABzzSU1X46571+0m23IUok6fdIjS5+nVQ=" crossorigin="anonymous" >
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/nivoslider/3.2/themes/default/default.css" integrity="sha256-O1/X/SEJPvJ8T2QC3NQvoARgaeAk1iGHstf0wUjuNkA=" crossorigin="anonymous" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="<?= get_stylesheet_uri(); ?>" >
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" integrity="sha384-Pn+PczAsODRZ2PiGg0IheRROpP7lXO1NTIjiPo6cca8TliBvaeil42fobhzvZd74" crossorigin="anonymous"></script>
@@ -27,6 +28,19 @@ use SDES\SDES_Static as SDES_Static;
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js" integrity="sha256-8PU3OtIDEB6pG/gmxafvj3zXSIfwa60suSd6UEUDueI=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js" integrity="sha256-TZwF+mdLcrSLlptjyffYpBb8iUAuLtidBmNiMj7ll1k=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/sdes_main_ucf.js"></script>
+
+	<style>
+		#accessibility {
+			margin-bottom: 7px;
+			display: block;
+		}
+		#copyright {
+			font-size: 11px;
+			opacity: .4;
+		}
+
+	</style>
+	
 
 	<?php $sdes_theme_settings_js_lib = esc_attr(get_option('sdes_theme_settings_js_lib', ''));
 		if ( '' != $sdes_theme_settings_js_lib ) {

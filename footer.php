@@ -113,7 +113,7 @@ class Footer {
 								Footer::get_feed_links( 'left' );
 							} else {
 								?>
-								<ol>
+							<ul>
 								<li><a href="http://www.sdes.ucf.edu/">SDES Home</a></li>
 								<li><a href="http://www.sdes.ucf.edu/about">What is SDES? / About</a></li>
 								<li><a href="http://www.sdes.ucf.edu/departments">SDES Departments</a></li>
@@ -122,7 +122,7 @@ class Footer {
 								<li><a href="http://www.sdes.ucf.edu/staff">SDES Leadership Team</a></li>
 								<li><a href="http://creed.sdes.ucf.edu/">The UCF Creed</a></li>
 								<li><a href="http://it.sdes.ucf.edu/">SDES Information Technology</a></li>
-								</ol>
+							</ul>
 								<?php
 							}
 						}
@@ -152,17 +152,18 @@ class Footer {
 						<h2>Search</h2>
 						<span id="footer-search">
 						<form action="https://google.cc.ucf.edu/search">
-							<label for="footer-search-field">Search UCF</label>
+								<fieldset>
 							<input type="hidden" name="output" value="xml_no_dtd">
 							<input type="hidden" name="proxystylesheet" value="UCF_Main">
 							<input type="hidden" name="client" value="UCF_Main">
 							<input type="hidden" name="site" value="UCF_Main">
 							<div class="input-group">
-								<input type="text" id="footer-search-field" class="form-control">
+										<input type="text" class="form-control" name="q">
 								<span class="input-group-btn">
 									<input type="submit" class="btn" value="Search">
 								</span>
 							</div>
+								</fieldset>
 						</form>
 						</span>
 						<?php
@@ -191,14 +192,11 @@ class Footer {
 		<div class="site-sub-footer">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8">
-						Copyright &copy; 2015 <a href="http://www.sdes.ucf.edu/">Student Development and Enrollment Services</a> &bull;
-						Designed by <a href="http://it.sdes.ucf.edu/">SDES Information Technology</a>
+					<div class="col-sm-11">
+						<div id="accessibility"><a href="http://www.sdes.ucf.edu/accessibility"><i class="fa fa-universal-access" aria-hidden="true"></i> Accessibility Statement</a></div>
+						<div id="copyright">Copyright &copy; <?= date('Y'); ?> <a href="http://www.sdes.ucf.edu/">Student Development and Enrollment Services</a></div>
 					</div>
-					<div class="col-md-4 text-right">
-						<a href="http://validator.w3.org/check?uri=referer">Valid HTML 5</a> &bull;
-						<a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">Valid CSS 3</a>
-					</div>
+					<div id="sdes_promo" class="col-sm-1"><div id="sdes_promo" class="col-sm-1"><a href="http://undergrad.ucf.edu/whatsnext"><img src="https://assets.sdes.ucf.edu/images/qep-logo-dark.png" alt="what's next"></a></div></div>
 				</div>
 			</div>
 		</div>
