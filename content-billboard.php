@@ -4,24 +4,17 @@
 */
 use SDES\SDES_Static as SDES_Static;
 
-get_header();
-
-$hideBillboard = false; // Could add an option for hiding Billboard in Theme Customizer.
-if ( $hideBillboard ) {
-	// Could add an adminmsg here.
-} else {
-	/* If using the WP Nivo Plugin, use the following code instead: */
-	// if ( function_exists('show_nivo_slider') ) { show_nivo_slider(); } 
-	echo do_shortcode( "[billboard-list tags='". get_post_meta($post->ID, "billboard-meta-box-text", true) ."']" );
-
-}
-
+get_header(); 
 
 ?>
+
+<?= do_shortcode( "[billboard-list tags='". get_post_meta($post->ID, "billboard-meta-box-text", true) ."']" ) ?>
+
 <!-- content area -->
 <div class="container site-content" id="content">
 	<?= do_shortcode( '[alert-list show_all="true"]' ); ?>
 
+	<h1 class="page-header"><?= get_the_title() ?></h1>
 
 	<div class="row">
 		<br>

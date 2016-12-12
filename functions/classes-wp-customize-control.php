@@ -22,10 +22,6 @@ class Textarea_CustomControl extends WP_Customize_Control {
 	}
 }
 
-
-
-
-
 /**
  * Display a field for a phone number within Theme Customizer.
  * Adds CSS classes: .customize-phoneLabel, .customize-phoneInput

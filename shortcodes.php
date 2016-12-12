@@ -545,15 +545,12 @@ class sc_events extends ShortcodeBase {
 
 						?>    
 						<li class="list-group-item">
-							<div class="date">
-								<time datetime="<?= $context['datetime'] ?>">
-									<span class="month"><?= $context['month'] ?></span>
-									<span class="day"><?= $context['day'] ?></span>
-								</time>
+							<div class="date">								
+								<span class="month"><?= $context['month'] ?></span>
+								<span class="day"><?= $context['day'] ?></span>								
 							</div>
-							<a href="<?= $context['link'] ?>">
-								<span class="title"><?= $title ?></span><br/>
-								<span class="location"><?= $loc ?></span>
+							<a class="title" href="<?= $context['link'] ?>"><?= $title ?></a>
+							<a class="location" href="<?= $context['link'] ?>"><?= $loc ?></a>
 							</a>
 							<div class="end"></div>
 						</li>

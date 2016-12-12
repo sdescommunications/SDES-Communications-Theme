@@ -428,12 +428,13 @@ class Billboard extends CustomPostType {
 			<script type="text/javascript">
 			$(window).load(function() {
 				$('#slider').nivoSlider({
-					slices: <?= $billboard_count ?>,
-					pauseTime: 5000,
+					slices: <?= $billboard_count ?>,					
+					pauseTime: 5000,					
 					controlNav: false,
 					captionOpacity: 0.7,
 					<?php if ( 1 === $billboard_count ) : ?>
 					directionNav: false,
+					manualAdvance: true,
 					<?php endif; ?>
 				});
 				$('#slider').show();
