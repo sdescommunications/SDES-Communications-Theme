@@ -10,7 +10,6 @@ get_header();
 <div class="container site-content" id="content">
 	<?= get_template_part( 'includes/template', 'alert' ); ?>
 
-
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 		<?= get_template_part( 'includes/template', 'heading' ); ?>
 		<div class="row">
@@ -19,8 +18,8 @@ get_header();
 			</div>
 			<div class="col-sm-4 col-xs-12">
 				<?php
-				$prefix = SDES_Static::get_post_type( get_the_ID() ).'_';
-				echo do_shortcode( get_post_meta(get_the_ID(),  $prefix.'sidecolumn', true ) ); 
+					$prefix = SDES_Static::get_post_type( get_the_ID() ).'_';
+					echo do_shortcode( get_post_meta(get_the_ID(),  $prefix.'sidecolumn', true ) ); 
 				?>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-<?php
+ <?php
 /** Display a single Alert post, per the WordPress template hierarchy. */
 namespace SDES\BaseTheme\PostTypes;
 use SDES\SDES_Static as SDES_Static;
@@ -25,7 +25,7 @@ get_header();
 			while (have_posts()) : the_post(); 
 
 		global $post;
-		//var_dump(get_post_meta($post->ID));
+		
 		echo Alert::toHTML( $post );
 
 		endwhile;
