@@ -24,19 +24,6 @@ class SDES_Static
 		: $default_value;
 	}
 
-	/**
-	 * Set multiple default values for keys in $args, which is passed by reference.
-	 * @param array $args    An args array (that is passed in by reference).
-	 * @param array $default_values   An collections of keys and their default values.
-	 */
-	public static function set_default_keyValue_array( &$args, $default_values ) {
-		foreach ( $default_values as $key => $default_value ) {
-			$args[ $key ] = (isset( $args[ $key ] ))
-			? $args[ $key ]
-			: $default_value;
-		}
-	}
-
 	
 	/**
 	 * For each class provided, create a new instance of the class and call its the register function.
@@ -54,41 +41,6 @@ class SDES_Static
 		}
 		return $class_instances;
 	}
-
-
-	/**
-	 * Add .img-responsive to IMG tags. Usually called from a filter, e.g., `add_filter('the_content', 'img_add_responsive_class_content');`
-	 * @see https://developer.wordpress.org/reference/functions/the_content/ WP-Ref: the_content()
-	 * @see http://stackoverflow.com/a/20499803 Stack-Overflow: /a/20499803
-	 * @return string A string of the filtered HTML content.
-	 */
-	public static function img_add_responsive_class_content( $content ){
-		if ( self::is_null_or_whitespace( $content) ) { return $content; }
-
-		if ( \function_exists( 'mb_convert_encoding' ) ) {
-			$content = \utf8_decode( \mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
-		}
-
-		// Loads content without adding doctype, html, and body tags, or wrapping in a p tag.
-		$document = new \SDES\DOMDocument_Smart();
-		\libxml_use_internal_errors( true );
-		// Presumably fatal exception in QA after the next line executes. Above code is fine.
-		$document->loadHTML( $content );
-
-		// Loop through img tags to add .img-responsive (unless IMG.img-nonresponsive).
-		$imgs = $document->getElementsByTagName( 'img' );
-		foreach ( $imgs as $img ) {
-			$existing_class = $img->getAttribute( 'class' );
-			if( false === \strpos( $existing_class, 'img-nonresponsive' ) ) {
-				$img->setAttribute( 'class', "img-responsive $existing_class" );
-			} else {
-				continue;
-			}
-		}
-		return $document->saveHTML();
-	}
-
-
 
 	
 	/**
@@ -123,37 +75,6 @@ class SDES_Static
 		}
 		return $output;
 	}
-
-
-	
-	/**
-	 * Always include an area code, show only numbers and the dash symbol, always show 2 dashes.
-	 * @param string $value    The value to be sanitized, as passed back by sanitize_callback.
-	 */
-	public static function sanitize_telephone( $value, $areaCode = '407' ) {
-		if ( '' === $value ) { return $value; }
-		$value = preg_replace( '/[^0-9-]/', '', $value ); // Remove non-numeric, unless a dash.
-
-		// Prepend area code if necessary.
-		if ( strlen( $value ) <= 8 ) {
-			$value = $areaCode . '-' . $value;
-		}
-
-		// Add first dash if missing.
-		$firstDash = 3;
-		if ( '-' !== $value[ $firstDash ]  ) {
-			$value = substr_replace( $value, '-', $firstDash, 0 );
-		}
-
-		// Add last dash if missing.
-		$lastDash = 7; // strlen($value)-5; //.
-		if ( '-' !== $value[ $lastDash ] ) {
-			$value = substr_replace( $value, '-', $lastDash, 0 );
-		}
-
-		return $value;
-	}
-
 
 	/**
 	 * Add a protocol to a URL if it does not exist.
@@ -219,7 +140,6 @@ public static function is_null_or_whitespace( $string ) {
 		return $class_names;
 	}
 
-
 	/**
 	 * Really get the post type.  A post type of revision will return its parent
 	 * post type.
@@ -267,7 +187,6 @@ public static function is_null_or_whitespace( $string ) {
 		return $default_text;
 	}
 
-
 	/**
 	 * Use to display a message in locations where have_posts() returns false.
 	 * @param Array $args  Any additional arguments for this function.
@@ -289,8 +208,6 @@ public static function is_null_or_whitespace( $string ) {
 		return $output;
 	}
 }
-
-
 
 /**
  * Load HTML content into a DOMDocument without wrapping it in doctype, html, and body tags. In case there is only text,
