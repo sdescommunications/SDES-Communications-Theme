@@ -18,7 +18,7 @@ namespace SDES\BaseTheme;
 				
 				<p class="nav navbar-text navbar-right icons">
 				
-					<a href="http://get.adobe.com/reader/"><img src="<?= get_stylesheet_directory_uri(); ?>/images/content-end-pdf.jpg" alt="adobe acrobat icon" title="Get Adobe Reader"></a>
+					<a href="//get.adobe.com/reader/"><img src="<?= get_stylesheet_directory_uri(); ?>/images/content-end-pdf.jpg" alt="adobe acrobat icon" title="Get Adobe Reader"></a>
 				</p>
 			</div>
 		</nav>
@@ -46,7 +46,7 @@ class Footer {
 		 * (libraries like C#'s memorycache, not servers like memcached, redis).
 		 * Maybe desarrolla2/cache, doctrine/cache, or something under cache/cache on Packagist.org
 		 */
-		$rss_url = SDES_Static::get_theme_mod_defaultIfEmpty( "sdes_rev_2015-footer_feed-{$position}", 'http://today.ucf.edu/feed/' );
+		$rss_url = SDES_Static::get_theme_mod_defaultIfEmpty( "sdes_rev_2015-footer_feed-{$position}", 'http://today.ucf.edu/feed/json' );
 		$rss_url = SDES_Static::url_ensure_prefix( $rss_url );
 		$default_anchors = SDES_Static::get_rss_links_and_titles( $rss_url );
 		SDES_Static::set_default_keyValue( $ctx_links, 'anchors', $default_anchors );
@@ -114,14 +114,14 @@ class Footer {
 							} else {
 								?>
 							<ul>
-								<li><a href="http://www.sdes.ucf.edu/">SDES Home</a></li>
-								<li><a href="http://www.sdes.ucf.edu/about">What is SDES? / About</a></li>
-								<li><a href="http://www.sdes.ucf.edu/departments">SDES Departments</a></li>
-								<li><a href="http://www.sdes.ucf.edu/events">Division Calendar</a></li>
-								<li><a href="http://www.sdes.ucf.edu/contact">Contact Us</a></li>
-								<li><a href="http://www.sdes.ucf.edu/staff">SDES Leadership Team</a></li>
-								<li><a href="http://creed.sdes.ucf.edu/">The UCF Creed</a></li>
-								<li><a href="http://it.sdes.ucf.edu/">SDES Information Technology</a></li>
+								<li><a href="//www.sdes.ucf.edu/">SDES Home</a></li>
+								<li><a href="//www.sdes.ucf.edu/about">What is SDES? / About</a></li>
+								<li><a href="//www.sdes.ucf.edu/departments">SDES Departments</a></li>
+								<li><a href="//www.sdes.ucf.edu/events">Division Calendar</a></li>
+								<li><a href="//www.sdes.ucf.edu/contact">Contact Us</a></li>
+								<li><a href="//www.sdes.ucf.edu/staff">SDES Leadership Team</a></li>
+								<li><a href="//creed.sdes.ucf.edu/">The UCF Creed</a></li>
+								<li><a href="//it.sdes.ucf.edu/">SDES Information Technology</a></li>
 							</ul>
 								<?php
 							}
@@ -149,23 +149,7 @@ class Footer {
 						} else {
 							
 						?>
-						<h2>Search</h2>
-						<span id="footer-search">
-						<form action="https://google.cc.ucf.edu/search">
-								<fieldset>
-							<input type="hidden" name="output" value="xml_no_dtd">
-							<input type="hidden" name="proxystylesheet" value="UCF_Main">
-							<input type="hidden" name="client" value="UCF_Main">
-							<input type="hidden" name="site" value="UCF_Main">
-							<div class="input-group">
-										<input type="text" class="form-control" name="q">
-								<span class="input-group-btn">
-									<input type="submit" class="btn" value="Search">
-								</span>
-							</div>
-								</fieldset>
-						</form>
-						</span>
+						
 						<?php
 
 							//Gets main contact info and desplays it
@@ -191,7 +175,7 @@ class Footer {
 								<?php if(!empty($data)){ ?>
 
 									<?php if(!empty($data['contact_phone'][0])) { ?>
-										Phone:<?= $data['contact_phone'][0] ?> 
+										Phone: <a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a> 
 									<?php } ?>
 
 									<?php if(!empty($data['contact_fax'][0])) { ?>
@@ -203,14 +187,14 @@ class Footer {
 									<?php } ?>
 
 									<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
-										&#8226; Location: <a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>" class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a>
+										&#8226; Location: <a href="//map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>" class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a>
 									<?php } ?>	
 
 								<?php } else{ ?>
-									<a href="http://www.ucf.edu/phonebook/">UCF Phonebook</a> &#8226; 
-									<a href="http://events.ucf.edu/">UCF Events</a> &#8226; 
-									<a href="http://map.ucf.edu/">UCF Map</a> &#8226; 
-									<a href="http://ucf.custhelp.com/">Ask UCF</a>
+									<a href="//www.ucf.edu/phonebook/">UCF Phonebook</a> &#8226; 
+									<a href="//events.ucf.edu/">UCF Events</a> &#8226; 
+									<a href="//map.ucf.edu/">UCF Map</a> &#8226; 
+									<a href="//ucf.custhelp.com/">Ask UCF</a>
 								<?php	} ?>
 
 								
@@ -226,10 +210,10 @@ class Footer {
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-11">
-						<div id="accessibility"><a href="http://www.sdes.ucf.edu/accessibility"><i class="fa fa-universal-access" aria-hidden="true"></i> Accessibility Statement</a></div>
-						<div id="copyright">Copyright &copy; <?= date('Y'); ?> <a href="http://www.sdes.ucf.edu/">Student Development and Enrollment Services</a></div>
+						<div id="accessibility"><a href="//www.sdes.ucf.edu/accessibility"><i class="fa fa-universal-access" aria-hidden="true"></i> Accessibility Statement</a></div>
+						<div id="copyright">Copyright &copy; <?= date('Y'); ?> <a href="//www.sdes.ucf.edu/">Student Development and Enrollment Services</a></div>
 					</div>
-					<div id="sdes_promo" class="col-sm-1"><div id="sdes_promo" class="col-sm-1"><a href="http://undergrad.ucf.edu/whatsnext"><img src="https://assets.sdes.ucf.edu/images/qep-logo-dark.png" alt="what's next"></a></div></div>
+					<div id="sdes_promo" class="col-sm-1"><div id="sdes_promo" class="col-sm-1"><a href="//undergrad.ucf.edu/whatsnext"><img src="//assets.sdes.ucf.edu/images/qep-logo-dark.png" alt="what's next"></a></div></div>
 				</div>
 			</div>
 		</div>

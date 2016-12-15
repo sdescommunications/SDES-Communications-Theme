@@ -28,7 +28,6 @@ get_header();
 		SDES_Static::Get_No_Posts_Message();
 	endif; ?>
 
-
 </div> <!-- /DIV.container.site-content -->
 <?php
 get_footer();

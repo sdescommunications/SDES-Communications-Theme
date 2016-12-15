@@ -12,7 +12,7 @@ get_header();
 
 <!-- content area -->
 <div class="container site-content" id="content">
-	<?= do_shortcode( '[alert-list show_all="true"]' ); ?>
+	<?= get_template_part( 'includes/template', 'alert' ); ?>
 
 	<h1 class="page-header"><?= get_the_title() ?></h1>
 
@@ -35,7 +35,6 @@ get_header();
 			?>
 		</div>	
 	</div>
-
 
 </div> <!-- /DIV.container.site-content -->
 <?php

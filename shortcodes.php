@@ -558,7 +558,7 @@ class sc_events extends ShortcodeBase {
 						endif; ?>
 					</ul>
 					<div class="panel-footer">
-						<a href="http://events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">&raquo;More Events</a>
+						<a href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">&raquo;More Events</a>
 					</div>
 				</div>
 				<?php
@@ -686,7 +686,7 @@ class sc_twitterFeed extends ShortcodeBase {
 			);
 		ob_start();
 		?>
-		<a class="twitter-timeline" href="https://twitter.com/<?= $attr['username']; ?>" data-widget-id="<?= $attr['widgetId']; ?>">Tweets by @<?= $attr['username']; ?></a>
+		<a class="twitter-timeline" href="//twitter.com/<?= $attr['username']; ?>" data-widget-id="<?= $attr['widgetId']; ?>">Tweets by @<?= $attr['username']; ?></a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		<?php
 		return ob_get_clean();
@@ -830,7 +830,7 @@ class sc_contactblock extends ShortcodeBase{
 				<?php if(!empty($data['contact_phone'][0])) { ?>
 				<tr>
 					<th scope="row">Phone</th>
-					<td><?= $data['contact_phone'][0] ?></td>
+					<td><a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a></td>
 				</tr>
 				<?php } ?>
 				<?php if(!empty($data['contact_fax'][0])) { ?>
