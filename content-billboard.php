@@ -36,7 +36,6 @@ get_header();
 		</div>	
 	</div>
 
-
 </div> <!-- /DIV.container.site-content -->
 <?php
 get_footer();

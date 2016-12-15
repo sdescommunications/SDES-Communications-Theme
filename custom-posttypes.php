@@ -197,7 +197,7 @@ class Alert extends CustomPostType {
 					array(
 						'key' => $prefix.'is_sitewide',
 					// Remember that Checkbox list values are serialized.
-					// See: https://wordpress.org/support/topic/meta_query-doesnt-find-value-if-custom-field-value-is-serialized#post-2106580 .
+					// See: //wordpress.org/support/topic/meta_query-doesnt-find-value-if-custom-field-value-is-serialized#post-2106580 .
 						'value' => serialize( strval( $prefix.'is_sitewide' ) ),
 						'compare' => 'LIKE',
 						)

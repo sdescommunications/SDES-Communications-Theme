@@ -214,7 +214,7 @@ global $shortcode_tags;
 						</tr>
 						<tr>
 							<td>column_width</td>
-							<td>Determines the width of the columns of results.  Intended for use with Bootstrap scaffolding (<a href="http://twitter.github.com/bootstrap/scaffolding.html">see here</a>), but will accept any CSS class name.</td>
+							<td>Determines the width of the columns of results.  Intended for use with Bootstrap scaffolding (<a href="//twitter.github.com/bootstrap/scaffolding.html">see here</a>), but will accept any CSS class name.</td>
 							<td>span4</td>
 							<td></td>
 						</tr>
@@ -226,7 +226,7 @@ global $shortcode_tags;
 						</tr>
 						<tr>
 							<td>order_by</td>
-							<td>How to order results by term.  Note that this does not affect alphabetical results.  See <a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters">WP Query Orderby params</a> in the Wordpress Codex for more information.</td>
+							<td>How to order results by term.  Note that this does not affect alphabetical results.  See <a href="//codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters">WP Query Orderby params</a> in the Wordpress Codex for more information.</td>
 							<td>post_title</td>
 							<td>
 								<ul>
