@@ -56,3 +56,5 @@ require_once( 'functions/class-render-template.php' );
 require_once( 'functions/template-options.php' );
 
 require_once( 'functions/template-billboard.php' );
+
+require_once( 'functions/filter-menu-classes.php' ); //Adds Bootstrap classes to menu items

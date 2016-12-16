@@ -15,7 +15,7 @@ require_once(  get_stylesheet_directory() . '/functions/class-sdes-helper.php' )
 			'theme_location' => $locKey
 			, 'depth' => 1
 			, 'container' => 'ul'
-			, 'menu_class' => 'nav nav-pills pull-right'
+			, 'menu_class' => 'nav nav-pills pull-xs-right'
 			, 'fallback_cb' => 'SDES\\BaseTheme\\SDES_Helper::fallback_navpills_warning'
 		));
 	?>

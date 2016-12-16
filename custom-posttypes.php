@@ -408,69 +408,61 @@ class Billboard extends CustomPostType {
 			return static::render_objects_to_html( $context );
 		}
 
-		protected static function render_objects_to_html( $context ) {
+				protected static function render_objects_to_html( $context ) {
 
-			$BILLBOARD_SIZE = array( 1140, 318 );
-			$billboard_count = 0;
-			foreach ( $context['objects'] as $o ) {
-				// Extend WP_Post objects to save query results.
-				$o->has_post_thumbnail = has_post_thumbnail( $o );
-				if ( $o->has_post_thumbnail ) {
-					$billboard_count++;
-					$o->alt_text = SDES_Static::get_post_thumbnail_alttext( $o->ID, 'Billboard '. $billboard_count );
-					$o->billboard_url = get_post_meta( $o->ID, 'billboard_url', true );
-					$o->is_caption_valid = ( ! SDES_Static::is_null_or_whitespace( $o->post_title )  || ! SDES_Static::is_null_or_whitespace( $o->post_content ));
+					ob_start();
+
+					$CAROUSEL_SIZE = array( 1140, 380 );
+					$count = 0;
+					$control = null;
+					$indicator = null;
+					$inner = null;
+					$title = null;
+
+					$control = '
+					<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+						<span class="fa fa-2x fa-arrow-circle-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+						<span class="fa fa-2x fa-arrow-circle-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+					';
+
+					foreach ($context['objects'] as $item) {
+						$indicator .= '
+							<li data-target="#carousel" data-slide-to="'.$count.'" class="'. ($count === 0 ? 'active' : false) .'"></li>
+							';                                              
+
+						$inner .= '
+							<div class="carousel-item '.($count === 0 ? 'active' : false).'">'.
+								get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )).
+								((!empty($item->post_title)) || (!empty($item->post_content)) ? 
+								'<div class="carousel-caption">'
+									. ((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? '<h3><a href="'. $item->billboard_url .'">'. $item->post_title .'</a></h3>'
+									: '<h3>'. $item->post_title .'</h3>') .
+									'<p>
+										'. $item->post_content .'
+									</p>
+								</div>' : false) .'
+							</div>
+							';
+
+					$count++;
 				}
-			}
-			ob_start();
-			?>
-			<!-- nivo slider -->
-			<script type="text/javascript">
-			$(window).load(function() {
-				$('#slider').nivoSlider({
-					slices: <?= $billboard_count ?>,					
-					pauseTime: 5000,					
-					controlNav: false,
-					captionOpacity: 0.7,
-					<?php if ( 1 === $billboard_count ) : ?>
-					directionNav: false,
-					manualAdvance: true,
-					<?php endif; ?>
-				});
-				$('#slider').show();
+				?>                           
 
-				// Remove accessibility errors.
-				$('.nivo-main-image').attr('alt', 'Rotating Billboard');
-				$('.nivo-slice img').attr('alt', '');
-			});
-		</script>
-		<div class="container site-billboard theme-default">
-			<div id="slider" class="nivoSlider" style="display: none;">
-			<?php foreach ( $context['objects'] as $o ) :
-				if ( $o->has_post_thumbnail ) :
-					if ( (!empty($o->billboard_url)) && ($o->billboard_url != 'http://') ) : ?>
-						<a href="<?= $o->billboard_url ?>" class="nivo-imageLink">
-					<?php endif;
-							$title = ( $o->is_caption_valid ) ? '#nivo-caption-'.$o->ID : null ;
-							echo get_the_post_thumbnail( $o, $BILLBOARD_SIZE,
-							array( 'title' => $title, 'alt' => $o->alt_text ) );
-							if ( $o->billboard_url ) : ?>
-										</a>
-									<?php endif;
-				endif;
-				endforeach; ?>
+				<div id="carousel" class="container carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<?= $indicator ?>
+					</ol>
+					<div class="carousel-inner" role="listbox">
+						<?= $inner ?>
+					</div>
+					<?= (($count > 1) ? $control : false) ?>
 				</div>
-				<?php foreach ( $context['objects'] as $o ) :
-					if ( $o->has_post_thumbnail ) :
-						if ( $o->is_caption_valid ) : ?>
-						<div id="nivo-caption-<?= $o->ID ?>" class="nivo-html-caption">
-							<div class="nivo-padding"></div>
-							<div class="nivo-title"><?= $o->post_title ?></div>
-							<div class="nivo-strapline"><?= $o->post_content ?></div>
-						</div>
-					<?php endif;
-		  		endif;
-				endforeach; ?>
+
 				<div class="noscript">
 					Billboards:<br><br>
 					<?php echo "\n";
@@ -485,6 +477,7 @@ class Billboard extends CustomPostType {
 					endforeach; ?>
 				</div>
 			</div>
+
 			<?php
 			return ob_get_clean();
 		}
@@ -668,8 +661,8 @@ class Staff extends CustomPostType {
 			$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
 			$context['thumbnail']
 			= has_post_thumbnail( $post_object )
-				? get_the_post_thumbnail( $post_object, 'post-thumbnail', array( 'class' => 'img-responsive' ) )
-				: "<img src='".$thumbnailUrl."' alt='thumb' class='img-responsive'>";
+				? get_the_post_thumbnail( $post_object, 'post-thumbnail', array( 'class' => 'img-fluid' ) )
+				: "<img src='".$thumbnailUrl."' alt='thumb' class='img-fluid'>";
 			$context['title'] = get_the_title( $post_object );
 			$context['staff_position_title'] = get_post_meta( $post_object->ID, 'staff_position_title', true );
 			$context['staff_phone'] = get_post_meta( $post_object->ID, 'staff_phone', true );
@@ -895,8 +888,8 @@ class News extends CustomPostType {
 			$context['thumbnail']
 			= has_post_thumbnail( $post_object )
 				? get_the_post_thumbnail($post_object, '',
-				array( 'class' => 'img-responsive', 'alt' => SDES_Static::get_post_thumbnail_alttext( $post_object->ID, 'Thumbnail' ) ) )
-					: "<img src='".$thumbnailUrl."' alt='Thumbnail' class='img-responsive'>";
+				array( 'class' => 'img-fluid', 'alt' => SDES_Static::get_post_thumbnail_alttext( $post_object->ID, 'Thumbnail' ) ) )
+					: "<img src='".$thumbnailUrl."' alt='Thumbnail' class='img-fluid'>";
 				$news_url = get_post_meta( $post_object->ID, 'news_url', true );
 				$context['permalink'] = get_permalink( $post_object );
 				$context['title_link'] = ( '' !== $news_url ) ? $news_url : $context['permalink'];

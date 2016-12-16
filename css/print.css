@@ -7,7 +7,7 @@ body{
 #ucfhb,
 .site-billboard,
 .site-footer-container,
-.img-responsive,
+.img-fluid,
 .nav-pills.home
 {
 	display: none;
@@ -28,6 +28,6 @@ body{
 	font-size: 0.4em;
 }
 
-.page-header > .pull-right{
+.page-header > .pull-xs-right{
 	display: none;
 }
