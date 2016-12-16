@@ -16,7 +16,7 @@ namespace SDES\BaseTheme;
 					<?php
 						wp_nav_menu( array( 'theme_location' => 'main-menu', 'depth' => 1, 'container' => '', 'items_wrap' => '%3$s', 'fallback_cb' => 'SDES\\BaseTheme\\SDES_Helper::fallback_navbar_list_pages' ) );
 					?> 
-					<li class="nav-item float-xs-right acrobat"><a class="nav-link" title="Get Acrobat Reader" href="#"><span class="fa fa-file-pdf-o"></span></a></li>
+					<li class="nav-item float-xs-right acrobat"><a class="nav-link" title="Get Acrobat Reader" href="http://get.adobe.com/reader/"><span class="fa fa-file-pdf-o"></span></a></li>
 				</ul>
 			</div>
 		</nav>
