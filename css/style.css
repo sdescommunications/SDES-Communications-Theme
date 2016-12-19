@@ -53,6 +53,10 @@ li:empty{
 	display: none;
 }
 
+.row img {
+	margin: 10px;
+}
+
 /* specific site elements ------------------------------------------------------------------------------------------ */
 
 .container.header{
@@ -1118,3 +1122,15 @@ li:empty{
 	div.top-b{
 		margin-bottom: 4px;
 	}
+
+/* WordPress fixes ------------------------------------------------------------------------------------------------------ */
+
+img.alignleft	{
+	float:left !important;
+	padding: 20px 20px 10px 0;
+}
+
+img.alignright	{
+	float:right !important;
+	padding: 20px 0 10px 20px;
+}
