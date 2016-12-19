@@ -107,9 +107,9 @@ class sc_menuPanel extends ShortcodeBase {
 	public static function render( $context ) {
 		ob_start();
 		?>
-		<div class="panel panel-warning menuPanel" style="<?=$context['style']?>">
-			<div class="panel-heading"><?=$context['heading']?></div>
-			<div class="list-group">
+		<div class="card menuPanel" style="<?=$context['style']?>">
+			<div class="card-header"><?=$context['heading']?></div>
+			<div class="list-group list-group-flush">
 				<?php
 				foreach ( (array) $context['menu_items'] as $key => $menu_item ) {
 					$title = $menu_item->title;
@@ -151,21 +151,21 @@ class sc_panel extends ShortcodeBase {
 			array(
 				'header' => '',
 				'footer' => '',
-				'class' => 'panel-warning',
+				'class' => '',
 				'style' => 'max-width: 697px;',
 				), $attr
 			);
 		ob_start();
 		?>
-		<div class="panel <?= $attr['class'] ? $attr['class'] : ''; ?>" <?= $attr['style'] ? ' style="' . $attr['style'] . '"' : '';?> >
-			<div class="panel-heading">
-				<h3 class="panel-title"><?= $attr['header'] ?></h3>
+		<div class="card <?= $attr['class'] ? $attr['class'] : ''; ?>" <?= $attr['style'] ? ' style="' . $attr['style'] . '"' : '';?> >
+			<div class="card-header">
+				<?= $attr['header'] ?>
 			</div>
-			<div class="panel-body">
+			<div class="card-block">
 				<?= apply_filters( 'the_content', $content ); ?>
 			</div>
 			<?php if ( '' !== $attr['footer'] ) : ?>
-				<div class="panel-footer"><?= $attr['footer'] ?></div>
+				<div class="card-footer"><?= $attr['footer'] ?></div>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -521,9 +521,9 @@ class sc_events extends ShortcodeBase {
 		$count = ( count( $xml->channel->item ) > $attr['limit'] ) ? $attr['limit'] : count( $xml->channel->item );
 		ob_start();
 		?>
-		<div class="panel panel-warning">
-			<div class="panel-heading"><?= $attr['header'] ?></div>
-			<ul class="list-group ucf-events">
+		<div class="card">
+			<div class="card-header"><?= $attr['header'] ?></div>
+			<ul class="list-group list-group-flush ucf-events">
 				<?php
 					// Check for items.
 				if ( 0 === count( $xml->channel->item ) ) : ?>
@@ -557,7 +557,7 @@ class sc_events extends ShortcodeBase {
 						<?php }
 						endif; ?>
 					</ul>
-					<div class="panel-footer">
+					<div class="card-footer">
 						<a href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">&raquo;More Events</a>
 					</div>
 				</div>
@@ -595,7 +595,7 @@ class sc_socialButton extends ShortcodeBase {
 			'id'        => 'class',
 			'help_text' => 'The wrapper classes.',
 			'type'      => 'text',
-			'default' => 'col-sm-6 text-center',
+			'default' => 'col-sm-6 text-xs-center',
 			),
 	); // The parameters used by the shortcode.
 
@@ -607,7 +607,7 @@ class sc_socialButton extends ShortcodeBase {
 		$attr = shortcode_atts(
 			array(
 				'network' => '',
-				'class' => 'col-sm-6 text-center',
+				'class' => 'col-sm-6 text-xs-center',
 				), $attr
 			);
 		$ctxt['container_classes'] = esc_attr( $attr['class'] );
@@ -636,7 +636,7 @@ class sc_socialButton extends ShortcodeBase {
 	 */
 	public static function render( $ctxt ) {
 		ob_start();
-		?>
+		?>		
 		<div class="<?= $ctxt['container_classes'] ?>">
 			<a href="<?= $ctxt['url'] ?>">
 				<img src="<?= $ctxt['image'] ?>" class="clean" alt="<?= $ctxt['network'] ?> button">
@@ -819,7 +819,7 @@ class sc_contactblock extends ShortcodeBase{
 		ob_start();
 		?>	
 		
-		<table class="table table-condensed table-striped table-bordered">
+		<table class="table table-sm table-striped table-bordered">
 			<tbody>
 				<?php if(!empty($data['contact_Hours'][0])) { ?>
 				<tr>

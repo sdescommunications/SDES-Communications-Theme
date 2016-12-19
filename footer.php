@@ -9,17 +9,15 @@ namespace SDES\BaseTheme;
 </div>
 
 	<!-- repeated navigation, social media -->
-	<div class="container site-content-end">
-		<nav class="navbar navbar-default site-nav-repeated">
-			<div class="container-fluid">
-				<?php
-				wp_nav_menu( array( 'theme_location' => 'main-menu', 'depth' => 1, 'container' => '', 'items_wrap' => '<ol class="nav navbar-nav">%3$s</ol>', 'fallback_cb' => 'SDES\\BaseTheme\\SDES_Helper::fallback_navbar_list_pages' ) );
-				?> 
-				
-				<p class="nav navbar-text navbar-right icons">
-				
-					<a href="//get.adobe.com/reader/"><img src="<?= get_stylesheet_directory_uri(); ?>/images/content-end-pdf.jpg" alt="adobe acrobat icon" title="Get Adobe Reader"></a>
-				</p>
+	<div class="site-content-end">
+		<div class="container">
+			<nav class="navbar navbar-light bg-faded site-nav-repeated">				
+				<ul class="nav navbar-nav">
+					<?php
+						wp_nav_menu( array( 'theme_location' => 'main-menu', 'depth' => 1, 'container' => '', 'items_wrap' => '%3$s', 'fallback_cb' => 'SDES\\BaseTheme\\SDES_Helper::fallback_navbar_list_pages' ) );
+					?> 
+					<li class="nav-item float-xs-right acrobat"><a class="nav-link" title="Get Acrobat Reader" href="http://get.adobe.com/reader/"><span class="fa fa-file-pdf-o"></span></a></li>
+				</ul>
 			</div>
 		</nav>
 	</div>

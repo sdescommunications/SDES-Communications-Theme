@@ -19,8 +19,8 @@ get_header();
 	$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
 	$context['thumbnail']
 	= has_post_thumbnail($post_object) 
-	? get_the_post_thumbnail($post_object, '', array('class' => 'img-responsive'))
-	: "<img src='".$thumbnailUrl."' alt='thumb' class='img-responsive'>";
+	? get_the_post_thumbnail($post_object, '', array('class' => 'img-fluid'))
+	: "<img src='".$thumbnailUrl."' alt='thumb' class='img-fluid'>";
 	$news_link = get_post_meta( $post_object->ID, 'news_link', true );
 	$context['permalink'] = get_permalink( $post_object );
 	$context['title_link'] = ( '' !== $news_link ) ? $news_link : $context['permalink'];
