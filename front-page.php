@@ -16,7 +16,6 @@ get_header();
 
 
 	<div class="row">
-		<br>
 		<div class="col-sm-8">
 			<?php 
 				if ( have_posts() ) :
