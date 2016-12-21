@@ -138,12 +138,13 @@ li:empty{
 }
 
 .site-content > .page-header:first-child{
-	margin-top: 1.75em;
+	margin-top: .75em;
+	
 }
 
 .page-header	{
 	border-bottom:1px dotted #ddd;
-	margin-bottom:1.75em;
+	margin-bottom:.5em;
 }
 
 @media (max-width: 768px){ /* tiny breakpoint and smaller */
