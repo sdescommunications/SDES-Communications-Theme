@@ -10,9 +10,13 @@ a:hover, a:focus{
 	text-decoration: underline;
 }
 
+html, 
 body{
 	background: #fff url('../images/ucf.png') repeat-x 0 50px;
 	background-size: 100% 139px;
+	font-family: Helvetica,Arial,sans-serif !important;
+	font-size: 14px;
+	line-height: 1.42857143;
 }
 
 /* Hide noscript content without DOM flickering (and avoid WebAIM WAVE alert for <noscript> tags).
@@ -23,6 +27,11 @@ body.jsEnabled .noscript {
 
 caption{
 	font-size: 1.5em;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, 
+h1, h2, h3, h4, h5, h6 {
+	font-family: Helvetica,Arial,sans-serif !important;
 }
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
@@ -55,6 +64,10 @@ li:empty{
 
 .row img {
 	margin: 10px;
+}
+
+.table-sm td, .table-sm th {
+	padding: 10px;
 }
 
 /* specific site elements ------------------------------------------------------------------------------------------ */
@@ -139,7 +152,7 @@ li:empty{
 
 .site-content > .page-header:first-child{
 	margin-top: .75em;
-	
+
 }
 
 .page-header	{
@@ -1124,14 +1137,14 @@ li:empty{
 		margin-bottom: 4px;
 	}
 
-/* WordPress fixes ------------------------------------------------------------------------------------------------------ */
+	/* WordPress fixes ------------------------------------------------------------------------------------------------------ */
 
-img.alignleft	{
-	float:left !important;
-	padding: 20px 20px 10px 0;
-}
+	img.alignleft	{
+		float:left !important;
+		padding: 20px 20px 10px 0;
+	}
 
-img.alignright	{
-	float:right !important;
-	padding: 20px 0 10px 20px;
-}
+	img.alignright	{
+		float:right !important;
+		padding: 20px 0 10px 20px;
+	}
