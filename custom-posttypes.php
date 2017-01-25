@@ -459,10 +459,10 @@ class Billboard extends CustomPostType {
 						<?= $inner ?>
 					</div>
 					<?= (($count > 1) ? $control : false) ?>
-				</div>
 					<ol class="carousel-indicators">
 						<?= $indicator ?>
 					</ol>
+				</div>				
 
 				<div class="noscript">
 					Billboards:<br><br>
