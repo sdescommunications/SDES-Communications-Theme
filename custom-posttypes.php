@@ -917,7 +917,7 @@ class News extends CustomPostType {
 						<a href="<?= $context['title_link'] ?>"><?= $context['title'] ?></a>
 					<?php } else  echo $context['title']; ?>					
 				</div> 
-				<?= $context['news_strapline'] ?>
+				<div class="news-strapline"><?= $context['news_strapline'] ?></div>
 				<div class="datestamp">
 					Posted on 
 					<a href="<?= $context['permalink'] ?>">
