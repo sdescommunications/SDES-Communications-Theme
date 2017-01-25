@@ -64,10 +64,6 @@ li:empty{
 	display: none;
 }
 
-.row img {
-	margin: 10px;
-}
-
 .table-sm td, .table-sm th {
 	padding: 10px;
 }
