@@ -432,7 +432,7 @@ class Billboard extends CustomPostType {
 
 					foreach ($context['objects'] as $item) {
 						$indicator .= '
-							<li data-target="#carousel" data-slide-to="'.$count.'" class="'. ($count === 0 ? 'active' : false) .'"></li>
+							<li data-target="#carousel" data-slide-to="'.$count.'" class="'. ($count === 0 ? 'active' : false) .'"> </li>
 							';                                              
 
 						$inner .= '
@@ -454,14 +454,15 @@ class Billboard extends CustomPostType {
 				?>                           
 
 				<div id="carousel" class="container carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<?= $indicator ?>
-					</ol>
+					
 					<div class="carousel-inner" role="listbox">
 						<?= $inner ?>
 					</div>
 					<?= (($count > 1) ? $control : false) ?>
 				</div>
+					<ol class="carousel-indicators">
+						<?= $indicator ?>
+					</ol>
 
 				<div class="noscript">
 					Billboards:<br><br>
