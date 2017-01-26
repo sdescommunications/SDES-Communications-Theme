@@ -5,15 +5,17 @@
 	{
 	    wp_nonce_field(basename(__FILE__), "meta-box-nonce");
 		
-		$url = (!empty(get_post_meta($object->ID, "service-meta-box-image"))) ? get_post_meta($object->ID, "service-meta-box-image") : NULL;
-		$header = (!empty(get_post_meta($object->ID, "service-meta-box-header"))) ? get_post_meta($object->ID, "service-meta-box-header") : NULL;
-		$footer = (!empty(get_post_meta($object->ID, "service-meta-box-footer"))) ? get_post_meta($object->ID, "service-meta-box-footer") : NULL;
+		$url = get_post_meta($object->ID, "service-meta-box-image");
+		$header = get_post_meta($object->ID, "service-meta-box-header");
+		$footer = get_post_meta($object->ID, "service-meta-box-footer");
 
 		$c = 1;
 	    while ($c <= $GLOBALS['NUMBEROFCARDS']) {
-			$content[] = (!empty(get_post_meta($object->ID, "service_wysiwyg_".$c))) ? get_post_meta($object->ID, "service_wysiwyg_".$c) : NULL;
+			$content[] = get_post_meta($object->ID, "service_wysiwyg_".$c);
 			$c++;
 		}
+
+		//exit(var_dump($content));
 
 		$c = 1;     
 		while($c <= $GLOBALS['NUMBEROFCARDS']) {
@@ -25,7 +27,7 @@
 					<strong>Content</strong>
 				</p>
 				<p>	          	
-					<?= (!empty($content)) ? wp_editor( $content[($c-1)][0], 'service_wysiwyg_'. ($c) ) : wp_editor( '', 'service_wysiwyg_'. ($c) ) ?>
+					<?= wp_editor( $content[($c-1)][0], 'service_wysiwyg_'. ($c) ); ?>
 				</p>	          
 			</div>
 
@@ -34,7 +36,7 @@
 					<strong>Image</strong>
 				</p>
 				<p>
-					<input name="service-meta-box-image[]" type="text" value="<?= (!empty($url)) ? $url[0][($c-1)] : '' ?>">
+					<input name="service-meta-box-image[]" type="text" value="<?= $url[0][($c-1)] ?>">
 				</p>	          
 			</div>
 			<div class="inside">
@@ -42,7 +44,7 @@
 					<strong>Header</strong>
 				</p>
 				<p>
-					<input name="service-meta-box-header[]" type="text" value="<?= (!empty($header)) ? $header[0][($c-1)] : '' ?>">
+					<input name="service-meta-box-header[]" type="text" value="<?= $header[0][($c-1)] ?>">
 				</p>	          
 			</div>
 
@@ -51,7 +53,7 @@
 					<strong>Footer</strong>
 				</p>
 				<p>
-					<input name="service-meta-box-footer[]" type="text" value="<?= (!empty($footer)) ? $footer[0][($c-1)] : '' ?>">
+					<input name="service-meta-box-footer[]" type="text" value="<?= $footer[0][($c-1)] ?>">
 				</p>	          
 			</div>
 			<br>
