@@ -34,7 +34,7 @@
 					<strong>Image</strong>
 				</p>
 				<p>
-					<input name="service-meta-box-image[]" type="text" value="<?= (empty($url)) ? $url[0][($c-1)] : false ?>">
+					<input name="service-meta-box-image[]" type="text" value="<?= (empty($url)) ? $url[0][($c-1)] : null ?>">
 				</p>	          
 			</div>
 			<div class="inside">
@@ -42,7 +42,7 @@
 					<strong>Header</strong>
 				</p>
 				<p>
-					<input name="service-meta-box-header[]" type="text" value="<?= (empty($header)) ? $header[0][($c-1)] : false ?>">
+					<input name="service-meta-box-header[]" type="text" value="<?= (empty($header)) ? $header[0][($c-1)] : null ?>">
 				</p>	          
 			</div>
 
@@ -51,7 +51,7 @@
 					<strong>Footer</strong>
 				</p>
 				<p>
-					<input name="service-meta-box-footer[]" type="text" value="<?= (empty($footer)) ? $footer[0][($c-1)] : false ?>">
+					<input name="service-meta-box-footer[]" type="text" value="<?= (empty($footer)) ? $footer[0][($c-1)] : null ?>">
 				</p>	          
 			</div>
 			<br>
