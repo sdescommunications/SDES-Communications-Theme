@@ -27,17 +27,21 @@ get_header();
 				<div class="card-columns">
 				<?php					
 					foreach ($urls as $key => $url) {
+					if(!empty($contents[$key]) || !empty($headers[$key]) || !empty($url) ){
 				?>
 					<div class="card">
 						<?php if (!empty($url)) { ?>
 							<img class="card-img-top img-fluid" src="<?= $url ?>" alt="...">
-						<?php } ?>						
+						<?php } ?>
+
+						<?php if (!empty($contents[$key]) || !empty($headers[$key])) { ?>						
 						<div class="card-block">	
 							<h3 class="card-title"><?= $headers[$key] ?></h3>
 							<p class="card-text">
 								<?= wpautop($contents[$key]) ?>
 							</p>														
 						</div>
+						<?php } ?>
 
 						<?php if (!empty($footers[$key])) { ?>
 						<div class="card-footer">
@@ -47,6 +51,7 @@ get_header();
 					</div>						
 				<?php											
 					}
+				}
 				?>
 				</div>
 
