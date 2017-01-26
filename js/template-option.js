@@ -2,21 +2,33 @@
 $(document).ready(function() {
 
     var $page_template = $('#page_template'),
-        $metabox_side = $('#custom_page_metabox'),
-        $metabox_billboard = $('#billboard-meta-box'); // For example
+        $side = $('#custom_page_metabox'),
+        $billboard = $('#billboard-meta-box'),
+        $service = $('#service-meta-box'); 
 
     $page_template.change(function() {
-        if ($(this).val() == 'content-left-sidecol.php' || $(this).val() == 'content-right-sidecol.php') {
-            $metabox_side.show();
-            $metabox_billboard.hide();
+        if ($(this).val() == 'content-right-sidecol.php') {
+            $side.show();
+            $billboard.hide();
+            $service.hide();
+            
 
         }else if($(this).val() == 'content-billboard.php'){
-        	$metabox_billboard.show();
-			$metabox_side.show();
+        	$billboard.show();
+			$side.show();
+            $service.hide();
+           
+        }else if($(this).val() == 'content-services.php'){
+            $service.show();
+            $side.hide();
+            $billboard.hide();
+           
         }
         else {
-            $metabox_side.hide();
-            $metabox_billboard.hide();
+            $side.hide();
+            $billboard.hide();
+            $service.hide();
+           
         }
     }).change();
 

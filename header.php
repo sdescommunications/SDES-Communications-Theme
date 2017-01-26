@@ -26,16 +26,7 @@ use SDES\SDES_Static as SDES_Static;
 	<script src="//cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.min.js" integrity="sha256-TZwF+mdLcrSLlptjyffYpBb8iUAuLtidBmNiMj7ll1k=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/sdes_main_ucf.js"></script>
 
-	<style>
-		#accessibility {
-			margin-bottom: 7px;
-			display: block;
-		}
-		#copyright {
-			font-size: 11px;
-			opacity: .4;
-		}
-	</style>	
+
 
 	<?php $sdes_theme_settings_js_lib = esc_attr(get_option('sdes_theme_settings_js_lib', ''));
 	if ( '' != $sdes_theme_settings_js_lib ) {
