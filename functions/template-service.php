@@ -13,19 +13,19 @@
 	    while ($c <= $GLOBALS['NUMBEROFCARDS']) {
 			$content[] = get_post_meta($object->ID, "service_wysiwyg_".$c);
 			$c++;
-		}
+		}			
 
-		$c = 1;     
+		$c = 1;
 		while($c <= $GLOBALS['NUMBEROFCARDS']) {
 		?>
-			<h1>Item <?= $c ?></h1>	        
+			<h1>Item <?= $c ?></h1>
 
 			<div class="inside">
 				<p>
 					<strong>Content</strong>
 				</p>
 				<p>	          	
-					<?= (empty($content)) ? wp_editor( $content[($c-1)][0], 'service_wysiwyg_'. ($c) ) : wp_editor( '', 'service_wysiwyg_'. ($c) ) ?>
+					<?= (!empty($content[($c-1)][0])) ? wp_editor( $content[($c-1)][0], 'service_wysiwyg_'. ($c) ) : wp_editor( '', 'service_wysiwyg_'. ($c) ) ?>
 				</p>	          
 			</div>
 
