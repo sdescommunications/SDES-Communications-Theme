@@ -15,8 +15,6 @@
 			$c++;
 		}
 
-		//exit(var_dump($content));
-
 		$c = 1;     
 		while($c <= $GLOBALS['NUMBEROFCARDS']) {
 		?>
@@ -27,7 +25,7 @@
 					<strong>Content</strong>
 				</p>
 				<p>	          	
-					<?= wp_editor( $content[($c-1)][0], 'service_wysiwyg_'. ($c) ); ?>
+					<?= (!empty($content)) ? wp_editor( $content[($c-1)][0], 'service_wysiwyg_'. ($c) ) : wp_editor( '', 'service_wysiwyg_'. ($c) ) ?> 
 				</p>	          
 			</div>
 
