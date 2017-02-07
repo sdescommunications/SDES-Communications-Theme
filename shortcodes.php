@@ -405,7 +405,7 @@ class sc_contactblock extends ShortcodeBase{
 				}	//end of if		
 			}	//end of for
 		}else{
-			return '<div class="alert alert-danger">Verbage to say go to contact and add a contact named main.</div>';
+			return '<div class="alert alert-danger">Go to contact and add a contact named Main.</div>';
 		}	//end of ifelse
 
 		return '<div class="alert alert-danger">No contact block exists with this name.</div>';
@@ -459,12 +459,148 @@ class sc_contactblock extends ShortcodeBase{
 	}
 }
 
+class social_media extends ShortcodeBase{
+	public
+	$name = 'Social Media', // The name of the shortcode.
+	$command = 'social_media', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array(
+		array(			
+			'name'      => 'Facebook Url',
+			'id'        => 'facebook',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Flickr Url',
+			'id'        => 'flickr',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Google+ Url',
+			'id'        => 'google_plus',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Instagram Url',
+			'id'        => 'instagram',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Pinterest Url',
+			'id'        => 'pinterest',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Twitter Url',
+			'id'        => 'twitter',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Tumblr Url',
+			'id'        => 'tumblr',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Vimeo Url',
+			'id'        => 'vimeo',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Youtube Url',
+			'id'        => 'youtube',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		);
+
+	public static function callback( $attr, $content = '' ) {;
+
+		ob_start();
+		?>
+
+		<div class="card-columns social">
+			<?php if (!empty($attr['facebook'])) { ?>
+			<div class="card">
+				<a class="btn btn-block facebook text-xl-left text-lg-center" href="<?= $attr['facebook'] ?>">
+					<span class="fa fa-facebook-official fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Facebook</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['flickr'])) { ?>
+			<div class="card">
+				<a class="btn btn-block flickr text-xl-left text-lg-center" href="<?= $attr['flickr'] ?>">
+					<span class="fa fa-flickr fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Flickr</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['google_plus'])) { ?>
+			<div class="card">
+				<a class="btn btn-block gplus text-xl-left text-lg-center" href="<?= $attr['google_plus'] ?>">
+					<span class="fa fa-google-plus fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Google+</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['instagram'])) { ?>
+			<div class="card">
+				<a class="btn btn-block instagram text-xl-left text-lg-center" href="<?= $attr['instagram'] ?>">
+					<span class="fa fa-instagram fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Instagram</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['pinterest'])) { ?>
+			<div class="card">
+				<a class="btn btn-block pinterest text-xl-left text-lg-center" href="<?= $attr['pinterest'] ?>">
+					<span class="fa fa-pinterest fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Pinterest</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['twitter'])) { ?>
+			<div class="card">
+				<a class="btn btn-block twitter text-xl-left text-lg-center" href="<?= $attr['twitter'] ?>">
+					<span class="fa fa-twitter fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Twitter</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['tumblr'])) { ?>
+			<div class="card">
+				<a class="btn btn-block tumblr text-xl-left text-lg-center" href="<?= $attr['tumblr'] ?>">
+					<span class="fa fa-tumblr fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Tumblr</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['vimeo'])) { ?>
+			<div class="card">
+				<a class="btn btn-block vimeo text-xl-left text-lg-center" href="<?= $attr['vimeo'] ?>">
+					<span class="fa fa-vimeo fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Vimeo</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['youtube'])) { ?>
+			<div class="card">
+				<a class="btn btn-block youtube text-xl-left text-lg-center" href="<?= $attr['youtube'] ?>">
+					<span class="fa fa-youtube fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;YouTube</span>
+				</a>
+			</div>
+			<?php } ?>
+		</div>		
+		
+		<?php
+		return ob_get_clean();
+	}
+	
+}
+
 function register_shortcodes() {
 	ShortcodeBase::Register_Shortcodes(array(
 		__NAMESPACE__.'\sc_alert',		
 		__NAMESPACE__.'\sc_menuPanel',
 		__NAMESPACE__.'\sc_events',
 		__NAMESPACE__.'\sc_contactBlock',
+		__NAMESPACE__.'\social_media',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
