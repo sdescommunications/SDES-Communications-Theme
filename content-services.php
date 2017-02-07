@@ -24,7 +24,7 @@ get_header();
 			<div class="col-sm-12 ">
 				<?php the_content(); ?>
 				
-				<div class="card-columns">
+				<div class="card-deck">
 				<?php					
 					foreach ($urls as $key => $url) {
 					if(!empty($contents[$key]) || !empty($headers[$key]) || !empty($url) ){
