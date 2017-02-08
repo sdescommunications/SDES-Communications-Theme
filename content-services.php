@@ -25,7 +25,6 @@ get_header();
 				<?php the_content(); ?>
 				
 				<div class="card-deck">
-
 				<?php
 					$c=1;					
 					foreach ($contents as $key => $content) {					
