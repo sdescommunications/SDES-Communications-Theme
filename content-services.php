@@ -1,15 +1,15 @@
 <?php
 /**
-* Template Name: Content Services
+* Template Name: Cards
 */
 use SDES\SDES_Static as SDES_Static;
 	
-$urls = get_post_meta($post->ID, "service-meta-box-image", true);
-$headers = get_post_meta($post->ID, "service-meta-box-header", true);
-$footers = get_post_meta($post->ID, "service-meta-box-footer", true);
+
+
  $c = 1;
 while ($c <= $GLOBALS['NUMBEROFCARDS']) {
 	$contents[] = get_post_meta($post->ID, "service_wysiwyg_".$c, true);
+	$images [] = get_post_meta($post->ID, "card_image_".$c, true);
 	$c++;
 }
 get_header();
@@ -24,37 +24,37 @@ get_header();
 			<div class="col-sm-12 ">
 				<?php the_content(); ?>
 				
-				<div class="card-columns">
-				<?php					
-					foreach ($urls as $key => $url) {
-					if(!empty($contents[$key]) || !empty($headers[$key]) || !empty($url) ){
-				?>
-					<div class="card">
-						<?php if (!empty($url)) { ?>
-							<img class="card-img-top img-fluid" src="<?= $url ?>" alt="...">
-						<?php } ?>
+				<div class="card-deck">
 
-						<?php if (!empty($contents[$key]) || !empty($headers[$key])) { ?>						
-						<div class="card-block">	
-							<h3 class="card-title"><?= $headers[$key] ?></h3>
-							<p class="card-text">
+				<?php
+					$c=1;					
+					foreach ($contents as $key => $content) {					
+				?>
+					<?php if (!empty($contents[$key]) && !empty($images[$key])) { ?>
+					<div class="card">						
+					
+						<?= misha_image_uploader_field( 'card_image_'.$c, $images[$key], 2 ) ?>
+											
+						<div class="card-block">							
+							<div class="card-text">
 								<?= wpautop($contents[$key]) ?>
-							</p>														
+							</div>																					
 						</div>
-						<?php } ?>
 
-						<?php if (!empty($footers[$key])) { ?>
-						<div class="card-footer">
-							<?= $footers[$key] ?>
-						</div>
-						<?php } ?>
-					</div>						
-				<?php											
-					}
-				}
-				?>
+					</div>
+
+					<?php } //end of if
+
+						if ((($key+1) % 4) == 0){ ?>
+							</div>
+							<div class="card-deck">
+					<?php
+					 
+						}//end of if
+					}//end of foreach
+					
+					?>
 				</div>
-
 							
 		</div>
 	<?php endwhile;
