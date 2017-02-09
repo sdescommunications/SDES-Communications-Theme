@@ -20,7 +20,7 @@ jQuery(function($){
 		}).on('select', function() { // it also has "open" and "close" events 
 			var attachment = custom_uploader.state().get('selection').first().toJSON();
 			$(button).removeClass('button').html('<img class="true_pre_image" src="' + attachment.url + '" style="max-width:95%;display:block;" />').next().val(attachment.id).next().show();
-			/* if you sen multiple to true, here is some code for getting the image IDs
+			/* if set multiple to true, here is some code for getting the image IDs
 			var attachments = frame.state().get('selection'),
 			    attachment_ids = new Array(),
 			    i = 0;

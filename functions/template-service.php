@@ -1,15 +1,11 @@
 <?php
-
 	$GLOBALS['NUMBEROFCARDS'] = 8;
-
 
 	function service_meta_box_markup($object)
 	{
 	    wp_nonce_field(basename(__FILE__), "meta-box-nonce");		
 		
-		$meta_key = 'card_image_';
-		
-		
+		$meta_key = 'card_image_';		
 		
 		$c = 1;
 	    while ($c <= $GLOBALS['NUMBEROFCARDS']) {
@@ -27,7 +23,7 @@
 					<strong>Image</strong> (required)
 				</p>
 				<p>
-					<?= misha_image_uploader_field( $meta_key.$c, get_post_meta($object->ID, $meta_key.$c, true) ) ?>
+					<?= image_uploader_field( $meta_key.$c, get_post_meta($object->ID, $meta_key.$c, true) ) ?>
 				</p>
 			</div>
 

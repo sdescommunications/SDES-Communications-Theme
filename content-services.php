@@ -3,8 +3,6 @@
 * Template Name: Cards
 */
 use SDES\SDES_Static as SDES_Static;
-	
-
 
  $c = 1;
 while ($c <= $GLOBALS['NUMBEROFCARDS']) {
@@ -25,6 +23,7 @@ get_header();
 				<?php the_content(); ?>
 				
 				<div class="card-deck">
+
 				<?php
 					$c=1;					
 					foreach ($contents as $key => $content) {					
@@ -32,7 +31,7 @@ get_header();
 					<?php if (!empty($contents[$key]) && !empty($images[$key])) { ?>
 					<div class="card">						
 					
-						<?= misha_image_uploader_field( 'card_image_'.$c, $images[$key], 2 ) ?>
+						<?= image_uploader_field( 'card_image_'.$c, $images[$key], 2 ) ?>
 											
 						<div class="card-block">							
 							<div class="card-text">
