@@ -1,6 +1,6 @@
 <?php
 /**
-* Template Name: Content Page Right Sidecolumn
+* Template Name: Sidebar
 */
 use SDES\SDES_Static as SDES_Static;
 
