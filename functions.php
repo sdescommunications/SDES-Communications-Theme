@@ -56,5 +56,9 @@ require_once( 'functions/class-render-template.php' );
 require_once( 'functions/template-options.php' );
 
 require_once( 'functions/template-billboard.php' );
+require_once( 'functions/template-service.php' );
 
 require_once( 'functions/filter-bootstrap-classes.php' ); //Adds stock Bootstrap classes where necessary
+
+require_once( 'functions/image_selector.php' );  
+  

@@ -125,55 +125,6 @@ class sc_menuPanel extends ShortcodeBase {
 		}
 	}
 
-/**
- * [panel] - Wrap HTML in a Boostrap CSS panel.
- */
-class sc_panel extends ShortcodeBase {
-	public
-	$name        = 'Panel',
-	$command     = 'panel',
-	$description = 'Wraps content in a bootstrap panel.',
-	$render      = false,
-	$params      = array(
-		array(
-			'name'      => 'Header',
-			'id'        => 'header',
-			'help_text' => 'A header for the panel.',
-			'type'      => 'text',
-			'default'   => '',
-			),
-		),
-	$callback    = 'callback',
-	$wysiwyg     = true;
-
-	public static function callback( $attr, $content = '' ) {
-		$attr = shortcode_atts(
-			array(
-				'header' => '',
-				'footer' => '',
-				'class' => '',
-				'style' => 'max-width: 697px;',
-				), $attr
-			);
-		ob_start();
-		?>
-		<div class="card <?= $attr['class'] ? $attr['class'] : ''; ?>" <?= $attr['style'] ? ' style="' . $attr['style'] . '"' : '';?> >
-			<div class="card-header">
-				<?= $attr['header'] ?>
-			</div>
-			<div class="card-block">
-				<?= apply_filters( 'the_content', $content ); ?>
-			</div>
-			<?php if ( '' !== $attr['footer'] ) : ?>
-				<div class="card-footer"><?= $attr['footer'] ?></div>
-			<?php endif; ?>
-		</div>
-		<?php
-		return ob_get_clean();
-	}
-}
-
-
 /**************** SHORTCODE Boilerplate START **********************
  * [myShortcode] - Shortcode description.
  * Available attributes:
@@ -217,230 +168,6 @@ function render_sc_myShortcode( $context ) {
 /**************** SHORTCODE Boilerplate END   **********************/
 
 require_once( get_stylesheet_directory().'/functions/class-shortcodebase.php' );
-
-/**
- * [row] - Wrap HTML in a Boostrap CSS row.
- *
- * @see https://github.com/UCF/Students-Theme/blob/d56183079c70836adfcfaa2ac7b02cb4c935237d/shortcodes.php#L454-L504
- */
-class sc_row extends ShortcodeBase {
-	public
-	$name        = 'Row',
-	$command     = 'row',
-	$description = 'Wraps content in a bootstrap row.',
-	$render      = false,
-	$params      = array(
-		array(
-			'name'      => 'Add Container',
-			'id'        => 'container',
-			'help_text' => 'Wrap the row in a container div',
-			'type'      => 'checkbox',
-			),
-		array(
-			'name'      => 'Additional Classes',
-			'id'        => 'class',
-			'help_text' => 'Additional css classes',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Inline Styles',
-			'id'        => 'style',
-			'help_text' => 'Inline css styles',
-			'type'      => 'text',
-			),
-		),
-	$callback    = 'callback',
-	$wysiwyg     = true;
-
-	public static function callback( $attr, $content = '' ) {
-		$attr = shortcode_atts(
-			array(
-				'container' => 'false',
-				'class'     => '',
-				'style'    => '',
-				), $attr
-			);
-
-		ob_start();
-		?>
-		<?php if ( 'true' === $attr['container'] ) : ?>
-			<div class="container">
-			<?php endif; ?>
-			<div class="row <?php echo $attr['class'] ? $attr['class'] : ''; ?>"<?php echo $attr['style'] ? ' style="' . $attr['style'] . '"' : '';?>>
-				<?php echo apply_filters( 'the_content', $content ); ?>
-			</div>
-			<?php if ( 'true' === $attr['container'] ) : ?>
-			</div>
-		<?php endif; ?>
-		<?php
-		return ob_get_clean();
-	}
-}
-
-/**
- * [column] - Wrap HTML in a Boostrap CSS column.
- *
- * @see https://github.com/UCF/Students-Theme/blob/d56183079c70836adfcfaa2ac7b02cb4c935237d/shortcodes.php#L506-L650
- */
-class sc_column extends ShortcodeBase {
-	public
-	$name        = 'Column',
-	$command     = 'column',
-	$description = 'Wraps content in a bootstrap column',
-	$render      = 'render',
-	$params      = array(
-		array(
-			'name'      => 'Large Size',
-			'id'        => 'lg',
-			'help_text' => 'The size of the column when the screen is > 1200px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Medium Size',
-			'id'        => 'md',
-			'help_text' => 'The size of the column when the screen is between 992px and 1199px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Small Size',
-			'id'        => 'sm',
-			'help_text' => 'The size of the column when the screen is between 768px and 991px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Extra Small Size',
-			'id'        => 'xs',
-			'help_text' => 'The size of the column when the screen is < 767px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Large Offset',
-			'id'        => 'lg_offset',
-			'help_text' => 'The offset of the column when the screen is > 1200px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Medium Offset',
-			'id'        => 'md_offset',
-			'help_text' => 'The offset of the column when the screen is between 992px and 1199px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Small Offset',
-			'id'        => 'sm_offset',
-			'help_text' => 'The offset of the column when the screen is between 768px and 991px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Extra Small Offset',
-			'id'        => 'xs_offset',
-			'help_text' => 'The offset of the column when the screen is < 767px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Large Push',
-			'id'        => 'lg_push',
-			'help_text' => 'Pushes the column the specified number of column widths when the screen is > 1200px (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Medium Push',
-			'id'        => 'md_push',
-			'help_text' => 'Pushes the column the specified number of column widths when the screen is between 992px and 1199px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Small Push',
-			'id'        => 'sm_push',
-			'help_text' => 'Pushes the column the specified number of column widths when the screen is between 768px and 991px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Extra Small Push',
-			'id'        => 'xs_push',
-			'help_text' => 'Pushes the column the specified number of column widths when the screen is < 767px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Large Pull',
-			'id'        => 'lg_pull',
-			'help_text' => 'Pulls the column the specified number of column widths when the screen is > 1200px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Medium Offset Size',
-			'id'        => 'md_pull',
-			'help_text' => 'Pulls the column the specified number of column widths when the screen is between 992px and 1199px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Small Offset Size',
-			'id'        => 'sm_pull',
-			'help_text' => 'Pulls the column the specified number of column widths when the screen is between 768px and 991px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Extra Small Offset Size',
-			'id'        => 'xs_pull',
-			'help_text' => 'Pulls the column the specified number of column widths when the screen is < 767px wide (1-12)',
-			'type'      => 'text',
-			),
-		array(
-			'name'      => 'Additional Classes',
-			'id'        => 'class',
-			'help_text' => 'Any additional classes for the column',
-			'type'      => 'text',
-			),
-		array(
-			'style'     => 'Inline Styles',
-			'id'        => 'style',
-			'help_text' => 'Any additional inline styles for the column',
-			'type'      => 'text',
-			),
-		),
-	$callback    = 'callback',
-	$wysiwig     = true;
-
-	public static function callback( $attr, $content = '' ) {
-		$attr = array_merge(
-			$attr,
-			array(
-				'class' => '',
-				'style' => '',
-				)
-			);
-
-		// Size classes.
-		$classes = array( $attr['class'] ? $attr['class'] : '' );
-
-		$prefixes = array( 'xs', 'sm', 'md', 'lg' );
-		$suffixes = array( '', '_offset', '_pull', '_push' );
-
-		foreach ( $prefixes as $prefix ) {
-			foreach ( $suffixes as $suffix ) {
-				if ( array_key_exists( $prefix.$suffix, $attr ) ) {
-					$suf = str_replace( '_', '-', $suffix );
-					$classes[] = 'col-' . $prefix . $suf . '-' . $attr[ $prefix . $suffix ];
-				}
-			}
-		}
-
-		$ctxt['cls_str'] = esc_attr( implode( ' ', $classes ) );
-		$ctxt['style'] = esc_attr( $attr['style'] );
-		$ctxt['content'] = apply_filters( 'the_content', $content );
-		return static::render( $ctxt );
-	}
-
-	public static function render( $ctxt ) {
-		ob_start();
-		?>
-		<div class="<?= $ctxt['cls_str'] ?>" style="<?= $ctxt['style'] ?>">
-			<?= $ctxt['content'] ?>
-		</div>
-		<?php
-		return ob_get_clean();
-	}
-}
 
 /**
  * [events] - Show an events calendar from events.ucf.edu
@@ -566,133 +293,6 @@ class sc_events extends ShortcodeBase {
 			}
 		}
 
-/**
- * [socialButton] - Show a button for social network, based on the URL set in the Theme Customizer.
- */
-class sc_socialButton extends ShortcodeBase {
-	public
-	$name = 'Social Button', // The name of the shortcode.
-	$command = 'socialButton', // The command used to call the shortcode.
-	$description = 'Show a button for a social network.', // The description of the shortcode.
-	$callback    = 'callback',
-	$render      = 'render',
-	$closing_tag = false,
-	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
-	$params      = array(
-		array(
-			'name'      => 'Network',
-			'id'        => 'network',
-			'help_text' => 'The social network to show.',
-			'type'      => 'dropdown',
-			'choices' => array(
-				array( 'value' => 'facebook', 'name' => 'facebook' ),
-				array( 'value' => 'twitter', 'name' => 'twitter' ),
-				array( 'value' => 'youtube', 'name' => 'youtube' ),
-				),
-			),
-		array(
-			'name'      => 'Class',
-			'id'        => 'class',
-			'help_text' => 'The wrapper classes.',
-			'type'      => 'text',
-			'default' => 'col-sm-6 text-xs-center',
-			),
-	); // The parameters used by the shortcode.
-
-	/**
-	 * @see hhttps://github.com/ucf-sdes-it/it-php-template/blob/615ecbcfa0eccffd0e8b5f71501b1b7e78cd5cf7/template_data.php#L1723-L1740
-	 * @see https://shs.sdes.ucf.edu/home.php
-	 */
-	public static function callback( $attr, $content = '' ) {
-		$attr = shortcode_atts(
-			array(
-				'network' => '',
-				'class' => 'col-sm-6 text-xs-center',
-				), $attr
-			);
-		$ctxt['container_classes'] = esc_attr( $attr['class'] );
-		switch ( $attr['network'] ) {
-			case 'facebook':
-			case 'twitter':
-			case 'youtube':
-			default:
-			$ctxt['network'] = $attr['network'];
-			$ctxt['url'] = esc_attr(
-				SDES_Static::url_ensure_prefix(
-					SDES_Static::get_theme_mod_defaultIfEmpty( 'sdes_rev_2015-' . $attr['network'], '' ) ) );
-			$ctxt['image'] = esc_attr( get_stylesheet_directory_uri() . "/images/{$attr['network']}.gif" );
-			break;
-		}
-		if ( '' === $ctxt['url'] ) { return ''; }
-		return static::render( $ctxt );
-	}
-
-	/**
-	 * Render HTML for a "socialButton" shortcode with a given context.
-	 * Context variables:
-	 * container_classes    => List of css classes for the cotainer div..
-	 * url  => The URL of the social network being linked.
-	 * image  => The button image.
-	 */
-	public static function render( $ctxt ) {
-		ob_start();
-		?>		
-		<div class="<?= $ctxt['container_classes'] ?>">
-			<a href="<?= $ctxt['url'] ?>">
-				<img src="<?= $ctxt['image'] ?>" class="clean" alt="<?= $ctxt['network'] ?> button">
-			</a>
-		</div>
-		<?php
-		return ob_get_clean();
-	}
-}
-
-/**
- * [twitterFeed] - Show a Twitter timeline for a given Twitter username.
- * @see https://dev.twitter.com/web/javascript/loading https://dev.twitter.com/web/javascript/loading
- */
-class sc_twitterFeed extends ShortcodeBase {
-	public
-	$name        = 'Twitter Feed',
-	$command     = 'twitterFeed',
-	$description = 'Display a Twitter feed.',
-	$render      = false,
-	$closing_tag = false,
-	$params      = array(
-		array(
-			'name'      => 'Username',
-			'id'        => 'username',
-			'help_text' => 'The username for your Twitter feed.',
-			'type'      => 'text',
-			'default'   => '',
-			),
-		array(
-			'name'      => 'Widget ID',
-			'id'        => 'widgetId',
-			'help_text' => 'The ID for your Twitter account. After logging in, go to: https://twitter.com/settings/widgets/new',
-			'type'      => 'text',
-			'default'   => '',
-			),
-		),
-	$callback    = 'callback',
-	$wysiwyg     = true;
-
-	public static function callback( $attr, $content = '' ) {
-		$attr = shortcode_atts(
-			array(
-				'username' => '',
-				'widgetId' => '',
-				), $attr
-			);
-		ob_start();
-		?>
-		<a class="twitter-timeline" href="//twitter.com/<?= $attr['username']; ?>" data-widget-id="<?= $attr['widgetId']; ?>">Tweets by @<?= $attr['username']; ?></a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-		<?php
-		return ob_get_clean();
-	}
-}
-
 require_once( get_stylesheet_directory().'/custom-posttypes.php' );
 use SDES\BaseTheme\PostTypes\Alert;
 /**
@@ -805,7 +405,7 @@ class sc_contactblock extends ShortcodeBase{
 				}	//end of if		
 			}	//end of for
 		}else{
-			return '<div class="alert alert-danger">Verbage to say go to contact and add a contact named main.</div>';
+			return '<div class="alert alert-danger">Go to contact and add a contact named Main.</div>';
 		}	//end of ifelse
 
 		return '<div class="alert alert-danger">No contact block exists with this name.</div>';
@@ -859,17 +459,148 @@ class sc_contactblock extends ShortcodeBase{
 	}
 }
 
+class social_media extends ShortcodeBase{
+	public
+	$name = 'Social Media', // The name of the shortcode.
+	$command = 'social_media', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array(
+		array(			
+			'name'      => 'Facebook Url',
+			'id'        => 'facebook',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Flickr Url',
+			'id'        => 'flickr',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Google+ Url',
+			'id'        => 'google_plus',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Instagram Url',
+			'id'        => 'instagram',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Pinterest Url',
+			'id'        => 'pinterest',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Twitter Url',
+			'id'        => 'twitter',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Tumblr Url',
+			'id'        => 'tumblr',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Vimeo Url',
+			'id'        => 'vimeo',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Youtube Url',
+			'id'        => 'youtube',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		);
+
+	public static function callback( $attr, $content = '' ) {;
+
+		ob_start();
+		?>
+
+		<div class="card-columns social">
+			<?php if (!empty($attr['facebook'])) { ?>
+			<div class="card">
+				<a class="btn btn-block facebook text-xl-left text-lg-center" href="<?= $attr['facebook'] ?>">
+					<span class="fa fa-facebook-official fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Facebook</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['flickr'])) { ?>
+			<div class="card">
+				<a class="btn btn-block flickr text-xl-left text-lg-center" href="<?= $attr['flickr'] ?>">
+					<span class="fa fa-flickr fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Flickr</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['google_plus'])) { ?>
+			<div class="card">
+				<a class="btn btn-block gplus text-xl-left text-lg-center" href="<?= $attr['google_plus'] ?>">
+					<span class="fa fa-google-plus fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Google+</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['instagram'])) { ?>
+			<div class="card">
+				<a class="btn btn-block instagram text-xl-left text-lg-center" href="<?= $attr['instagram'] ?>">
+					<span class="fa fa-instagram fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Instagram</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['pinterest'])) { ?>
+			<div class="card">
+				<a class="btn btn-block pinterest text-xl-left text-lg-center" href="<?= $attr['pinterest'] ?>">
+					<span class="fa fa-pinterest fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Pinterest</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['twitter'])) { ?>
+			<div class="card">
+				<a class="btn btn-block twitter text-xl-left text-lg-center" href="<?= $attr['twitter'] ?>">
+					<span class="fa fa-twitter fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Twitter</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['tumblr'])) { ?>
+			<div class="card">
+				<a class="btn btn-block tumblr text-xl-left text-lg-center" href="<?= $attr['tumblr'] ?>">
+					<span class="fa fa-tumblr fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Tumblr</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['vimeo'])) { ?>
+			<div class="card">
+				<a class="btn btn-block vimeo text-xl-left text-lg-center" href="<?= $attr['vimeo'] ?>">
+					<span class="fa fa-vimeo fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Vimeo</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['youtube'])) { ?>
+			<div class="card">
+				<a class="btn btn-block youtube text-xl-left text-lg-center" href="<?= $attr['youtube'] ?>">
+					<span class="fa fa-youtube fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;YouTube</span>
+				</a>
+			</div>
+			<?php } ?>
+		</div>		
+		
+		<?php
+		return ob_get_clean();
+	}
+	
+}
+
 function register_shortcodes() {
 	ShortcodeBase::Register_Shortcodes(array(
-		__NAMESPACE__.'\sc_row',
-		__NAMESPACE__.'\sc_column',
-		__NAMESPACE__.'\sc_alert',
-		__NAMESPACE__.'\sc_panel',
+		__NAMESPACE__.'\sc_alert',		
 		__NAMESPACE__.'\sc_menuPanel',
 		__NAMESPACE__.'\sc_events',
-		__NAMESPACE__.'\sc_socialButton',
-		__NAMESPACE__.'\sc_twitterFeed',
 		__NAMESPACE__.'\sc_contactBlock',
+		__NAMESPACE__.'\social_media',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
