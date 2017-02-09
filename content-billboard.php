@@ -1,6 +1,6 @@
 <?php
 /**
-* Template Name: Content Page Billboard
+* Template Name: Billboard
 */
 use SDES\SDES_Static as SDES_Static;
 

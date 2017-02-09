@@ -1,6 +1,6 @@
 <?php
 /**
-* Template Name: Content Full Width
+* Template Name: Full Width
 */
 use SDES\SDES_Static as SDES_Static;
 
