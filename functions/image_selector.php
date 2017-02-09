@@ -6,7 +6,7 @@ function image_selector() {
     wp_enqueue_media();
   }
  
-  wp_enqueue_script( 'uploadscript', get_stylesheet_directory_uri() . '../js/image_selector.js', array('jquery'), null, false );
+  wp_enqueue_script( 'uploadscript', get_stylesheet_directory_uri() . '/js/image_selector.js', array('jquery'), null, false );
 }
  
 add_action( 'admin_enqueue_scripts', 'image_selector' );
