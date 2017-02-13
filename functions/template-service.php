@@ -73,6 +73,8 @@
 	    	update_post_meta( $post_id, $meta_key.$c, $_POST[$meta_key.$c] );
 	    	$c++;
 	    }
+
+	    update_post_meta($post_id, "billboard-meta-box-text", $_POST["billboard-meta-box-text"]);
 	   
 	}
 
