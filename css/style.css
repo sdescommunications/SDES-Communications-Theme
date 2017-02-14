@@ -261,6 +261,8 @@ li:empty{
 
 .carousel-item	{
 	max-height:380px;
+	min-height:380px;
+	background:#000;
 }
 
 @media (max-width: 544px){
@@ -281,6 +283,7 @@ li:empty{
 
 .carousel-item img {
 	width: 100%;
+
 }
 
 .carousel-indicators {
