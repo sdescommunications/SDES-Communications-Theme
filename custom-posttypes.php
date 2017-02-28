@@ -315,7 +315,7 @@ class Billboard extends CustomPostType {
 		$use_editor     = true,  // WYSIWYG editor, post content field
 		$use_revisions  = true,  // Revisions on post content and titles
 		$use_thumbnails = true,  // Featured images
-		$use_order      = false, // Wordpress built-in order meta data
+		$use_order      = true, // Wordpress built-in order meta data
 		$use_metabox    = true,  // Enable if you have custom fields to display in admin
 		$use_shortcode  = true,  // Auto generate a shortcode for the post type
 		                         // (see also objectsToHTML and toHTML methods).
@@ -367,10 +367,8 @@ class Billboard extends CustomPostType {
 		public function shortcode( $attr ) {
 			$prefix = $this->options( 'name' ).'_';
 			$default_attrs = array(
-			'type' => $this->options( 'name' ),
-			'orderby' => 'meta_value_datetime',
-			'meta_key' => $prefix.'start_date',
-			'order' => 'ASC',
+			'type' => $this->options( 'name' ),			
+			'meta_key' => $prefix.'start_date',			
 			'meta_query' => array(
 				'relation' => 'AND',
 				array(
@@ -771,10 +769,8 @@ class News extends CustomPostType {
 			$prefix = $this->options( 'name' ).'_';
 			$default_attrs = array(
 			'type' => $this->options( 'name' ),
-			'show-archives' => false,
-			'orderby' => 'meta_value_datetime',
-			'meta_key' => $prefix.'start_date',
-			'order' => 'ASC',
+			'show-archives' => false,			
+			'meta_key' => $prefix.'start_date',			
 			'header' => 'News & Announcements',
 			'css_classes' => '',
 			);
