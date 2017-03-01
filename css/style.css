@@ -260,8 +260,8 @@ li:empty{
 }
 
 .carousel-item	{
-	max-height:380px;
-	min-height:380px;
+	max-height:318px;
+	min-height:318px;
 	background:#000;
 }
 
@@ -1209,12 +1209,16 @@ div.top-b{
 
 img.alignleft	{
 	float:left !important;
-	padding: 20px 20px 10px 0;
+	padding: 20px 20px 20px 0;
 }
 
 img.alignright	{
 	float:right !important;
-	padding: 20px 0 10px 20px;
+	padding: 20px 0 20px 20px;
+}
+
+img.aligncenter {
+	padding:20px;
 }
 
 /* ucf search bar container fix ------------------------------------------------------------------------------------------------------ */
