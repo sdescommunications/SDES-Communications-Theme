@@ -260,18 +260,14 @@ li:empty{
 }
 
 .carousel-item	{
-	max-height:318px;
-	min-height:318px;
 	background:#000;
 }
 
 @media (max-width: 544px){
-	.carousel-item {
-		height:auto !important;
-	}
+
 
 	.carousel-item h3	{
-		font-size:115%;
+
 	}
 
 	.carousel-item p {
@@ -319,7 +315,7 @@ li:empty{
 	background: rgba(0, 0, 0, 0.6);
 	left:0;
 	right:0;
-	padding: 15px 15px 15px 15px;
+	padding: 10px;
 	width:100%;
 	bottom:0px;
 	text-shadow: none;
@@ -330,7 +326,10 @@ li:empty{
 	color:#ccc;
 
 }
+.carousel-caption p {
+	margin-bottom: 0;
 
+}
 .carousel-caption a:hover {
 	color:#fff;
 	text-decoration: underline;
@@ -434,6 +433,11 @@ li:empty{
 
 	.staff .staff-content, .news .news-content{
 		margin: 0;
+	}
+
+	.carousel-caption {
+
+	    display: none;
 	}
 }
 
