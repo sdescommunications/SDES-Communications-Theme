@@ -594,6 +594,50 @@ class social_media extends ShortcodeBase{
 	
 }
 
+class sc_iframe extends ShortcodeBase{
+	public
+	$name = 'IFrame', // The name of the shortcode.
+	$command = 'iframe', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array(
+		array(			
+			'name'      => 'IFrame Url',
+			'id'        => 'if_url',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Width',
+			'id'        => 'if_width',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Height',
+			'id'        => 'if_height',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		
+		);
+
+	public static function callback( $attr, $content = '' ) {
+
+		ob_start();
+		?>
+
+			<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no"></iframe>
+
+		<?php
+		return ob_get_clean();
+	}
+
+}
+
 function register_shortcodes() {
 	ShortcodeBase::Register_Shortcodes(array(
 		__NAMESPACE__.'\sc_alert',		
@@ -601,6 +645,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_events',
 		__NAMESPACE__.'\sc_contactBlock',
 		__NAMESPACE__.'\social_media',
+		__NAMESPACE__.'\sc_iframe',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
