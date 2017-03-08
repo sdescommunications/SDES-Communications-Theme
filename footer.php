@@ -104,7 +104,7 @@ class Footer {
 						if ( Footer::should_show_static_content( 'left' ) ) {
 							Footer::get_static_content( 'left' );
 						} else {
-							Footer::get_header( 'left', 'Site Hosted by SDES' );
+							Footer::get_header( 'left', 'SDES Resources' );
 							if ( Footer::should_show_nav_menu( 'left' ) ) {
 								Footer::get_nav_menu( 'left' );
 							} elseif ( Footer::is_feed_set( 'left' ) ) {
@@ -211,7 +211,7 @@ class Footer {
 						<div id="accessibility"><a href="//www.sdes.ucf.edu/accessibility"><i class="fa fa-universal-access" aria-hidden="true"></i> Accessibility Statement</a></div>
 						<div id="copyright">Copyright &copy; <?= date('Y'); ?> <a href="//www.sdes.ucf.edu/">Student Development and Enrollment Services</a></div>
 					</div>
-					<div id="sdes_promo" class="col-sm-1"><div id="sdes_promo" class="col-sm-1"><a href="//undergrad.ucf.edu/whatsnext"><img src="//assets.sdes.ucf.edu/images/qep-logo-dark.png" alt="what's next"></a></div></div>
+					<div id="sdes_promo" class="col-sm-1"><div id="sdes_promo" class="col-sm-1"></div></div>
 				</div>
 			</div>
 		</div>
