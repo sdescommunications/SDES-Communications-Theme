@@ -19,7 +19,7 @@ get_header();
 			<div class="col-sm-4 col-xs-12">
 				<?php
 					$prefix = SDES_Static::get_post_type( get_the_ID() ).'_';
-					echo wpautop(do_shortcode( get_post_meta(get_the_ID(),  $prefix.'sidecolumn', true ) )); 
+					echo do_shortcode(wpautop( get_post_meta(get_the_ID(),  $prefix.'sidecolumn', true ) )); 
 				?>
 			</div>
 		</div>
