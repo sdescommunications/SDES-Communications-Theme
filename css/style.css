@@ -157,12 +157,10 @@ li:empty{
 
 }
 
-.page-header	{
-	border-bottom:1px dotted #ddd;
-	margin-bottom:.5em;
+.page-header {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 19px;
 }
-
-
 
 .site-content-end{
 	margin: 3em auto 1em;
@@ -325,12 +323,12 @@ li:empty{
 	margin-left: 150px;
 }
 
-.staff-role{
-	border-bottom: 1px solid #eee;
-	clear: both;
-	font-size: 1.5em;
-	margin-bottom: 0.666em;
-	padding-bottom: 0.25em;
+.staff-role {
+    border-bottom: 1px solid #eee;
+    clear: both;
+    font-size: 22px;
+    margin: 20px 0;
+    padding-bottom: 0.25em;
 }
 
 .staff .staff-name{
