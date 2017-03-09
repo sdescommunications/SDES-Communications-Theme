@@ -630,7 +630,7 @@ class sc_iframe extends ShortcodeBase{
 		ob_start();
 		?>
 
-			<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no"></iframe>
+			<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no" allowfullscreen></iframe>
 
 		<?php
 		return ob_get_clean();
