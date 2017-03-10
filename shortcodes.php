@@ -629,8 +629,19 @@ class sc_iframe extends ShortcodeBase{
 
 		ob_start();
 		?>
+			<?php
+				if (strpos($attr['if_url'], 'youtube') !== false) {
+			?>
 
 			<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
+			<?php
+				} else {
+			?>
+				<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no" ></iframe>
+			<?php
+				}
+			?>
 
 		<?php
 		return ob_get_clean();
