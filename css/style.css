@@ -158,8 +158,8 @@ li:empty{
 }
 
 .page-header {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 19px;
+    border-bottom: 1px dotted #ddd;
+    margin-bottom: 23px;
 }
 
 .site-content-end{
