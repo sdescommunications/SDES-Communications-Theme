@@ -64,6 +64,65 @@ li:empty{
 	padding: 10px;
 }
 
+
+
+.form-pills{
+	margin-top: 4px;
+	margin-left: 5px;
+}
+
+.navbar-toggler {
+	color:#000;
+}
+
+
+
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+	border: 0;
+	padding: 10px;
+}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+	border-top: 1px solid #ddd;
+}
+.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
+	padding: 10px;
+}
+.h1, h1 {
+	font-size: 32px;
+}
+.h2, h2 {
+    font-size: 25px;
+    margin: 14px 0;
+}
+.h3, h3 {
+	font-size: 21px;
+}
+.site-title {
+	letter-spacing: -1px;
+}
+.site-title {
+	font-size: 40px;
+}
+.news {
+	border-bottom: 1px solid #f1f1f1;
+	margin: 0 0 20px 0;
+}
+
+#accessibility {
+	margin-bottom: 7px;
+	display: block;
+	font-size: 14px;
+}
+
+#copyright {
+	font-size: 12px;
+	opacity: .4;
+}
+
+
+
+
 /* specific site elements ------------------------------------------------------------------------------------------ */
 
 .container.header{
@@ -858,59 +917,6 @@ h1 a[href$='.pptx'], h2 a[href$='.pptx'], h3 a[href$='.pptx']{
 	background: url('../images/fff_page_black_powerpoint.png') right center no-repeat;
 }
 
-.form-pills{
-	margin-top: 4px;
-	margin-left: 5px;
-}
-
-.navbar-toggler {
-	color:#000;
-}
-
-
-
-
-.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
-	border: 0;
-	padding: 10px;
-}
-.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
-	border-top: 1px solid #ddd;
-}
-.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
-	padding: 10px;
-}
-.h1, h1 {
-	font-size: 32px;
-}
-.h2, h2 {
-	font-size: 25px;
-}
-.h3, h3 {
-	font-size: 21px;
-}
-.site-title {
-	letter-spacing: -1px;
-}
-.site-title {
-	font-size: 40px;
-}
-.news {
-	border-bottom: 1px solid #f1f1f1;
-	margin: 0 0 20px 0;
-}
-
-#accessibility {
-	margin-bottom: 7px;
-	display: block;
-}
-
-#copyright {
-	font-size: 11px;
-	opacity: .4;
-}
-
-
 
 
 
@@ -1206,21 +1212,11 @@ img.aligncenter {
 		column-count:1;
 	}
 
-		.carousel-item h3	{
-
-	}
-
 	.carousel-item p {
 		font-size:80%;
 		line-height: 110%;
 	}
 
-
-}
-
-
-
-@media (max-width: 768px){ /* tiny breakpoint and smaller */
 	.site-title{
 		font-size: 2.75em;
 	}

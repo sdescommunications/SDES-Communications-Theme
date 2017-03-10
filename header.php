@@ -11,7 +11,7 @@ use SDES\SDES_Static as SDES_Static;
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><?= wp_title( '&raquo;', true, 'right' ); bloginfo( 'name' ); ?> &raquo; UCF</title>
+	<title><?= wp_title( '&raquo;', true, 'right' ); bloginfo( 'name' ); ?> - UCF</title>
 
 	<link rel="shortcut icon" href="<?= get_stylesheet_directory_uri(); ?>/images/favicon_black.png" >
 	<link rel="apple-touch-icon" href="<?= get_stylesheet_directory_uri(); ?>/images/apple-touch-icon.png" >
@@ -28,52 +28,6 @@ use SDES\SDES_Static as SDES_Static;
 
 
 
-	<?php $sdes_theme_settings_js_lib = esc_attr(get_option('sdes_theme_settings_js_lib', ''));
-	if ( '' != $sdes_theme_settings_js_lib ) {
-		echo "\n";
-		$libs = explode(';', $sdes_theme_settings_js_lib);
-		foreach ($libs as $lib_url) {
-			echo "\t<script type='text/javascript' src='{$lib_url}'></script>\n";
-		}
-	} ?>
-	<?php
-	$sdes_theme_settings_js = esc_attr(get_option('sdes_theme_settings_js', ''));
-	if ( '' != $sdes_theme_settings_js )
-		{ ?>
-	<script>
-		$(document).ready(function(){
-			<?= $sdes_theme_settings_js ?>
-		});	
-	</script>
-	<?php } ?>
-	<?php
-	$sdes_theme_settings_ga_id = esc_attr(get_option('google_id', ''));
-	if ( '' != $sdes_theme_settings_ga_id ) : ?>
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', "<?= $sdes_theme_settings_ga_id ?>", 'ucf.edu');
-		ga('send', 'pageview');
-	</script>
-<?php endif; ?>
-
-
-<?php
-$sdes_theme_settings_css_lib = esc_attr(get_option('sdes_theme_settings_css_lib', ''));
-if ( '' != $sdes_theme_settings_css_lib ) {
-	echo "\n";
-	$libs = explode(';', $sdes_theme_settings_css_lib);
-	foreach ($libs as $lib_url) {
-		echo "\t<link rel='stylesheet' href='{$lib_url}'>\n";
-	}
-} ?>
-<?php
-$sdes_theme_settings_css = esc_attr(get_option('sdes_theme_settings_css', ''));
-if ( '' != $sdes_theme_settings_css ) {
-	echo "<style>\n\t\t{$sdes_theme_settings_css}\n\t</style>\n";
-} ?>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,7 +37,6 @@ if ( '' != $sdes_theme_settings_css ) {
 	<![endif]-->
 
 
-	<?php wp_head(); ?>
 </head>
 <body class="nojs">
 	<script>
