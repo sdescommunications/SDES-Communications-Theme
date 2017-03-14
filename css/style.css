@@ -969,6 +969,16 @@ h1 a[href$='.pptx'], h2 a[href$='.pptx'], h3 a[href$='.pptx']{
 	color:#bc2a8d;
 }
 
+.btn.linkedin	{
+	background-color:#0077B5;
+	color:#fff;
+}
+
+.btn.linkedin:hover	{
+	background-color: #ddd;
+	color:#0077B5;
+}
+
 .btn.pinterest	{
 	background-color:#cb2027;
 	color:#fff;

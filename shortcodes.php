@@ -494,6 +494,12 @@ class social_media extends ShortcodeBase{
 			'type'      => 'text',
 			),
 		array(			
+			'name'      => 'LinkedIn Url',
+			'id'        => 'linkedin',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
 			'name'      => 'Pinterest Url',
 			'id'        => 'pinterest',
 			'help_text' => '',
@@ -553,6 +559,12 @@ class social_media extends ShortcodeBase{
 			<div class="card">
 				<a class="btn btn-block instagram text-xl-left text-lg-center" href="<?= $attr['instagram'] ?>">
 					<span class="fa fa-instagram fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Instagram</span>
+				</a>
+			</div>
+			<?php } if (!empty($attr['linkedin'])) { ?>
+			<div class="card">
+				<a class="btn btn-block linkedin text-xl-left text-lg-center" href="<?= $attr['linkedin'] ?>">
+					<span class="fa fa-linkedin fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;LinkedIn</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['pinterest'])) { ?>
