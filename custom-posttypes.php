@@ -1062,7 +1062,7 @@ class FAQ extends CustomPostType {
 		$use_shortcode  = true, // Auto generate a shortcode for the post type
 		                         // (see also objectsToHTML and toHTML methods).
 		$taxonomies     = array( 'org_groups' ),
-		$menu_icon      = 'dashicons-groups',
+		$menu_icon      = 'dashicons-editor-help',
 		$built_in       = false,
 		// Optional default ordering for generic shortcode if not specified by user.
 		$default_orderby = null,
