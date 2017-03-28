@@ -1073,7 +1073,6 @@ class FAQ extends CustomPostType {
 			$prefix = $this->options( 'name' ).'_';
 			$default_attrs = array(
 				'type' => $this->options( 'name' ),
-				'header' => $this->options( 'plural_name' ),
 				);
 			if ( is_array( $attr ) ) {
 				$attr = array_merge( $default_attrs, $attr );
