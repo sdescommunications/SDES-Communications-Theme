@@ -7,9 +7,9 @@ namespace SDES\BaseTheme\PostTypes;
 use \WP_Query;
 use SDES\SDES_Static as SDES_Static;
 require_once( get_stylesheet_directory().'/functions/class-sdes-metaboxes.php' );
-	use SDES\SDES_Metaboxes;
+use SDES\SDES_Metaboxes;
 require_once( get_stylesheet_directory().'/functions/class-custom-posttype.php' );
-	use SDES\CustomPostType;
+use SDES\CustomPostType;
 
 /**
  * The built-in post_type named 'Post'.
@@ -77,12 +77,12 @@ class Page extends CustomPostType {
  */
 class Alert extends CustomPostType {
 	public
-		$name           = 'alert',
-		$plural_name    = 'Alerts',
-		$singular_name  = 'Alert',
-		$add_new_item   = 'Add New Alert',
-		$edit_item      = 'Edit Alert',
-		$new_item       = 'New Alert',
+	$name           = 'alert',
+	$plural_name    = 'Alerts',
+	$singular_name  = 'Alert',
+	$add_new_item   = 'Add New Alert',
+	$edit_item      = 'Edit Alert',
+	$new_item       = 'New Alert',
 		$public         = true,  // I dunno...leave it true
 		$use_title      = true,  // Title field
 		$use_editor     = true,  // WYSIWYG editor, post content field
@@ -288,8 +288,8 @@ class Alert extends CustomPostType {
 			?>
 			<div class="alert <?= $context['css_classes'] ?>">
 				
-			<strong><?= $context['title'] ?></strong>
-			<?= $context['message'] ?>
+				<strong><?= $context['title'] ?></strong>
+				<?= $context['message'] ?>
 				
 			</div>
 			<div class="clearfix"></div>
@@ -297,19 +297,19 @@ class Alert extends CustomPostType {
 			
 			return ob_get_clean();
 		}
-}
+	}
 
 /**
  * A single billboard slide to be displayed in a carousel, such as the NivoSlider jQuery plugin.
  */
 class Billboard extends CustomPostType {
 	public
-		$name           = 'billboard',
-		$plural_name    = 'Billboards',
-		$singular_name  = 'Billboard',
-		$add_new_item   = 'Add New Billboard',
-		$edit_item      = 'Edit Billboard',
-		$new_item       = 'New Billboard',
+	$name           = 'billboard',
+	$plural_name    = 'Billboards',
+	$singular_name  = 'Billboard',
+	$add_new_item   = 'Add New Billboard',
+	$edit_item      = 'Edit Billboard',
+	$new_item       = 'New Billboard',
 		$public         = true,  // I dunno...leave it true
 		$use_title      = true,  // Title field
 		$use_editor     = true,  // WYSIWYG editor, post content field
@@ -329,29 +329,29 @@ class Billboard extends CustomPostType {
 		public function fields() {
 			$prefix = $this->options( 'name' ).'_';
 			return array(
-			array(
-				'name' => 'URL',
-				'descr' => 'Add a link for this billboard.',
-				'id' => $prefix.'url',
-				'type' => 'text',
-				'default' => 'http://',
-			),
-			array(
-				'name' => 'Start Date',
-				'descr' => 'The billboard will be shown starting on this date.',
-				'id' => $prefix.'start_date',
-				'type' => 'date',
-				'custom_column_order' => 200,
-				'default' => date( 'Y-m-d', time() ),
-			),
-			array(
-				'name' => 'End Date',
-				'descr' => 'Stop showing the billboard after this date.',
-				'id' => $prefix.'end_date',
-				'type' => 'date',
-				'custom_column_order' => 300,
-			),
-			);
+				array(
+					'name' => 'URL',
+					'descr' => 'Add a link for this billboard.',
+					'id' => $prefix.'url',
+					'type' => 'text',
+					'default' => 'http://',
+					),
+				array(
+					'name' => 'Start Date',
+					'descr' => 'The billboard will be shown starting on this date.',
+					'id' => $prefix.'start_date',
+					'type' => 'date',
+					'custom_column_order' => 200,
+					'default' => date( 'Y-m-d', time() ),
+					),
+				array(
+					'name' => 'End Date',
+					'descr' => 'Stop showing the billboard after this date.',
+					'id' => $prefix.'end_date',
+					'type' => 'date',
+					'custom_column_order' => 300,
+					),
+				);
 		}
 
 		public function register_metaboxes() {
@@ -360,36 +360,36 @@ class Billboard extends CustomPostType {
 			// Move and Rename the Featured Image Metabox.
 			remove_meta_box( 'postimagediv', $this->name, 'side' );
 			add_meta_box('postimagediv', __( "{$this->singular_name} Image" ),
-			'post_thumbnail_meta_box', $this->name, 'after_title', 'high');
+				'post_thumbnail_meta_box', $this->name, 'after_title', 'high');
 			CustomPostType::register_meta_boxes_after_title();
 		}
 
 		public function shortcode( $attr ) {
 			$prefix = $this->options( 'name' ).'_';
 			$default_attrs = array(
-			'type' => $this->options( 'name' ),			
-			'meta_key' => $prefix.'start_date',			
-			'meta_query' => array(
-				'relation' => 'AND',
-				array(
-					'key' => $prefix.'start_date',
-					'value' => date( 'Y-m-d', time() ),
-					'compare' => '<=',
-				),
-				array(
-					'relation' => 'OR',
+				'type' => $this->options( 'name' ),			
+				'meta_key' => $prefix.'start_date',			
+				'meta_query' => array(
+					'relation' => 'AND',
 					array(
-						'key' => $prefix.'end_date',
+						'key' => $prefix.'start_date',
+						'value' => date( 'Y-m-d', time() ),
+						'compare' => '<=',
+						),
+					array(
+						'relation' => 'OR',
+						array(
+							'key' => $prefix.'end_date',
 						'value' => date( 'Y-m-d', strtotime( '-1 day' ) ), // Datetime is stored as 24 hours before it should expire.
 						'compare' => '>',
-					),
-					array(
-						'key' => $prefix.'end_date',
+						),
+						array(
+							'key' => $prefix.'end_date',
 						'compare' => 'NOT EXISTS', // Allow perpetual billboards.
+						),
+						)
 					),
-				)
-			),
-			);
+				);
 			if ( is_array( $attr ) ) {
 				$attr = array_merge( $default_attrs, $attr );
 			} else {
@@ -406,82 +406,82 @@ class Billboard extends CustomPostType {
 			return static::render_objects_to_html( $context );
 		}
 
-				protected static function render_objects_to_html( $context ) {
+		protected static function render_objects_to_html( $context ) {
 
-					ob_start();
+			ob_start();
 
-					$CAROUSEL_SIZE = array( 1140, 380 );
-					$count = 0;
-					$control = null;
-					$indicator = null;
-					$inner = null;
-					$title = null;
+			$CAROUSEL_SIZE = array( 1140, 380 );
+			$count = 0;
+			$control = null;
+			$indicator = null;
+			$inner = null;
+			$title = null;
 
-					$control = '
-					<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-						<span class="fa fa-2x fa-arrow-circle-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-					<a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-						<span class="fa fa-2x fa-arrow-circle-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-					';
+			$control = '
+			<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+				<span class="fa fa-2x fa-arrow-circle-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+				<span class="fa fa-2x fa-arrow-circle-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+			';
 
-					foreach ($context['objects'] as $item) {
-						$indicator .= '
-							<li data-target="#carousel" data-slide-to="'.$count.'" class="'. ($count === 0 ? 'active' : false) .'"> </li>
-							';                                              
+			foreach ($context['objects'] as $item) {
+				$indicator .= '
+				<li data-target="#carousel" data-slide-to="'.$count.'" class="'. ($count === 0 ? 'active' : false) .'"> </li>
+				';                                              
 
-						$inner .= '
-							<div class="carousel-item '.($count === 0 ? 'active' : false).'">'.
-								((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? 
-									'<a href="'. $item->billboard_url .'">'. get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'</a>' 
-								: get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text ))).
-								((!empty($item->post_title)) || (!empty($item->post_content)) ? 
-								'<div class="carousel-caption">'
-									. ((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? '<h3><a href="'. $item->billboard_url .'">'. $item->post_title .'</a></h3>'
-									: '<h3>'. $item->post_title .'</h3>') .
-									'<p>
-										'. $item->post_content .'
-									</p>
-								</div>' : false) .'
-							</div>
-							';
-
-					$count++;
-				}
-				?>                           
-
-				<div id="carousel" class="container carousel slide" data-ride="carousel">
-					
-					<div class="carousel-inner" role="listbox">
-						<?= $inner ?>
-					</div>
-					<?= (($count > 1) ? $control : false) ?>
-					<ol class="carousel-indicators">
-						<?= $indicator ?>
-					</ol>
-				</div>				
-
-				<div class="noscript">
-					Billboards:<br><br>
-					<?php echo "\n";
-					foreach ( $context['objects'] as $o ) :
-						if ( $o->billboard_url ) : ?>
-							<a href="<?= $o->billboard_url ?>">
-						<?php endif;
-						echo "\t\t\t\t{$o->post_title} {$o->post_content} {$o->alt_text}<br><br>\n";
-						if ( $o->billboard_url ) : ?>
-							</a>
-						<?php endif;
-					endforeach; ?>
+				$inner .= '
+				<div class="carousel-item '.($count === 0 ? 'active' : false).'">'.
+					((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? 
+						'<a href="'. $item->billboard_url .'">'. get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'</a>' 
+						: get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text ))).
+					((!empty($item->post_title)) || (!empty($item->post_content)) ? 
+						'<div class="carousel-caption">'
+						. ((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? '<h3><a href="'. $item->billboard_url .'">'. $item->post_title .'</a></h3>'
+							: '<h3>'. $item->post_title .'</h3>') .
+						'<p>
+						'. $item->post_content .'
+					</p>
+				</div>' : false) .'
 				</div>
-			</div>
+				';
 
-			<?php
-			return ob_get_clean();
-		}
+				$count++;
+			}
+			?>                           
+
+			<div id="carousel" class="container carousel slide" data-ride="carousel">
+
+				<div class="carousel-inner" role="listbox">
+					<?= $inner ?>
+				</div>
+				<?= (($count > 1) ? $control : false) ?>
+				<ol class="carousel-indicators">
+					<?= $indicator ?>
+				</ol>
+			</div>				
+
+			<div class="noscript">
+				Billboards:<br><br>
+				<?php echo "\n";
+				foreach ( $context['objects'] as $o ) :
+					if ( $o->billboard_url ) : ?>
+				<a href="<?= $o->billboard_url ?>">
+				<?php endif;
+				echo "\t\t\t\t{$o->post_title} {$o->post_content} {$o->alt_text}<br><br>\n";
+				if ( $o->billboard_url ) : ?>
+			</a>
+		<?php endif;
+		endforeach; ?>
+	</div>
+</div>
+
+<?php
+return ob_get_clean();
+}
 }
 
 /**
@@ -489,12 +489,12 @@ class Billboard extends CustomPostType {
  */
 class Staff extends CustomPostType {
 	public
-		$name           = 'staff',
-		$plural_name    = 'Staff',
-		$singular_name  = 'Staff',
-		$add_new_item   = 'Add New Staff',
-		$edit_item      = 'Edit Staff',
-		$new_item       = 'New Staff',
+	$name           = 'staff',
+	$plural_name    = 'Staff',
+	$singular_name  = 'Staff',
+	$add_new_item   = 'Add New Staff',
+	$edit_item      = 'Edit Staff',
+	$new_item       = 'New Staff',
 		$public         = true,  // I dunno...leave it true
 		$use_title      = true,  // Title field
 		$use_editor     = true,  // WYSIWYG editor, post content field
@@ -517,7 +517,7 @@ class Staff extends CustomPostType {
 				'help_text' => 'Show a header for above the staff list.',
 				'type' => 'text',
 				'default' => 'Staff List',
-			),
+				),
 			array(
 				'name' => 'Collapse',
 				'id' => 'collapse',
@@ -526,44 +526,44 @@ class Staff extends CustomPostType {
 				'choices' => array(
 					array( 'value' => 'false', 'name' => "Don't show [Read More] link." ),
 					array( 'value' => 'true', 'name' => 'Show [Read More] link.' ),
+					),
 				),
-			),
-		);
+			);
 
 		public function fields() {
 			$prefix = $this->options( 'name' ).'_';
 			return array(
-			array(
-				'name' => 'Position Title',
-				'descr' => '',
-				'id' => $prefix.'position_title',
-				'type' => 'text',
-			),
-			array(
-				'name' => 'Email',
-				'descr' => '',
-				'id' => $prefix.'email',
-				'type' => 'text',
-			),
-			array(
-				'name' => 'Phone',
-				'descr' => '',
-				'id' => $prefix.'phone',
-				'type' => 'text',
-			),
-			);
+				array(
+					'name' => 'Position Title',
+					'descr' => '',
+					'id' => $prefix.'position_title',
+					'type' => 'text',
+					),
+				array(
+					'name' => 'Email',
+					'descr' => '',
+					'id' => $prefix.'email',
+					'type' => 'text',
+					),
+				array(
+					'name' => 'Phone',
+					'descr' => '',
+					'id' => $prefix.'phone',
+					'type' => 'text',
+					),
+				);
 		}
 
 		public function metabox() {
 			if ( $this->options( 'use_metabox' ) ) {
 				return array(
-				'id'       => 'custom_'.$this->options( 'name' ).'_metabox',
-				'title'    => __( $this->options( 'singular_name' ).' Fields' ),
-				'page'     => $this->options( 'name' ),
-				'context'  => 'after_title',
-				'priority' => 'high',
-				'fields'   => $this->fields(),
-				);
+					'id'       => 'custom_'.$this->options( 'name' ).'_metabox',
+					'title'    => __( $this->options( 'singular_name' ).' Fields' ),
+					'page'     => $this->options( 'name' ),
+					'context'  => 'after_title',
+					'priority' => 'high',
+					'fields'   => $this->fields(),
+					);
 			}
 			return null;
 		}
@@ -572,7 +572,7 @@ class Staff extends CustomPostType {
 			// Move and Rename the Featured Image Metabox.
 			remove_meta_box( 'postimagediv', $this->name, 'side' );
 			add_meta_box('postimagediv', __( "{$this->singular_name} Image" ),
-			'post_thumbnail_meta_box', $this->name, 'after_title', 'high');
+				'post_thumbnail_meta_box', $this->name, 'after_title', 'high');
 			CustomPostType::register_meta_boxes_after_title();
 
 			parent::register_metaboxes();
@@ -581,11 +581,11 @@ class Staff extends CustomPostType {
 		public function shortcode( $attr ) {
 			$prefix = $this->options( 'name' ).'_';
 			$default_attrs = array(
-			'type' => $this->options( 'name' ),
-			'header' => $this->options( 'plural_name' ) . ' List',
-			'css_classes' => '',
-			'collapse' => false,
-			);
+				'type' => $this->options( 'name' ),
+				'header' => $this->options( 'plural_name' ) . ' List',
+				'css_classes' => '',
+				'collapse' => false,
+				);
 			if ( is_array( $attr ) ) {
 				$attr = array_merge( $default_attrs, $attr );
 			} else {
@@ -617,80 +617,80 @@ class Staff extends CustomPostType {
 			ob_start();
 			?>
 			<?php if ( $context['collapse'] ) : ?>
-			<script type="text/javascript">
-				$(function(){
-					var collapsedSize = 60;
-					$(".staff-details").each(function() {
-						var h = this.scrollHeight;
-						var div = $(this);
-						if (h > 30) {
-							div.css("height", collapsedSize);
-							div.after("<a class=\"staff-more\" href=\"\">[Read More]</a>");
-							var link = div.next();
-							link.click(function(e) {
-								e.stopPropagation();
-								e.preventDefault();
-								if (link.text() != "[Collapse]") {
-									link.text("[Collapse]");
-									div.animate({ "height": h });
-								} else {
-									div.animate({ "height": collapsedSize });
-									link.text("[Read More]");
-								}
-							});
-						}
+				<script type="text/javascript">
+					$(function(){
+						var collapsedSize = 60;
+						$(".staff-details").each(function() {
+							var h = this.scrollHeight;
+							var div = $(this);
+							if (h > 30) {
+								div.css("height", collapsedSize);
+								div.after("<a class=\"staff-more\" href=\"\">[Read More]</a>");
+								var link = div.next();
+								link.click(function(e) {
+									e.stopPropagation();
+									e.preventDefault();
+									if (link.text() != "[Collapse]") {
+										link.text("[Collapse]");
+										div.animate({ "height": h });
+									} else {
+										div.animate({ "height": collapsedSize });
+										link.text("[Read More]");
+									}
+								});
+							}
+						});
 					});
-				});
-			</script>
+				</script>
 			<?php endif;
 			if ( $context['header'] ) : ?>
-				<div class="staff-role"><?= $context['header'] ?></div>
-			<?php endif; ?>
-				<span class="<?= $context['css_classes'] ?>">
-					<?php foreach ( $context['objects'] as $o ) : ?>
-					<?= static::toHTML( $o ) ?>
-					<div class="hr-blank"></div>
-				<?php endforeach;?>
-				</span>
-			<?php
-			
-			return ob_get_clean();
-		}
+			<div class="staff-role"><?= $context['header'] ?></div>
+		<?php endif; ?>
+		<span class="<?= $context['css_classes'] ?>">
+			<?php foreach ( $context['objects'] as $o ) : ?>
+				<?= static::toHTML( $o ) ?>
+				<div class="hr-blank"></div>
+			<?php endforeach;?>
+		</span>
+		<?php
 
-		public static function toHTML( $post_object ) {
-			$context['Post_ID'] = $post_object->ID;
-			$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
-			$context['thumbnail']
-			= has_post_thumbnail( $post_object )
-				? get_the_post_thumbnail( $post_object, 'post-thumbnail', array( 'class' => 'img-fluid' ) )
-				: "<img src='".$thumbnailUrl."' alt='thumb' class='img-fluid'>";
-			$context['title'] = get_the_title( $post_object );
-			$context['staff_position_title'] = get_post_meta( $post_object->ID, 'staff_position_title', true );
-			$context['staff_phone'] = get_post_meta( $post_object->ID, 'staff_phone', true );
-			$context['staff_email'] = get_post_meta( $post_object->ID, 'staff_email', true );
-			$context['content'] = wpautop($post_object->post_content);
-			return static::render_to_html( $context );
-		}
+		return ob_get_clean();
+	}
 
-		protected static function render_to_html( $context ) {
-			ob_start();
-			?>
-			<div class="staff">
-				<?= $context['thumbnail'] ?>
-				<div class="staff-content">
-					<div class="staff-name"><?= $context['title'] ?></div>
-					<div class="staff-title"><?= $context['staff_position_title'] ?></div>
-					<div class="staff-phone"><?= $context['staff_phone'] ?></div>
-					<div class="staff-email">
-						<a href="mailto:<?= $context['staff_email'] ?>"><?= $context['staff_email'] ?></a>
-					</div>
-					<div class="staff-details"><?= $context['content'] ?></div>
+	public static function toHTML( $post_object ) {
+		$context['Post_ID'] = $post_object->ID;
+		$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
+		$context['thumbnail']
+		= has_post_thumbnail( $post_object )
+		? get_the_post_thumbnail( $post_object, 'post-thumbnail', array( 'class' => 'img-fluid' ) )
+		: "<img src='".$thumbnailUrl."' alt='thumb' class='img-fluid'>";
+		$context['title'] = get_the_title( $post_object );
+		$context['staff_position_title'] = get_post_meta( $post_object->ID, 'staff_position_title', true );
+		$context['staff_phone'] = get_post_meta( $post_object->ID, 'staff_phone', true );
+		$context['staff_email'] = get_post_meta( $post_object->ID, 'staff_email', true );
+		$context['content'] = wpautop($post_object->post_content);
+		return static::render_to_html( $context );
+	}
+
+	protected static function render_to_html( $context ) {
+		ob_start();
+		?>
+		<div class="staff">
+			<?= $context['thumbnail'] ?>
+			<div class="staff-content">
+				<div class="staff-name"><?= $context['title'] ?></div>
+				<div class="staff-title"><?= $context['staff_position_title'] ?></div>
+				<div class="staff-phone"><?= $context['staff_phone'] ?></div>
+				<div class="staff-email">
+					<a href="mailto:<?= $context['staff_email'] ?>"><?= $context['staff_email'] ?></a>
 				</div>
+				<div class="staff-details"><?= $context['content'] ?></div>
 			</div>
-			<?php
-		 
-			return ob_get_clean();
-		}
+		</div>
+		<?php
+
+		return ob_get_clean();
+	}
 }
 
 /**
@@ -698,12 +698,12 @@ class Staff extends CustomPostType {
  */
 class News extends CustomPostType {
 	public
-		$name           = 'news',
-		$plural_name    = 'News',
-		$singular_name  = 'News',
-		$add_new_item   = 'Add New News',
-		$edit_item      = 'Edit News',
-		$new_item       = 'New News',
+	$name           = 'news',
+	$plural_name    = 'News',
+	$singular_name  = 'News',
+	$add_new_item   = 'Add New News',
+	$edit_item      = 'Edit News',
+	$new_item       = 'New News',
 		$public         = true,  // I dunno...leave it true
 		$use_title      = true,  // Title field
 		$use_editor     = true,  // WYSIWYG editor, post content field
@@ -731,51 +731,51 @@ class News extends CustomPostType {
 					array( 'value' => 'false', 'name' => 'Show current news.' ),
 					array( 'value' => 'true', 'name' => 'Show archived news.' ),
 					),
-			),
-		);
+				),
+			);
 
 		public function fields() {
 			$prefix = $this->options( 'name' ).'_';
 			return array(
-			array(
-				'name' => 'Strapline',
-				'descr' => '',
-				'id' => $prefix.'strapline',
-				'type' => 'text',
-			),
-			array(
-				'name' => 'URL',
-				'descr' => '',
-				'id' => $prefix.'url',
-				'type' => 'text',
-				'default' => 'http://',
-			),
-			array(
-				'name' => 'Start Date',
-				'descr' => '',
-				'id' => $prefix.'start_date',
-				'type' => 'date',
-				'custom_column_order' => 200,
-			),
-			array(
-				'name' => 'End Date',
-				'descr' => '',
-				'id' => $prefix.'end_date',
-				'type' => 'date',
-				'custom_column_order' => 300,
-			),
-			);
+				array(
+					'name' => 'Strapline',
+					'descr' => '',
+					'id' => $prefix.'strapline',
+					'type' => 'text',
+					),
+				array(
+					'name' => 'URL',
+					'descr' => '',
+					'id' => $prefix.'url',
+					'type' => 'text',
+					'default' => 'http://',
+					),
+				array(
+					'name' => 'Start Date',
+					'descr' => '',
+					'id' => $prefix.'start_date',
+					'type' => 'date',
+					'custom_column_order' => 200,
+					),
+				array(
+					'name' => 'End Date',
+					'descr' => '',
+					'id' => $prefix.'end_date',
+					'type' => 'date',
+					'custom_column_order' => 300,
+					),
+				);
 		}
 
 		public function shortcode( $attr ) {
 			$prefix = $this->options( 'name' ).'_';
 			$default_attrs = array(
-			'type' => $this->options( 'name' ),
-			'show-archives' => false,			
-			'meta_key' => $prefix.'start_date',			
-			'header' => 'News & Announcements',
-			'css_classes' => '',
-			);
+				'type' => $this->options( 'name' ),
+				'show-archives' => false,			
+				'meta_key' => $prefix.'start_date',			
+				'header' => 'News & Announcements',
+				'css_classes' => '',
+				);
 			if ( is_array( $attr ) ) {
 				$attr = array_merge( $default_attrs, $attr );
 			} else {
@@ -787,29 +787,29 @@ class News extends CustomPostType {
 			if ( $attr['show-archives'] ) {
 				// Show where EndDate <= NOW .
 				$attr['meta_query'] = array(
-				'relation' => 'AND',
-				array(
-					'key' => esc_sql( $prefix.'end_date' ),
+					'relation' => 'AND',
+					array(
+						'key' => esc_sql( $prefix.'end_date' ),
 					'value' => date( 'Y-m-d', strtotime( '-1 day' ) ),  // Datetime is stored as 24 hours before it should expire.
 					'compare' => '<=',
-				)
-				);
+					)
+					);
 			} else {
 				// Show where StartDate is before now (StartDate <= NOW)
 				// AND EndDate is after now (EndDate >= NOW).
 				$attr['meta_query'] = array(
-				'relation' => 'AND',
-				array(
-					'key' => esc_sql( $prefix.'start_date' ),
-					'value' => date( 'Y-m-d', time() ),
-					'compare' => '<=',
-				),
-				array(
-					'key' => esc_sql( $prefix.'end_date' ),
+					'relation' => 'AND',
+					array(
+						'key' => esc_sql( $prefix.'start_date' ),
+						'value' => date( 'Y-m-d', time() ),
+						'compare' => '<=',
+						),
+					array(
+						'key' => esc_sql( $prefix.'end_date' ),
 					'value' => date( 'Y-m-d', strtotime( '-1 day' ) ), // Datetime is stored as 24 hours before it should expire.
 					'compare' => '>',
-				)
-				);
+					)
+					);
 			}
 
 			$context['header'] = $attr['header'];
@@ -839,8 +839,8 @@ class News extends CustomPostType {
 			} else {
 				$format_default_message = ( SDES_Static::Is_UserLoggedIn_Can( 'edit_posts' ) )
 				? '<span class="adminmsg">Admin Alert:<a class="text-danger" data-control-name="sdes_rev_2015-newsArchiveUrl"'
-				  . 'href="' . get_site_url() . '/wp-admin/">%1$s</a><br>'
-				  . "If you have not created <a href='".get_admin_url()."/post-new.php?post_type=page&post_title={$posttype_name}&content=%%5Bnews-list%%20show-archives%%3Dtrue%%5D'>a news archive page with a [news-list] shortcode</a>, please do this first.<br></span>"
+				. 'href="' . get_site_url() . '/wp-admin/">%1$s</a><br>'
+				. "If you have not created <a href='".get_admin_url()."/post-new.php?post_type=page&post_title={$posttype_name}&content=%%5Bnews-list%%20show-archives%%3Dtrue%%5D'>a news archive page with a [news-list] shortcode</a>, please do this first.<br></span>"
 				: '<!-- %1$s -->';
 				$archive_link = sprintf( $format_default_message, 'No news archive page was set.' );
 			}
@@ -859,9 +859,9 @@ class News extends CustomPostType {
 			ob_start();
 			?>
 			<?php if ( $context['header'] ) : ?>
-			<div class="page-header">
-				<h1><?= $context['header'] ?></h1>
-			</div>
+				<div class="page-header">
+					<h1><?= $context['header'] ?></h1>
+				</div>
 			<?php endif; ?>
 			<span class="<?= $context['css_classes'] ?>">
 				<?php foreach ( $context['objects'] as $o ) : ?>
@@ -877,7 +877,7 @@ class News extends CustomPostType {
 				<?php endif; ?>
 			</span>
 			<?php
-		
+
 			return ob_get_clean();
 		}
 
@@ -886,22 +886,22 @@ class News extends CustomPostType {
 			$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
 			$context['thumbnail']
 			= has_post_thumbnail( $post_object )
-				? get_the_post_thumbnail($post_object, '',
+			? get_the_post_thumbnail($post_object, '',
 				array( 'class' => 'img-fluid', 'alt' => SDES_Static::get_post_thumbnail_alttext( $post_object->ID, 'Thumbnail' ) ) )
-					: "<img src='".$thumbnailUrl."' alt='Thumbnail' class='img-fluid'>";
-				$news_url = get_post_meta( $post_object->ID, 'news_url', true );
-				$context['permalink'] = get_permalink( $post_object );
-				$context['title_link'] = ( '' !== $news_url ) ? $news_url : $context['permalink'];
-				$context['title'] = get_the_title( $post_object );
-				$news_strapline = get_post_meta( $post_object->ID, 'news_strapline', true );
-				$context['news_strapline'] = ('' !== $news_strapline ) ? '<div class="news-strapline">'.$news_strapline.'</div>' : '';
-				$context['month_year_day'] = get_the_date( 'F j, Y', $post_object );
-				$context['time'] = get_the_time( 'g:i a', $post_object );
-				$context['datetime'] = get_the_time( DATE_ISO8601, $post_object );
+			: "<img src='".$thumbnailUrl."' alt='Thumbnail' class='img-fluid'>";
+			$news_url = get_post_meta( $post_object->ID, 'news_url', true );
+			$context['permalink'] = get_permalink( $post_object );
+			$context['title_link'] = ( '' !== $news_url ) ? $news_url : $context['permalink'];
+			$context['title'] = get_the_title( $post_object );
+			$news_strapline = get_post_meta( $post_object->ID, 'news_strapline', true );
+			$context['news_strapline'] = ('' !== $news_strapline ) ? '<div class="news-strapline">'.$news_strapline.'</div>' : '';
+			$context['month_year_day'] = get_the_date( 'F j, Y', $post_object );
+			$context['time'] = get_the_time( 'g:i a', $post_object );
+			$context['datetime'] = get_the_time( DATE_ISO8601, $post_object );
 
-				$context['excerpt'] = wpautop($post_object->post_content);
-				
-				return static::render_to_html( $context );
+			$context['excerpt'] = wpautop($post_object->post_content);
+
+			return static::render_to_html( $context );
 		}
 
 		protected static function render_to_html( $context ) {
@@ -909,46 +909,46 @@ class News extends CustomPostType {
 			
 			?>
 			<div class="news">      
-			<?= $context['thumbnail'] ?>
-			<div class="news-content">
-				<div class="news-title">
-					<?php if(!empty($context['title_link']) && $context['title_link'] != 'http://') { ?>
-						<a href="<?= $context['title_link'] ?>"><?= $context['title'] ?></a>
-					<?php } else  echo $context['title']; ?>					
-				</div> 
-				<div class="news-strapline"><?= $context['news_strapline'] ?></div>
-				<div class="datestamp">
-					Posted on 
-					<a href="<?= $context['permalink'] ?>">
-						<time datetime="<?= $context['datetime'] ?>" pubdate>
-							<?= $context['month_year_day'] ?> at <?= $context['time'] ?>
-						</time>
-					</a>
+				<?= $context['thumbnail'] ?>
+				<div class="news-content">
+					<div class="news-title">
+						<?php if(!empty($context['title_link']) && $context['title_link'] != 'http://') { ?>
+							<a href="<?= $context['title_link'] ?>"><?= $context['title'] ?></a>
+							<?php } else  echo $context['title']; ?>					
+						</div> 
+						<div class="news-strapline"><?= $context['news_strapline'] ?></div>
+						<div class="datestamp">
+							Posted on 
+							<a href="<?= $context['permalink'] ?>">
+								<time datetime="<?= $context['datetime'] ?>" pubdate>
+									<?= $context['month_year_day'] ?> at <?= $context['time'] ?>
+								</time>
+							</a>
+						</div>
+						<div class="news-summary">
+							<p>
+								<?= $context['excerpt'] ?>
+							</p>
+						</div>
+					</div>
 				</div>
-				<div class="news-summary">
-					<p>
-						<?= $context['excerpt'] ?>
-					</p>
-				</div>
-			</div>
-		</div>
-		<?php
-		
-		return ob_get_clean();
+				<?php
+
+				return ob_get_clean();
+			}
 		}
-}
 
 /**
 * Contact Information without Customizer or Directory
 */
 class Contact extends CustomPostType {
 	public
-		$name           = 'contact',
-		$plural_name    = 'Contact',
-		$singular_name  = 'Contact',
-		$add_new_item   = 'Add New Contact',
-		$edit_item      = 'Edit Contact',
-		$new_item       = 'New Contact',
+	$name           = 'contact',
+	$plural_name    = 'Contact',
+	$singular_name  = 'Contact',
+	$add_new_item   = 'Add New Contact',
+	$edit_item      = 'Edit Contact',
+	$new_item       = 'New Contact',
 		$public         = true,  // I dunno...leave it true
 		$use_title      = true,  // Title field
 		$use_editor     = false,  // WYSIWYG editor, post content field
@@ -1039,7 +1039,106 @@ class Contact extends CustomPostType {
 
 			parent::register_metaboxes();
 		}
-}
+	}
+
+/**
+ * An employee associated with this site.
+ */
+class FAQ extends CustomPostType {
+	public
+	$name           = 'faq',
+	$plural_name    = 'FAQs',
+	$singular_name  = 'FAQ',
+	$add_new_item   = 'Add New FAQ',
+	$edit_item      = 'Edit FAQ',
+	$new_item       = 'New FAQ',
+		$public         = true,  // I dunno...leave it true
+		$use_title      = true,  // Title field
+		$use_editor     = true,  // WYSIWYG editor, post content field
+		$use_revisions  = true,  // Revisions on post content and titles
+		$use_thumbnails = false,  // Featured images
+		$use_order      = true, // Wordpress built-in order meta data
+		$use_metabox    = false, // Enable if you have custom fields to display in admin
+		$use_shortcode  = true, // Auto generate a shortcode for the post type
+		                         // (see also objectsToHTML and toHTML methods).
+		$taxonomies     = array( 'org_groups' ),
+		$menu_icon      = 'dashicons-editor-help',
+		$built_in       = false,
+		// Optional default ordering for generic shortcode if not specified by user.
+		$default_orderby = null,
+		$default_order   = null,
+		$sc_interface_fields = array();
+
+		public function shortcode( $attr ) {
+			$prefix = $this->options( 'name' ).'_';
+			$default_attrs = array(
+				'type' => $this->options( 'name' ),
+				);
+			if ( is_array( $attr ) ) {
+				$attr = array_merge( $default_attrs, $attr );
+			} else {
+				$attr = $default_attrs;
+			}
+
+			$args = array( 'classname' => __CLASS__, 'objects_only' => true );
+			$objects = parent::sc_object_list( $attr, $args );			
+
+			$context['objects'] = $objects;
+
+			return static::render_objects_to_html( $context );
+		}
+
+		public function objectsToHTML( $objects, $css_classes ) {
+			if ( count( $objects ) < 1 ) { return (WP_DEBUG) ? '<!-- No objects were provided to objectsToHTML. -->' : '';}
+			$context['objects'] = $objects;
+			return static::render_objects_to_html( $context );
+		}
+
+		protected static function render_objects_to_html( $context ) {
+			ob_start();
+
+			?>
+			<div id="accordion" role="tablist" aria-multiselectable="true">
+				<?php foreach ( $context['objects'] as $o ) : ?>
+					<?= static::toHTML( $o ) ?>
+					<div class="hr-blank"></div>
+				<?php endforeach;?>
+			</div>
+			<?php
+
+			return ob_get_clean();
+		}
+
+		public static function toHTML( $post_object ) {
+			$context['Post_ID'] = $post_object->ID;
+			$context['title'] = get_the_title( $post_object );
+			$context['content'] = wpautop($post_object->post_content);
+			return static::render_to_html( $context );
+		}
+
+		protected static function render_to_html( $context ) {
+			ob_start();
+			?>
+			<div class="card">
+				<div class="card-header" role="tab" id="heading-<?= $context['Post_ID'] ?>">
+					<h5 class="mb-0">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-<?= $context['Post_ID'] ?>" aria-expanded="true" aria-controls="collapse-<?= $context['Post_ID'] ?>">
+							<?= $context['title'] ?> <span class="float-xs-right"><i class="fa fa-angle-double-down"></i></span>
+						</a>
+					</h5>
+				</div>
+				<div id="collapse-<?= $context['Post_ID'] ?>" class="collapse" role="tabpanel" aria-labelledby="heading-<?= $context['Post_ID'] ?>">
+					<div class="card-block">
+						<?= $context['content'] ?>	
+					</div>
+				</div>
+			</div>
+
+			<?php
+
+			return ob_get_clean();
+		}
+	}
 
 /**
  * Register custom post types when the theme is initialized.
@@ -1054,6 +1153,7 @@ function register_custom_posttypes() {
 		__NAMESPACE__.'\News',
 		__NAMESPACE__.'\Staff',
 		__NAMESPACE__.'\Contact',
-	));
+		__NAMESPACE__.'\FAQ',
+		));
 }
 add_action( 'init', __NAMESPACE__.'\register_custom_posttypes' );
