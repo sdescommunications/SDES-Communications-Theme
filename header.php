@@ -45,9 +45,10 @@ use SDES\SDES_Static as SDES_Static;
 	</script>
 
 	<?php
-		$google_id = get_option('google_id', '');
 
+		$google_id = get_option('google_id', '');
 		if(!empty($google_id)){
+      
 	?>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
