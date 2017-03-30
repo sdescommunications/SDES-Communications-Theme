@@ -1,4 +1,8 @@
 <?php
+// Allow editors to see Appearance menu
+$role_object = get_role( 'editor' );
+$role_object->add_cap( 'edit_theme_options' );
+
 /**
 *   Removed admin items not needed to be seen my users.
 */
