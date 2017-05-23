@@ -114,12 +114,13 @@ class Footer {
 							<ul>
 								<li><a href="//www.sdes.ucf.edu/">SDES Home</a></li>
 								<li><a href="//www.sdes.ucf.edu/about">What is SDES? / About</a></li>
+								<li><a href="//www.sdes.ucf.edu/highlights">Annual Report</a></li>
 								<li><a href="//www.sdes.ucf.edu/departments">SDES Departments</a></li>
 								<li><a href="//www.sdes.ucf.edu/events">Division Calendar</a></li>
 								<li><a href="//www.sdes.ucf.edu/contact">Contact Us</a></li>
 								<li><a href="//www.sdes.ucf.edu/staff">SDES Leadership Team</a></li>
 								<li><a href="//creed.sdes.ucf.edu/">The UCF Creed</a></li>
-								<li><a href="//it.sdes.ucf.edu/">SDES Information Technology</a></li>
+								<li><a href="http://ucf.qualtrics.com/jfe/form/SV_3Qw0Qpr0du1iky9">Subscribe</a></li>
 							</ul>
 								<?php
 							}
