@@ -52,7 +52,7 @@ class SDES_Static
 	 * @return Array A collection of anchors (array of arrays). Each anchor has the keys: 'link', 'title'.
 	 */
 	public static function get_rss_links_and_titles( $uri,
-		$max_count = 8, $char_limit = 45,
+		$max_count = 9, $char_limit = 45,
 		$xml = null ) {
 		if ( null === $xml ) { $xml = wp_remote_get( esc_url_raw( $uri )); }
 
