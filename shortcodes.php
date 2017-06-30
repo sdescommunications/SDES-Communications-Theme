@@ -682,8 +682,12 @@ class sc_redirect extends ShortcodeBase{
 
 	public static function callback( $attr ) {
 
-		header('Location: '.$attr['redirect_url'].'');
-
+		echo 'Seems like you have JavaScript turned off please go to <a href="'.$attr['redirect_url'].'">'.$attr['redirect_url'].'</a>';		
+		
+		echo '<script type="text/javascript">
+           		window.location = "'.$attr['redirect_url'].'"
+      		</script>';
+      				
 	}
 
 }
