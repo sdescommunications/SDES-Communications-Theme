@@ -661,6 +661,37 @@ class sc_iframe extends ShortcodeBase{
 
 }
 
+class sc_redirect extends ShortcodeBase{
+	public
+	$name = 'Redirect', // The name of the shortcode.
+	$command = 'redirect', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array(
+		array(			
+			'name'      => 'Redirect Url',
+			'id'        => 'redirect_url',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		
+		);
+
+	public static function callback( $attr ) {
+
+		echo 'Seems like you have JavaScript turned off please go to <a href="'.$attr['redirect_url'].'">'.$attr['redirect_url'].'</a>';		
+		
+		echo '<script type="text/javascript">
+           		window.location = "'.$attr['redirect_url'].'"
+      		</script>';
+      				
+	}
+
+}
+
 function register_shortcodes() {
 	ShortcodeBase::Register_Shortcodes(array(
 		__NAMESPACE__.'\sc_alert',		
@@ -669,6 +700,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_contactBlock',
 		__NAMESPACE__.'\social_media',
 		__NAMESPACE__.'\sc_iframe',
+		__NAMESPACE__.'\sc_redirect',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
