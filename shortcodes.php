@@ -105,21 +105,26 @@ class sc_menuPanel extends ShortcodeBase {
 	 * style  => Value for the css attribute "style" on the container div.
 	 */
 	public static function render( $context ) {
-		ob_start();
-		?>
-		<div class="card menuPanel" style="<?=$context['style']?>">
-			<div class="card-header"><?=$context['heading']?></div>
-			<div class="list-group list-group-flush">
-				<?php
-				foreach ( (array) $context['menu_items'] as $key => $menu_item ) {
-					$title = $menu_item->title;
-					$url = SDES_Static::url_ensure_prefix( $menu_item->url );
-					$class_names = SDES_Static::Get_ClassNames( $menu_item, 'nav_menu_css_class' );
-					?>
-					<a href="<?=$url?>" class="list-group-item <?=$class_names?>"><?=$title?></a>
-					<?php  } ?>
+			ob_start();
+			?>
+
+			<div class="menu">
+				<div class="menu-header">
+					<?= $context['heading'] ?>
 				</div>
+				<ul class="list-group menu-right list-unstyled">
+					<?php 
+					foreach ( (array) $context['menu_items'] as $key => $menu_item ) {
+						$title = $menu_item->title;
+						$url = SDES_Static::url_ensure_prefix( $menu_item->url );
+						//removed as of new theme 8/31/2017
+						//$class_names = SDES_Static::Get_ClassNames( $menu_item, 'nav_menu_css_class' );
+					?>
+						<li><a href="<?= $url ?>" class="list-group-item"><?= $title ?></a></li>
+					<?php  } ?>
+				</ul>
 			</div>
+			
 			<?php
 			return ob_get_clean();
 		}
@@ -217,7 +222,7 @@ class sc_events extends ShortcodeBase {
 				), $attr
 			);
 		if ( null === $attr['id'] ) { return true; }
-
+		
 		// Open cURL instance for the UCF Event Calendar RSS feed.
 		$ch = curl_init( "http://events.ucf.edu/?calendar_id={$attr['id']}&upcoming=upcoming&format=rss" );
 
@@ -242,26 +247,28 @@ class sc_events extends ShortcodeBase {
 				<li><?= htmlentities( $error->message ) ?></li>
 			<?php endforeach;
 			return ob_get_clean();
-		}
+		}		
 
 		// Set limit if items returned are smaller than limit.
 		$count = ( count( $xml->channel->item ) > $attr['limit'] ) ? $attr['limit'] : count( $xml->channel->item );
 		ob_start();
 		?>
-		<div class="card">
-			<div class="card-header"><?= $attr['header'] ?></div>
-			<ul class="list-group list-group-flush ucf-events">
+			
+			<h2><?= $attr['header'] ?></h2>
+			<hr>
+			<?= $footer ?>
+			
 				<?php
 					// Check for items.
 				if ( 0 === count( $xml->channel->item ) ) : ?>
-				<li class="list-group-item">Sorry, no events could be found.</li>
+				<p>Sorry, no events could be found.</p>
 				<?php
 				else :
 						// Loop through until limit.
 					for ( $i = 0; $i < $count; $i++ ) {
 							// Prepare xml output to html.
 						$title = htmlentities( $xml->channel->item[ $i ]->title );
-						$title = ( strlen( $title ) > 50) ? substr( $title, 0, 45 ) : $title;
+						$title = ( strlen( $title ) > 25) ? substr( $title, 0, 19 ) : $title;
 						$loc = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->name );
 						$map = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->mapurl );
 						$startTime = new \DateTime( $xml->channel->item[ $i ]->children( 'ucfevent', true )->startdate, new \DateTimeZone( $attr['timezone'] ) );
@@ -271,23 +278,29 @@ class sc_events extends ShortcodeBase {
 						$context['link'] = htmlentities( $xml->channel->item[ $i ]->link );
 
 						?>    
-						<li class="list-group-item">
-							<div class="date">								
-								<span class="month"><?= $context['month'] ?></span>
-								<span class="day"><?= $context['day'] ?></span>								
+						<div class="row event">
+							<div class="col-sm-3 date">								
+								<div class="month"><?= $context['month'] ?></div>
+								<div class="day"><?= $context['day'] ?></div>								
 							</div>
-							<a class="title" href="<?= $context['link'] ?>"><?= $title ?></a>
-							<a class="location" href="<?= $context['link'] ?>"><?= $loc ?></a>
-							</a>
-							<div class="end"></div>
-						</li>
+							<div class="col-sm-8 description">
+								<h3 class="event-title">
+									<a href="<?= $context['link'] ?>">
+									<?= $title ?>
+										
+									</a>
+								</h3>
+								<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>			
+							</div>
+						</div>
 						<?php }
 						endif; ?>
-					</ul>
-					<div class="card-footer">
-						<a href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">&raquo;More Events</a>
-					</div>
-				</div>
+					
+					<p>
+						<a class="btn btn-callout float-right" href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">More Events</a>
+					</p>
+					<div class="clearfix"></div>
+		
 				<?php
 				return ob_get_clean();
 			}
@@ -389,6 +402,13 @@ class sc_contactblock extends ShortcodeBase{
 			'help_text' => 'This is the Title of the Contact block you would like to display.',
 			'type'      => 'text',
 			),
+		array(
+			'name'      => 'Footer',
+			'id'        => 'is_footer',
+			'help_text' => 'Is this the footer',
+			'type'      => 'text',
+			'default'	=> 'this is a test'
+			),
 		);
 
 	public static function callback( $attr, $content = '' ) {
@@ -398,10 +418,11 @@ class sc_contactblock extends ShortcodeBase{
 			'post_status' => 'publish',
 			'posts_per_page' => -1,
 			), 'OBJECT');
+
 		if(!empty($id)){
 			foreach($id as $item){			
 				if(strtolower($item->post_title) == strtolower($attr['contactname'])){	
-					return static::render( $item->ID );
+					return static::render( $item->ID, $attr['is_footer'] );
 				}	//end of if		
 			}	//end of for
 		}else{
@@ -412,42 +433,54 @@ class sc_contactblock extends ShortcodeBase{
 		
 	}
 
-	public static function render ( $attr ){
+	public static function render ( $attr, $footer = null ){
 		
 		$data = get_post_meta($attr);
 
 		ob_start();
+
+		if(empty($footer)){
 		?>	
 		
-		<table class="table table-sm table-striped table-bordered">
+		<table class="table table-hover">
 			<tbody>
 				<?php if(!empty($data['contact_Hours'][0])) { ?>
 				<tr>
-					<th scope="row">Hours</th>
+					<th scope="row">
+						<i class="fa fa-lg fa-fw fa-clock-o"><span class="sr-only">Phone</span></i>
+					</th>
 					<td><?= $data['contact_Hours'][0] ?></td>
 				</tr>
 				<?php } ?>
 				<?php if(!empty($data['contact_phone'][0])) { ?>
 				<tr>
-					<th scope="row">Phone</th>
+					<th scope="row">
+						<i class="fa fa-lg fa-fw fa-phone"><span class="sr-only">Phone</span></i>
+					</th>
 					<td><a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a></td>
 				</tr>
 				<?php } ?>
 				<?php if(!empty($data['contact_fax'][0])) { ?>
 				<tr>
-					<th scope="row">Fax</th>
+					<th scope="row">
+						<i class="fa fa-lg fa-fw fa-fax"><span class="sr-only">Fax</span></i>
+					</th>
 					<td><?= $data['contact_fax'][0] ?></td>
 				</tr>
 				<?php } ?>
 				<?php if(!empty($data['contact_email'][0])) { ?>
 				<tr>
-					<th scope="row">Email</th>
+					<th scope="row">
+						<i class="fa fa-lg fa-fw fa-envelope"><span class="sr-only">Email</span></i>
+					</th>
 					<td><a href="mailto:<?= $data['contact_email'][0] ?>"> <?= $data['contact_email'][0] ?></a></td>
 				</tr>
 				<?php } ?>
 				<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
 				<tr>
-					<th scope="row">Location</th>
+					<th scope="row">
+						<i class="fa fa-lg fa-fw fa-map-marker"><span class="sr-only">Location</span></i>
+					</th>
 					<td><a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>" class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a></td>
 				</tr>
 				<?php } ?>
@@ -455,6 +488,29 @@ class sc_contactblock extends ShortcodeBase{
 		</table>
 		
 		<?php
+			} else{
+		?> 
+			<P>
+				<?php if(!empty($data['contact_phone'][0])) { ?>
+				
+					<i class="fa fa-lg fa-fw fa-phone"><span class="sr-only">Phone</span></i>
+					<a href="tel:<?= $data['contact_phone'][0] ?>"><?= $data['contact_phone'][0] ?></a><br />
+				<?php } ?>
+				<?php if(!empty($data['contact_email'][0])) { ?>
+				
+					<i class="fa fa-lg fa-fw fa-envelope"><span class="sr-only">Email</span></i>
+					<a href="mailto:<?= $data['contact_email'][0] ?>"> <?= $data['contact_email'][0] ?></a><br />
+				<?php } ?>
+				<?php if(!empty($data['contact_room'][0]) && !empty($data['contact_building'][0]) && !empty($data['contact_room'][0])) { ?>
+				
+					<i class="fa fa-lg fa-fw fa-map-marker"><span class="sr-only">Location</span></i>
+					<a href="http://map.ucf.edu/?show=<?= $data['contact_map_id'][0] ?>" class="external"><?=	$data['contact_building'][0] ?>, Room <?= $data['contact_room'][0]?></a>
+				<?php } ?>
+			</P>
+
+
+		<?php
+			}
 		return ob_get_clean();
 	}
 }
@@ -531,7 +587,7 @@ class social_media extends ShortcodeBase{
 			),
 		);
 
-	public static function callback( $attr, $content = '' ) {;
+	public static function callback( $attr, $content = '' ) {
 
 		ob_start();
 		?>
@@ -539,62 +595,62 @@ class social_media extends ShortcodeBase{
 		<div class="card-columns social">
 			<?php if (!empty($attr['facebook'])) { ?>
 			<div class="card">
-				<a class="btn btn-block facebook text-xl-left text-lg-center" href="<?= $attr['facebook'] ?>">
-					<span class="fa fa-facebook-official fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Facebook</span>
+				<a class="btn btn-block facebook text-lg-center" href="<?= $attr['facebook'] ?>">
+					<span class="fa fa-facebook-official fa-fw fa-lg"></span><span class="sr-only">&emsp;Facebook</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['flickr'])) { ?>
 			<div class="card">
-				<a class="btn btn-block flickr text-xl-left text-lg-center" href="<?= $attr['flickr'] ?>">
-					<span class="fa fa-flickr fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Flickr</span>
+				<a class="btn btn-block flickr text-lg-center" href="<?= $attr['flickr'] ?>">
+					<span class="fa fa-flickr fa-fw fa-lg"></span><span class="sr-only">&emsp;Flickr</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['google_plus'])) { ?>
 			<div class="card">
-				<a class="btn btn-block gplus text-xl-left text-lg-center" href="<?= $attr['google_plus'] ?>">
-					<span class="fa fa-google-plus fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Google+</span>
+				<a class="btn btn-block gplus text-lg-center" href="<?= $attr['google_plus'] ?>">
+					<span class="fa fa-google-plus fa-fw fa-lg"></span><span class="sr-only">&emsp;Google+</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['instagram'])) { ?>
 			<div class="card">
-				<a class="btn btn-block instagram text-xl-left text-lg-center" href="<?= $attr['instagram'] ?>">
-					<span class="fa fa-instagram fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Instagram</span>
+				<a class="btn btn-block instagram text-lg-center" href="<?= $attr['instagram'] ?>">
+					<span class="fa fa-instagram fa-fw fa-lg"></span><span class="sr-only">&emsp;Instagram</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['linkedin'])) { ?>
 			<div class="card">
-				<a class="btn btn-block linkedin text-xl-left text-lg-center" href="<?= $attr['linkedin'] ?>">
-					<span class="fa fa-linkedin fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;LinkedIn</span>
+				<a class="btn btn-block linkedin text-lg-center" href="<?= $attr['linkedin'] ?>">
+					<span class="fa fa-linkedin fa-fw fa-lg"></span><span class="sr-only">&emsp;LinkedIn</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['pinterest'])) { ?>
 			<div class="card">
-				<a class="btn btn-block pinterest text-xl-left text-lg-center" href="<?= $attr['pinterest'] ?>">
-					<span class="fa fa-pinterest fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Pinterest</span>
+				<a class="btn btn-block pinterest text-lg-center" href="<?= $attr['pinterest'] ?>">
+					<span class="fa fa-pinterest fa-fw fa-lg"></span><span class="sr-only">&emsp;Pinterest</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['twitter'])) { ?>
 			<div class="card">
-				<a class="btn btn-block twitter text-xl-left text-lg-center" href="<?= $attr['twitter'] ?>">
-					<span class="fa fa-twitter fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Twitter</span>
+				<a class="btn btn-block twitter text-lg-center" href="<?= $attr['twitter'] ?>">
+					<span class="fa fa-twitter fa-fw fa-lg"></span><span class="sr-only">&emsp;Twitter</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['tumblr'])) { ?>
 			<div class="card">
-				<a class="btn btn-block tumblr text-xl-left text-lg-center" href="<?= $attr['tumblr'] ?>">
-					<span class="fa fa-tumblr fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Tumblr</span>
+				<a class="btn btn-block tumblr text-lg-center" href="<?= $attr['tumblr'] ?>">
+					<span class="fa fa-tumblr fa-fw fa-lg"></span><span class="sr-only">&emsp;Tumblr</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['vimeo'])) { ?>
 			<div class="card">
-				<a class="btn btn-block vimeo text-xl-left text-lg-center" href="<?= $attr['vimeo'] ?>">
-					<span class="fa fa-vimeo fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;Vimeo</span>
+				<a class="btn btn-block vimeo text-lg-center" href="<?= $attr['vimeo'] ?>">
+					<span class="fa fa-vimeo fa-fw fa-lg"></span><span class="sr-only">&emsp;Vimeo</span>
 				</a>
 			</div>
 			<?php } if (!empty($attr['youtube'])) { ?>
 			<div class="card">
-				<a class="btn btn-block youtube text-xl-left text-lg-center" href="<?= $attr['youtube'] ?>">
-					<span class="fa fa-youtube fa-fw fa-lg"></span><span class="hidden-lg-down">&emsp;YouTube</span>
+				<a class="btn btn-block youtube text-lg-center" href="<?= $attr['youtube'] ?>">
+					<span class="fa fa-youtube fa-fw fa-lg"></span><span class="sr-only">&emsp;YouTube</span>
 				</a>
 			</div>
 			<?php } ?>

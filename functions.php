@@ -35,6 +35,9 @@ function register_my_menus() {
       'main-menu' => __( 'Main Menu' ),
       )
     );
+  //menu loction for homepage
+  register_nav_menu( 'home-resource-menu', __('Homepage Resources'));
+  register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 }
 add_action( 'init', 'register_my_menus' );
 
@@ -45,6 +48,8 @@ function enqueue_scripts_and_styles(){
   wp_enqueue_script( 'jquery-ui-datepicker' );
   wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 }
+
+require_once('functions/menu-walkers.php');
 
 require_once('custom-taxonomies.php');    // Define and Register taxonomies for this theme
 require_once('custom-posttypes.php');  // Define and Register custom post_type's (CPTs) for this theme

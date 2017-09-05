@@ -14,8 +14,8 @@ get_header();
 <div class="container site-content" id="content">
 	<?= get_template_part( 'includes/template', 'alert' ); ?>
 
-	<h1 class="page-header"><?= get_the_title() ?></h1>
-
+	<h1><?= get_the_title() ?></h1>
+	<hr>
 	<div class="row">
 		<br>
 		<div class="col-sm-8">

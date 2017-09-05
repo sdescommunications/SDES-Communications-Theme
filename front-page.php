@@ -5,46 +5,58 @@
 use SDES\SDES_Static as SDES_Static;
 
 get_header();
-
 ?>
+	<?= do_shortcode( "[billboard-list tags='home']" ) ?>
+	<br>
+	<div class="container">
+		<h1><?= get_the_title() ?></h1>
+		<hr />
 
-<?= do_shortcode( "[billboard-list tags='home']" ) ?>
-
-<!-- content area -->
-<div class="container site-content" id="content">
-	<?= do_shortcode( '[alert-list show_all="true"]' ); ?>
-
-
-	<div class="row">
-		<br>
-		<div class="col-sm-8">
-			<?php 
-				if ( have_posts() ) :
-					while ( have_posts() ) : the_post();
-						the_content();
+		<section>
+			<aside>
+				<?= do_shortcode( get_post_meta( $post->ID, 'page_sidecolumn', $single=true ) ); ?>
+			</aside>
+			<article>
+				<?php if (have_posts()) :
+					while (have_posts()) : the_post();
+					the_content();
 					endwhile;
-				else:
-					$qNews = array('post_type' => 'news');
-					$loop = new WP_Query($qNews);
-					if ( $loop->have_posts() ) : ?>
-						<h2 class="page-header">News and Announcements</h2>
-						<?php echo do_shortcode("[news-list]"); 
 					else:
-						SDES_Static::Get_No_Posts_Message();
-					endif;
-				wp_reset_query();
-				endif; 
-			?>
-		</div>
-		<div class="col-sm-4">
-			<?php
-				$sidebar = get_post_meta( $post->ID, 'page_sidecolumn', $single=true );
-				echo do_shortcode( $sidebar );
-			?>
-		</div>	
+						
+					endif; 
+				?>
+			</article>
+		</section>
 	</div>
-
-
-</div> <!-- /DIV.container.site-content -->
+	<div class="yellow">
+		<div class="container">
+			<div class="row">
+			<?php if(has_nav_menu( 'home-resource-menu' )){ ?>
+				<div class="col-lg-4 col-md-12">
+					<div class="menu menu-left">
+						<div class="menu-header">
+							Other Resources
+						</div>
+						<?= 
+							wp_nav_menu(array(
+								'theme_location' => 'home-resource-menu',
+								'menu_class' => 'list-group list-unstyled', 
+								'walker' => new Side_Menu(),
+							)) 
+						?>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-12">
+			<?php } else { ?>
+					<div class="col-md-12">
+			<?php } ?>						
+					<?= 
+						do_shortcode( '[news-list show-archives="false" limit="3" join="or" tags="home" categories=""]' ) 
+					?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 get_footer();
