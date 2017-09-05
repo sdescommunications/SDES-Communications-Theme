@@ -436,11 +436,11 @@ class Billboard extends CustomPostType {
 				$inner .= '
 				<div class="carousel-item '.($count === 0 ? 'active' : false).'">'.
 					((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? 
-						'<a href="'. $item->billboard_url .'">'. get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'</a>' 
+						'<a class="noicon" href="'. $item->billboard_url .'">'. get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'</a>' 
 						: get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text ))).
 					((!empty($item->post_title)) || (!empty($item->post_content)) ? 
 						'<div class="carousel-caption"><div class="container">'
-						. ((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? '<h3><a href="'. $item->billboard_url .'">'. $item->post_title .'</a></h3>'
+						. ((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? '<h3><a class="noicon" href="'. $item->billboard_url .'">'. $item->post_title .'</a></h3>'
 							: '<h3>'. $item->post_title .'</h3>') .
 						'<p>
 						'. $item->post_content .'
