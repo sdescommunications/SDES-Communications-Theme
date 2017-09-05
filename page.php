@@ -16,18 +16,31 @@ get_header('second');
 	<?php if(is_page('News')){ ?>
 	<section>
 		<aside>
-			<?php
+			<?php			
 			$args = array(
-				'post_type' => array('news'),
+				'post_type' => array('news'),				
 				'tag' => $location, 
 				'orderby' => 'date',
 				'order'   => 'DESC',
 				'posts_per_page' => -1,
-				);
-			$object = new WP_Query($args);
-			
-			?>
+				'meta_query' => array(
+					'relation' => 'AND',
+					array(
+						'key' => esc_sql( 'news_start_date' ),
+						'value' => date( 'Y-m-d', time() ),
+						'compare' => '<=',
+						),
+					array(
+						'key' => esc_sql( 'news_end_date' ),
+						'value' => date( 'Y-m-d', strtotime( '-1 day' ) ), // Datetime is stored as 24 hours before it should expire.
+						'compare' => '>',
+					)
+				),
+			);
 
+			$object = new WP_Query($args);			
+			?>
+				
 			<div class="menu">					
 				<div class="menu-header">
 					Page Navigation
