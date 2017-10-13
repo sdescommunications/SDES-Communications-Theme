@@ -4,7 +4,7 @@
 */
 use SDES\SDES_Static as SDES_Static;
 
- $c = 1;
+$c = 1;
 while ($c <= $GLOBALS['NUMBEROFCARDS']) {
 	$titles[] 	= get_post_meta($post->ID, "service_title_".$c, true);
 	$contents[] = get_post_meta($post->ID, "service_wysiwyg_".$c, true);
@@ -25,63 +25,50 @@ get_header('second');
 		<div class="row">
 			<div class="col-sm-12 ">
 				<?php the_content(); ?>
-
-				<br>
-				
+				<br>				
 				<div class="card-deck mt-3">
-
-				<?php
+					<?php
 					$c=1;					
 					foreach ($contents as $key => $content) {					
-				?>
-					<?php if (!empty($contents[$key]) && !empty($images[$key])) { ?>
-					<div class="card">						
-					
-						<?= image_uploader_field( 'card_image_'.$c, $images[$key], 2 ) ?>
-											
-						<div class="card-block">
-							<?=
-								(!empty($titles[$key])) ?
+						?>
+						<?php 
+						if (!empty($contents[$key]) && !empty($images[$key])) { 
+							?>
+							<div class="card">					
+								<?= image_uploader_field( 'card_image_'.$c, $images[$key], 2 ) ?>							
+								<div class="card-block">
+									<?=
+									(!empty($titles[$key])) ?
 									'<h4 class="card-title">' . $titles[$key] . '</h4>
 									<hr>' : null
-							?>
-												
-							<div class="card-text">
-								<?= wpautop($contents[$key]) ?>
-							</div>																					
-						</div>
-						<?= 
-							(!empty($urls[$key]) && !empty($texts[$key])) ? 
-								'
-									<div class="card-img-bottom">
+									?>												
+									<div class="card-text">
+										<?= wpautop($contents[$key]) ?>
+									</div>																				
+								</div>
+								<?= 
+									(!empty($urls[$key]) && !empty($texts[$key])) ? 
+									'<div class="card-img-bottom">
 										<a class="btn btn-callout btn-block" href="' . $urls[$key] . '">' . $texts[$key] . '</a>
-									</div>
-								': null
-						 ?>
-						
-					</div>
-
+									</div>': null
+								?>						
+						</div>
 					<?php } //end of if
-
-						if ((($key+1) % 4) == 0){ ?>
-							</div>
-							
-							<div class="card-deck mt-3">
-					<?php
-					 
-						}//end of if
-					}//end of foreach
-					
+						if ((($key+1) % 4) == 0){ 
 					?>
-				</div>
-							
+				</div>							
+				<div class="card-deck mt-3">
+					<?php					 
+							}//end of if
+						}//end of foreach					
+					?>
+				</div>							
 			</div>
 		</div>
 	<?php endwhile;
 	else: 
 		SDES_Static::Get_No_Posts_Message();
 	endif; ?>
-
 </div> <!-- /DIV.container.site-content -->
 <?php
 get_footer();

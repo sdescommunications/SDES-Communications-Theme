@@ -120,7 +120,8 @@
 		</div>				
 
 		<div class="header-break hidden-md-down">
-			<img src="<?= get_stylesheet_directory_uri() ?>/images/breaker.jpg" class="img-fluid" />
+
+			<img src="<?= (!empty(get_option('breaker_id', ''))) ? get_option('breaker_id', '') : get_stylesheet_directory_uri() . '/images/breaker.jpg' ?>" class="img-fluid" />
 		</div>
 
 		<?= do_shortcode( '[alert-list show_all="true"]' ); ?>

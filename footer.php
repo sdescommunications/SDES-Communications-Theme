@@ -5,7 +5,7 @@
 		<div class="container"> 
 			<div class="row">
 				<div class="col-lg-3 col-md-12">					
-					<?= do_shortcode( '[events id="41" header="Upcoming Events" limit="2" ]' ) ?>	
+					<?= do_shortcode( '[events id="'.get_option('calendar_id', '').'" header="Upcoming Events" limit="2" ]' ) ?>	
 					<div class="clearfix"></div>
 				</div>
 				<div class="col-lg-4 col-md-12 offset-lg-1 offset-md-0">

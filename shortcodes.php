@@ -592,7 +592,7 @@ class social_media extends ShortcodeBase{
 		ob_start();
 		?>
 
-		<div class="card-columns social">
+		<div class="card-columns social mt-3">
 			<?php if (!empty($attr['facebook'])) { ?>
 			<div class="card">
 				<a class="btn btn-block facebook text-lg-center" href="<?= $attr['facebook'] ?>">
