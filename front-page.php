@@ -28,35 +28,42 @@ get_header();
 			</article>
 		</section>
 	</div>
+	<?php 
+		if (get_posts('post_type=news&tag=home')){
+	?>
 	<div class="yellow">
 		<div class="container">
 			<div class="row">
-			<?php if(has_nav_menu( 'home-resource-menu' )){ ?>
+				<?php if(has_nav_menu( 'home-resource-menu' )){ ?>
 				<div class="col-lg-4 col-md-12">
 					<div class="menu menu-left">
 						<div class="menu-header">
 							Other Resources
 						</div>
 						<?= 
-							wp_nav_menu(array(
-								'theme_location' => 'home-resource-menu',
-								'menu_class' => 'list-group list-unstyled', 
-								'walker' => new Side_Menu(),
-							)) 
+						wp_nav_menu(array(
+							'theme_location' => 'home-resource-menu',
+							'menu_class' => 'list-group list-unstyled', 
+							'walker' => new Side_Menu(),
+						)) 
 						?>
 					</div>
 				</div>
 				<div class="col-lg-8 col-md-12">
-			<?php } else { ?>
+					<?php } else { ?>
 					<div class="col-md-12">
-			<?php } ?>						
-					<?= 
+						<?php } ?>						
+						<?= 
 						do_shortcode( '[news-list show-archives="false" limit="3" join="or" tags="home" categories=""]' ) 
-					?>
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<?php
+		}else{}
+	?>
+	
 <?php
 get_footer();
