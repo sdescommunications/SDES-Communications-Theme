@@ -120,8 +120,11 @@
 		</div>				
 
 		<div class="header-break hidden-md-down">
+			<?php
+				$breaker = (!empty(get_option('breaker_id', ''))) ? get_option('breaker_id', '') : get_stylesheet_directory_uri() . '/images/breaker.jpg';
+			?>
 
-			<img src="https://www.idn-poker.net/wp-content/uploads/2017/05/bg-header.jpg" class="img-fluid" />
+			<img src="<?= $breaker ?>" class="img-fluid" />
 		</div>
 
 		<?= do_shortcode( '[alert-list show_all="true"]' ); ?>
