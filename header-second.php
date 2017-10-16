@@ -120,8 +120,16 @@
 		</div>				
 
 		<div class="header-break hidden-md-down">
+			<?php
+				
+				if(!empty(get_option('breaker_id', ''))){
+					$breaker = get_option('breaker_id', '');
+				}else{
+					$breaker = get_stylesheet_directory_uri() . '/images/breaker.jpg';
+				}
+			?>
 
-			<img src="https://dms.rvimg.com/dms/wp-content/uploads/sites/10/2016/04/Breaker-3-o.png" class="img-fluid" />
+			<img src="<?= $breaker ?>" class="img-fluid" />
 		</div>
 
 		<?= do_shortcode( '[alert-list show_all="true"]' ); ?>
