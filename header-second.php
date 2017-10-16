@@ -122,7 +122,7 @@
 		<div class="header-break hidden-md-down">
 			<?php
 				
-				if(!empty(get_option('breaker_id', ''))){
+				if(get_option('breaker_id', '')){
 					$breaker = get_option('breaker_id', '');
 				}else{
 					$breaker = get_stylesheet_directory_uri() . '/images/breaker.jpg';
