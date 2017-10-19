@@ -40,7 +40,7 @@ get_header();
 				Posted on <?= $context['month_year_day'] ?> at <?= $context['time'] ?>
 			</div>
 			<div class="news-summary">
-				<?= $context['content'] ?>
+				<?= wpautop($context['content']) ?>
 			</div>
 		</div>
 	</div>
