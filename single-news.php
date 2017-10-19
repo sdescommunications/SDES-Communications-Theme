@@ -36,7 +36,7 @@ get_header();
 		<?= $context['thumbnail'] ?>
 		<div class="news-content">
 			<?= $context['news_strapline'] ?>
-			<div class="datestamp">
+			<div class="datestamp mb-2">
 				Posted on <?= $context['month_year_day'] ?> at <?= $context['time'] ?>
 			</div>
 			<div class="news-summary">
