@@ -232,7 +232,7 @@ class Alert extends CustomPostType {
 		public static function get_render_context( $alert, $metadata_fields ) {
 
 			$alert_css_classes = ( $metadata_fields['alert_is_unplanned'] )
-			? 'alert-danger' : 'alert-warning';
+			? 'card-danger' : 'card-info';
 			
 			$alert_url = ($metadata_fields['alert_url'] == 'http://') ? null : $metadata_fields['alert_url'];
 			$alert_message = wpautop($alert->post_content);
@@ -286,11 +286,11 @@ class Alert extends CustomPostType {
 			ob_start();
 			
 			?>
-			<div class="alert <?= $context['css_classes'] ?>">
-				
-				<strong><?= $context['title'] ?></strong>
-				<?= $context['message'] ?>
-				
+			<div class="card card-inverse <?= $context['css_classes'] ?>">
+				<div class="container card-block">
+					<h2><?= $context['title'] ?></h2>
+					<?= $context['message'] ?>
+				</div>				
 			</div>
 			<div class="clearfix"></div>
 			<?php
