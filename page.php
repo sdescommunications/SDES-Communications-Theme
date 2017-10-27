@@ -7,10 +7,9 @@ use SDES\SDES_Static as SDES_Static;
 get_header('second');
 ?>
 <!-- content area -->
+
 <div class="container site-content" id="content">
-	<?= get_template_part( 'includes/template', 'alert' ); ?>
-
-
+	
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 	<?php if(is_page('News')){ ?>

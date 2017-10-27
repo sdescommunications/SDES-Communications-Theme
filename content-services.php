@@ -17,7 +17,6 @@ get_header('second');
 ?>
 <!-- content area -->
 <div class="container site-content" id="content">
-	<?= get_template_part( 'includes/template', 'alert' ); ?>
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 		<h1><?= get_the_title() ?></h1>

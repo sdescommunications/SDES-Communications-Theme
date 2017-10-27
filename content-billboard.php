@@ -12,7 +12,6 @@ get_header();
 
 <!-- content area -->
 <div class="container site-content" id="content">
-	<?= get_template_part( 'includes/template', 'alert' ); ?>
 
 	<h1><?= get_the_title() ?></h1>
 	<hr>

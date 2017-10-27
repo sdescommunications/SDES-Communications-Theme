@@ -123,5 +123,5 @@
 
 			<img src="<?= (get_option('breaker_id', '')) ? get_option('breaker_id', '') : get_stylesheet_directory_uri() . '/images/breaker.jpg' ?>" class="img-fluid" />
 		</div>
-
+		<?= get_template_part( 'includes/template', 'alert' ); ?>
 	</header>
