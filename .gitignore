@@ -1,4 +1,5 @@
-*~
+ *~
 /vendor/
 npm-debug.log
 .gitignore
+*-old.*

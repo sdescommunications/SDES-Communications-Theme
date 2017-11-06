@@ -7,7 +7,7 @@
 require_once( 'functions/class-sdes-static.php' );
 use SDES\SDES_Static;
 
-get_header();
+get_header('second');
 ?>
 <!-- content area -->
 <div class="container site-content" id="content">

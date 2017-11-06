@@ -1,14 +1,12 @@
-<?php
-/** Display a single News post, per the WordPress template hierarchy. */
-namespace SDES\BaseTheme\PostTypes;
-use SDES\SDES_Static as SDES_Static;
+<?php 
+	get_header('second'); the_post();
 
-get_header();
-?>
-<!-- content area -->
-<div class="container site-content" id="content">
-	<?= get_template_part( 'includes/template', 'alert' ); ?>
+	$image_url 	= has_post_thumbnail( $post->ID ) ?
+	wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID), 'full', false ) : null;
 
+	if ( $image_url ) {
+		$image_url = $image_url[0];
+	}
 
 	<?php if (have_posts()) :
 	while (have_posts()) : the_post(); 
@@ -42,15 +40,8 @@ get_header();
 			<div class="news-summary">
 				<?= wpautop($context['content']) ?>
 			</div>
-		</div>
-	</div>
-	<?php
-	endwhile;
-	else:
-		SDES_Static::Get_No_Posts_Message();
-	endif; ?>
-
-
-</div> <!-- /DIV.container.site-content -->
-<?php
-get_footer();
+			<a class="btn btn-callout float-right mt-3" href="<?= wp_get_referer() ?>"><i class="fa fa-chevron-left"></i> Back</a>
+		</article>
+	</section>
+</div>
+<?php get_footer(); ?>

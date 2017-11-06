@@ -4,14 +4,14 @@
 */
 use SDES\SDES_Static as SDES_Static;
 
-get_header();
+get_header('second');
 ?>
 <!-- content area -->
 <div class="container site-content" id="content">
-	<?= get_template_part( 'includes/template', 'alert' ); ?>
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-		<?= get_template_part( 'includes/template', 'heading' ); ?>
+		<h1><?= get_the_title() ?></h1>
+		<hr>
 		<div class="row">
 			<div class="col-sm-8 col-xs-12">
 				<?php the_content(); ?>

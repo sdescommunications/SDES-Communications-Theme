@@ -29,11 +29,37 @@
 
 			<div class="inside">
 				<p>
+					Card title
+				</p>
+				<p>
+					<input name="<?= 'service_title_'.$c ?>" type="text" value="<?= get_post_meta($object->ID, "service_title_".$c, true) ?>">
+				</p>				
+			</div>
+
+			<div class="inside">
+				<p>
 					<strong>Content</strong> (required)
 				</p>
 				<p>	          	
 					<?= (!empty($content[($c-1)][0])) ? wp_editor( $content[($c-1)][0], 'service_wysiwyg_'. ($c), array('media_buttons' => false, 'textarea_rows'=> 1,) ) : wp_editor( '', 'service_wysiwyg_'. ($c), array('media_buttons' => false, 'textarea_rows'=> 1,) ) ?>
 				</p>	          
+			</div>
+
+			<div class="inside">
+				<p>
+					Card Button Text
+				</p>
+				<p>
+					<input name="<?= 'service_btn_text_'.$c ?>" type="text" value="<?= get_post_meta($object->ID, "service_btn_text_".$c, true) ?>">
+				</p>	
+			</div>
+			<div class="inside">
+				<p>
+					Card Button Url
+				</p>
+				<p>
+					<input name="<?= 'service_btn_url_'.$c ?>" type="text" value="<?= get_post_meta($object->ID, "service_btn_url_".$c, true) ?>">
+				</p>	
 			</div>
 			
 			<br><hr><br>	
@@ -71,6 +97,9 @@
 	    while ($c <= $GLOBALS['NUMBEROFCARDS']) {
 	    	update_post_meta($post_id, "service_wysiwyg_".$c, $_POST["service_wysiwyg_".$c]);
 	    	update_post_meta( $post_id, $meta_key.$c, $_POST[$meta_key.$c] );
+	    	update_post_meta($post_id, "service_title_".$c, $_POST["service_title_".$c]);
+	    	update_post_meta($post_id, "service_btn_text_".$c, $_POST["service_btn_text_".$c]);
+	    	update_post_meta($post_id, "service_btn_url_".$c, $_POST["service_btn_url_".$c]);
 	    	$c++;
 	    }
 

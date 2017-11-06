@@ -287,7 +287,7 @@ class Alert extends CustomPostType {
 			
 			?>
 			<div class="alert <?= $context['css_classes'] ?>">
-				
+				<span class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
 				<strong><?= $context['title'] ?></strong>
 				<?= $context['message'] ?>
 				
@@ -410,7 +410,7 @@ class Billboard extends CustomPostType {
 
 			ob_start();
 
-			$CAROUSEL_SIZE = array( 1140, 380 );
+			$CAROUSEL_SIZE = array( 1900, 536 );
 			$count = 0;
 			$control = null;
 			$indicator = null;
@@ -436,16 +436,16 @@ class Billboard extends CustomPostType {
 				$inner .= '
 				<div class="carousel-item '.($count === 0 ? 'active' : false).'">'.
 					((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? 
-						'<a href="'. $item->billboard_url .'">'. get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'</a>' 
+						'<a class="noicon" href="'. $item->billboard_url .'">'. get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'</a>' 
 						: get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text ))).
 					((!empty($item->post_title)) || (!empty($item->post_content)) ? 
-						'<div class="carousel-caption">'
-						. ((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? '<h3><a href="'. $item->billboard_url .'">'. $item->post_title .'</a></h3>'
+						'<div class="carousel-caption"><div class="container">'
+						. ((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? '<h3><a class="noicon" href="'. $item->billboard_url .'">'. $item->post_title .'</a></h3>'
 							: '<h3>'. $item->post_title .'</h3>') .
 						'<p>
 						'. $item->post_content .'
 					</p>
-				</div>' : false) .'
+				</div></div>' : false) .'
 				</div>
 				';
 
@@ -453,35 +453,23 @@ class Billboard extends CustomPostType {
 			}
 			?>                           
 
-			<div id="carousel" class="container carousel slide" data-ride="carousel">
-
-				<div class="carousel-inner" role="listbox">
-					<?= $inner ?>
-				</div>
-				<?= (($count > 1) ? $control : false) ?>
-				<ol class="carousel-indicators">
-					<?= $indicator ?>
-				</ol>
-			</div>				
-
-			<div class="noscript">
-				Billboards:<br><br>
-				<?php echo "\n";
-				foreach ( $context['objects'] as $o ) :
-					if ( $o->billboard_url ) : ?>
-				<a href="<?= $o->billboard_url ?>">
-				<?php endif;
-				echo "\t\t\t\t{$o->post_title} {$o->post_content} {$o->alt_text}<br><br>\n";
-				if ( $o->billboard_url ) : ?>
-			</a>
-		<?php endif;
-		endforeach; ?>
+			<div class="carousel-wrapper not-home hidden-tiny" aria-hidden="true" style="width:100%; height:500px;">
+				<div id="carousel" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<?= $inner ?>					
+						<ol class="carousel-indicators">
+							<?= ($count > 1) ? $indicator : false ?>
+						</ol>
+						<?= (($count > 1) ? $control : false) ?>
+					</div>
+				</div>		
+			</div>
+						
 	</div>
-</div>
 
-<?php
-return ob_get_clean();
-}
+	<?php
+	return ob_get_clean();
+	}
 }
 
 /**
@@ -644,7 +632,8 @@ class Staff extends CustomPostType {
 				</script>
 			<?php endif;
 			if ( $context['header'] ) : ?>
-			<div class="staff-role"><?= $context['header'] ?></div>
+			<h2 class=""><?= $context['header'] ?></h2>
+			<hr>
 		<?php endif; ?>
 		<span class="<?= $context['css_classes'] ?>">
 			<?php foreach ( $context['objects'] as $o ) : ?>
@@ -678,13 +667,18 @@ class Staff extends CustomPostType {
 		<div class="staff">
 			<?= $context['thumbnail'] ?>
 			<div class="staff-content">
-				<div class="staff-name"><?= $context['title'] ?></div>
-				<div class="staff-title"><?= $context['staff_position_title'] ?></div>
-				<div class="staff-phone"><?= $context['staff_phone'] ?></div>
-				<div class="staff-email">
+				<h3 class="staff-name">
+					<?php if (!empty($context['content'])) { ?>
+						<a href="<?= get_permalink($context['Post_ID']) ?>"><?= $context['title'] ?></a>
+					<?php } else { ?>
+						<?= $context['title'] ?>
+					<?php } ?>
+				</h3>
+				<h4 class="staff-title"><?= $context['staff_position_title'] ?></h4>
+				<h5 class="staff-phone"><?= $context['staff_phone'] ?></h5>
+				<h5 class="staff-email">
 					<a href="mailto:<?= $context['staff_email'] ?>"><?= $context['staff_email'] ?></a>
-				</div>
-				<div class="staff-details"><?= $context['content'] ?></div>
+				</h5>
 			</div>
 		</div>
 		<?php
@@ -775,6 +769,8 @@ class News extends CustomPostType {
 				'meta_key' => $prefix.'start_date',			
 				'header' => 'News & Announcements',
 				'css_classes' => '',
+				'orderby' => 'date',
+				'order'   => 'DESC',
 				);
 			if ( is_array( $attr ) ) {
 				$attr = array_merge( $default_attrs, $attr );
@@ -812,6 +808,7 @@ class News extends CustomPostType {
 					);
 			}
 
+			$context['excerpt'] = $attr['excerpt'];
 			$context['header'] = $attr['header'];
 			$context['css_classes'] = ( $attr['css_classes'] ) ? $attr['css_classes'] : $this->options( 'name' ).'-list';
 			// Unset keys to prevent treating them as taxonomies in sc_object_list.
@@ -835,7 +832,7 @@ class News extends CustomPostType {
 
 			//add a check for news page
 			if ( 'http://' !== $archive_url ) {
-				$archive_link = '<div class="datestamp"><a href="' . get_home_url() . '/news">»News Archive</a></div>';
+				$archive_link = (is_front_page()) ? '<div><a class="btn btn-dark float-right mt-3" href="' . get_home_url() . '/news">More News</a></div>' : null;
 			} else {
 				$format_default_message = ( SDES_Static::Is_UserLoggedIn_Can( 'edit_posts' ) )
 				? '<span class="adminmsg">Admin Alert:<a class="text-danger" data-control-name="sdes_rev_2015-newsArchiveUrl"'
@@ -859,9 +856,10 @@ class News extends CustomPostType {
 			ob_start();
 			?>
 			<?php if ( $context['header'] ) : ?>
-				<div class="page-header">
-					<h1><?= $context['header'] ?></h1>
-				</div>
+				
+					<h2><?= $context['header'] ?></h2>
+					<hr>
+				
 			<?php endif; ?>
 			<span class="<?= $context['css_classes'] ?>">
 				<?php foreach ( $context['objects'] as $o ) : ?>
@@ -894,12 +892,13 @@ class News extends CustomPostType {
 			$context['title_link'] = ( '' !== $news_url ) ? $news_url : $context['permalink'];
 			$context['title'] = get_the_title( $post_object );
 			$news_strapline = get_post_meta( $post_object->ID, 'news_strapline', true );
-			$context['news_strapline'] = ('' !== $news_strapline ) ? '<div class="news-strapline">'.$news_strapline.'</div>' : '';
-			$context['month_year_day'] = get_the_date( 'F j, Y', $post_object );
-			$context['time'] = get_the_time( 'g:i a', $post_object );
+			$context['news_strapline'] = ('' !== $news_strapline ) ? $news_strapline : '';
+			$context['month_year_day'] = get_the_date( 'l, F j, Y ', $post_object );
+			$context['time'] = get_the_time( 'g:i A', $post_object );
 			$context['datetime'] = get_the_time( DATE_ISO8601, $post_object );
 
 			$context['excerpt'] = wpautop($post_object->post_content);
+			
 
 			return static::render_to_html( $context );
 		}
@@ -907,36 +906,59 @@ class News extends CustomPostType {
 		protected static function render_to_html( $context ) {
 			ob_start();
 			
+			if (is_front_page()) {
+			
+				$image_url = has_post_thumbnail( $context['Post_ID'] ) ?
+				wp_get_attachment_image_src( get_post_thumbnail_id( $context['Post_ID'] )) : null;
+
+				if ( $image_url ) {
+					$image_url = $image_url[0];
+				}
 			?>
-			<div class="news">      
-				<?= $context['thumbnail'] ?>
-				<div class="news-content">
-					<div class="news-title">
+				<div class="media">
+					<img class="d-flex mr-3 float-left" src="<?= !empty($image_url)? $image_url :  get_stylesheet_directory_uri() . '/images/blank.png' ?>" width="75px" alt="Generic placeholder image">
+					<div class="media-body">
+						<h4>							
+							<a href="<?= $context['permalink'] ?>"><?= $context['title'] ?></a>						
+						</h4>
+						<h5><?= $context['news_strapline'] ?></h5>
+					</div>
+				</div>
+			<?php
+			}else{
+			?>
+				<div id=<?= $context['Post_ID'] ?> class="news">      
+					<?= $context['thumbnail'] ?>
+					<div class="news-content">
+						<h2 class="news-title">
 						<?php if(!empty($context['title_link']) && $context['title_link'] != 'http://') { ?>
 							<a href="<?= $context['title_link'] ?>"><?= $context['title'] ?></a>
 							<?php } else  echo $context['title']; ?>					
-						</div> 
-						<div class="news-strapline"><?= $context['news_strapline'] ?></div>
+						</h2> 
+						<h3 class="news-strapline"><?= $context['news_strapline'] ?></h3>
 						<div class="datestamp">
 							Posted on 
-							<a href="<?= $context['permalink'] ?>">
+							
 								<time datetime="<?= $context['datetime'] ?>" pubdate>
-									<?= $context['month_year_day'] ?> at <?= $context['time'] ?>
+									<?= $context['month_year_day'] ?> @ <?= $context['time'] ?>
 								</time>
-							</a>
+						
 						</div>
 						<div class="news-summary">
 							<p>
-								<?= $context['excerpt'] ?>
+								<?= substr($context['excerpt'], 0, 600) ?>
+								<p><a class="" href="<?= $context['permalink'] ?>">Read More >></a></p>
 							</p>
 						</div>
 					</div>
 				</div>
-				<?php
 
-				return ob_get_clean();
-			}
+			<?php }
+			return ob_get_clean();
 		}
+
+
+	}
 
 /**
 * Contact Information without Customizer or Directory

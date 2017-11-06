@@ -5,12 +5,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
+
 		<?php 
 			echo wp_title( '&bull;', true, 'right' ); 
 			echo str_replace('&lt;br&gt;', ' ', get_bloginfo('name')); 
 		?> 
 		&bull; UCF
-	</title>	
+
+	</title>
+
+	
 
 	<link rel="shortcut icon" href="//it-dev.sdes.ucf.edu/testing/vp/images/favicon_black.png" />
 	<link rel="apple-touch-icon" href="//it-dev.sdes.ucf.edu/testing/vp/images/apple-touch-icon.png" />
@@ -28,7 +32,6 @@
 	
 	<script type="text/javascript" src="//it-dev.sdes.ucf.edu/testing/vp/js/tether.min.js"></script>
 	<script type="text/javascript" src="//it-dev.sdes.ucf.edu/testing/vp/js/bootstrap.min.js"></script>	
-	<script type="text/javascript" src="//it-dev.sdes.ucf.edu/testing/vp/js/smoothscroll.js"></script>
 
 
 	<!--[if lt IE 10]>
@@ -100,23 +103,25 @@
 					</aside>			
 				</section>
 			</div>
+
 			<!-- navigation -->
 			<nav class="navbar navbar-dept navbar-toggleable-md">
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<i class="fa falg fa-bars"></i>
 				</button>
-				<?= 
-					wp_nav_menu(array(
-						'theme_location' => 'main-menu', 
-						'menu_class' => 'navbar-nav',
-						'container_class' => 'collapse navbar-collapse',
-						'container_id' => 'navbarSupportedContent',
-						'walker' => new Nav_Menu(),
-					)) 
-				?>			
+				<?= wp_nav_menu(array(
+											'theme_location' => 'main-menu', 
+											'menu_class' => 'navbar-nav',
+											'container_class' => 'collapse navbar-collapse',
+											'container_id' => 'navbarSupportedContent',
+											'walker' => new Nav_Menu(),
+										)) ?>			
 			</nav>
-		</div>
+		</div>				
 
-		<?= do_shortcode( '[alert-list show_all="true"]' ); ?>
-		
+		<div class="header-break hidden-md-down">
+
+			<img src="<?= (get_option('breaker_id', '')) ? get_option('breaker_id', '') : get_stylesheet_directory_uri() . '/images/breaker.jpg' ?>" class="img-fluid" />
+		</div>
+		<?= get_template_part( 'includes/template', 'alert' ); ?>
 	</header>
