@@ -232,7 +232,7 @@ class Alert extends CustomPostType {
 		public static function get_render_context( $alert, $metadata_fields ) {
 
 			$alert_css_classes = ( $metadata_fields['alert_is_unplanned'] )
-			? 'card-danger' : 'card-info';
+			? 'alert-danger' : 'alert-warning';
 			
 			$alert_url = ($metadata_fields['alert_url'] == 'http://') ? null : $metadata_fields['alert_url'];
 			$alert_message = wpautop($alert->post_content);
@@ -286,11 +286,11 @@ class Alert extends CustomPostType {
 			ob_start();
 			
 			?>
-			<div class="card card-inverse <?= $context['css_classes'] ?>">
-				<div class="container card-block">
-					<h2><?= $context['title'] ?></h2>
-					<?= $context['message'] ?>
-				</div>				
+			<div class="alert <?= $context['css_classes'] ?>">
+				<span class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+				<strong><?= $context['title'] ?></strong>
+				<?= $context['message'] ?>
+				
 			</div>
 			<div class="clearfix"></div>
 			<?php
@@ -464,12 +464,12 @@ class Billboard extends CustomPostType {
 					</div>
 				</div>		
 			</div>
-					
-</div>
+						
+	</div>
 
-<?php
-return ob_get_clean();
-}
+	<?php
+	return ob_get_clean();
+	}
 }
 
 /**
@@ -632,9 +632,8 @@ class Staff extends CustomPostType {
 				</script>
 			<?php endif;
 			if ( $context['header'] ) : ?>
-			<div class="staff-role">
-				<h2><?= $context['header'] ?></h2>
-			</div>
+			<h2 class=""><?= $context['header'] ?></h2>
+			<hr>
 		<?php endif; ?>
 		<span class="<?= $context['css_classes'] ?>">
 			<?php foreach ( $context['objects'] as $o ) : ?>
@@ -809,6 +808,7 @@ class News extends CustomPostType {
 					);
 			}
 
+			$context['excerpt'] = $attr['excerpt'];
 			$context['header'] = $attr['header'];
 			$context['css_classes'] = ( $attr['css_classes'] ) ? $attr['css_classes'] : $this->options( 'name' ).'-list';
 			// Unset keys to prevent treating them as taxonomies in sc_object_list.
@@ -898,6 +898,7 @@ class News extends CustomPostType {
 			$context['datetime'] = get_the_time( DATE_ISO8601, $post_object );
 
 			$context['excerpt'] = wpautop($post_object->post_content);
+			
 
 			return static::render_to_html( $context );
 		}
@@ -945,7 +946,7 @@ class News extends CustomPostType {
 						</div>
 						<div class="news-summary">
 							<p>
-								<?= $context['excerpt'] ?>
+								<?= substr($context['excerpt'], 0, 600) ?>
 								<p><a class="" href="<?= $context['permalink'] ?>">Read More >></a></p>
 							</p>
 						</div>
