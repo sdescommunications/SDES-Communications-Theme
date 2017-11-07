@@ -632,8 +632,9 @@ class Staff extends CustomPostType {
 				</script>
 			<?php endif;
 			if ( $context['header'] ) : ?>
-			<h2 class=""><?= $context['header'] ?></h2>
-			<hr>
+				<div class="staff-role">
+					<h2><?= $context['header'] ?></h2>
+				</div> 
 		<?php endif; ?>
 		<span class="<?= $context['css_classes'] ?>">
 			<?php foreach ( $context['objects'] as $o ) : ?>
