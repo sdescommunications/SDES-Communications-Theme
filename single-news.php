@@ -14,22 +14,22 @@
 <br />
 <div class="container">
 	<h1>
-		<?= (!empty($url)) ? '<a href="' . $url . '">'. get_the_title() . '</a>' : get_the_title() ?>
+		<?= (!empty($url)) ? '<a href="' . $url . '">'. get_the_title() . '</a>' : get_the_title(); ?>
 	</h1>
-	<hr>
+	<hr />
 	<section>
 		<article class="full-width">
 			<div class="news">
 				<img src="<?= $image_url ?>" class="img-fluid">
 				<div class="news-content">
 					<h3 class="news-strapline"><?= $strapline ?></h3>
-					<p class="datestamp">Posted <?= get_the_date( 'l, F j, Y @ g:i A', $object->post->ID ) ?></p>
+					<p class="datestamp">Posted <?= get_the_date( 'l, F j, Y @ g:i A', $object->post->ID ); ?></p>
 					<p>
-						<?= the_content() ?>
+						<?= the_content(); ?>
 					</p>							
 				</div>
 			</div>
-			<a class="btn btn-callout float-right mt-3" href="<?= wp_get_referer() ?>"><i class="fa fa-chevron-left"></i> Back</a>
+			<a class="btn btn-callout float-right mt-3" href="<?= wp_get_referer(); ?>"><i class="fa fa-chevron-left"></i> Back</a>
 		</article>
 	</section>
 </div>
