@@ -8,37 +8,26 @@
 		$image_url = $image_url[0];
 	}
 
-	<?php if (have_posts()) :
-	while (have_posts()) : the_post(); 
-	global $post;
-	$post_object = $post;
-		//Copied from News::toHTML.
-	$context['Post_ID'] = $post_object->ID;
-	$thumbnailUrl = get_stylesheet_directory_uri() . '/images/blank.png';
-	$context['thumbnail']
-	= has_post_thumbnail($post_object) 
-	? get_the_post_thumbnail($post_object, '', array('class' => 'img-fluid'))
-	: "<img src='".$thumbnailUrl."' alt='thumb' class='img-fluid'>";
-	$news_link = get_post_meta( $post_object->ID, 'news_link', true );
-	$context['permalink'] = get_permalink( $post_object );
-	$context['title_link'] = ( '' !== $news_link ) ? $news_link : $context['permalink'];
-	$context['title'] = get_the_title( $post_object );
-	$news_strapline = get_post_meta( $post_object->ID, 'news_strapline', true );
-	$context['news_strapline'] =('' !== $news_strapline ) ? '<div class="news-strapline">'.$news_strapline.'</div>' : '';
-	$context['month_year_day'] = get_the_date('F j, Y', $post_object);
-	$context['time'] = get_the_time('g:i a', $post_object);
-	$context['content'] = get_the_content();
-	?>
-	<h2 class="page-header news-title"><?= the_title(); ?></h2>
-	<div class="news">		
-		<?= $context['thumbnail'] ?>
-		<div class="news-content">
-			<?= $context['news_strapline'] ?>
-			<div class="datestamp mb-2">
-				Posted on <?= $context['month_year_day'] ?> at <?= $context['time'] ?>
-			</div>
-			<div class="news-summary">
-				<?= wpautop($context['content']) ?>
+	$url		= get_post_meta( $post->ID, 'news_url', true);
+	$strapline 	= get_post_meta( $post->ID, 'news_strapline', true );
+?>
+<br />
+<div class="container">
+	<h1>
+		<?= (!empty($url)) ? '<a href="' . $url . '">'. get_the_title() . '</a>' : get_the_title() ?>
+	</h1>
+	<hr>
+	<section>
+		<article class="full-width">
+			<div class="news">
+				<img src="<?= $image_url ?>" class="img-fluid">
+				<div class="news-content">
+					<h3 class="news-strapline"><?= $strapline ?></h3>
+					<p class="datestamp">Posted <?= get_the_date( 'l, F j, Y @ g:i A', $object->post->ID ) ?></p>
+					<p>
+						<?= the_content() ?>
+					</p>							
+				</div>
 			</div>
 			<a class="btn btn-callout float-right mt-3" href="<?= wp_get_referer() ?>"><i class="fa fa-chevron-left"></i> Back</a>
 		</article>

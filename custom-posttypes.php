@@ -632,8 +632,9 @@ class Staff extends CustomPostType {
 				</script>
 			<?php endif;
 			if ( $context['header'] ) : ?>
-			<h2 class=""><?= $context['header'] ?></h2>
-			<hr>
+				<div class="staff-role">
+					<h2><?= $context['header'] ?></h2>
+				</div> 
 		<?php endif; ?>
 		<span class="<?= $context['css_classes'] ?>">
 			<?php foreach ( $context['objects'] as $o ) : ?>
@@ -916,7 +917,7 @@ class News extends CustomPostType {
 				}
 			?>
 				<div class="media">
-					<img class="d-flex mr-3 float-left" src="<?= !empty($image_url)? $image_url :  get_stylesheet_directory_uri() . '/images/blank.png' ?>" width="75px" alt="Generic placeholder image">
+					<img class="d-flex mr-3 float-left" src="<?= !empty($image_url)? $image_url :  get_stylesheet_directory_uri() . '/images/blank-news.png' ?>" width="75px" alt="Generic placeholder image">
 					<div class="media-body">
 						<h4>							
 							<a href="<?= $context['permalink'] ?>"><?= $context['title'] ?></a>						
@@ -944,11 +945,9 @@ class News extends CustomPostType {
 								</time>
 						
 						</div>
-						<div class="news-summary">
-							<p>
-								<?= substr($context['excerpt'], 0, 600) ?>
-								<p><a class="" href="<?= $context['permalink'] ?>">Read More >></a></p>
-							</p>
+						<div class="news-summary">							
+							<?= substr($context['excerpt'], 0, 600) ?>
+							<p><a class="" href="<?= $context['permalink'] ?>"> Read More >> </a></p>
 						</div>
 					</div>
 				</div>
