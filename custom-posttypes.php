@@ -436,7 +436,7 @@ class Billboard extends CustomPostType {
 				$inner .= '
 				<div class="carousel-item '.($count === 0 ? 'active' : false).'">'.
 					((!empty($item->billboard_url) && ($item->billboard_url != 'http://')) ? 
-						'<a class="noicon" href="'. $item->billboard_url .'">'. get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'</a>' 
+						'<img onMouseOver="this.style.cursor = \'pointer\'" onclick="window.location = \''. $item->billboard_url .'\'"src="'. get_the_post_thumbnail_url( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text )) .'">' 
 						: get_the_post_thumbnail( $item, $CAROUSEL_SIZE,array('alt' => $item->alt_text ))).
 					((!empty($item->post_title)) || (!empty($item->post_content)) ? 
 						'<div class="carousel-caption"><div class="container">'
