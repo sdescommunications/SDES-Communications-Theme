@@ -12,10 +12,9 @@
 		&bull; UCF
 	</title>	
 
-	<link rel="shortcut icon" href="//it-dev.sdes.ucf.edu/testing/vp/images/favicon_black.png" />
-	<link rel="apple-touch-icon" href="//it-dev.sdes.ucf.edu/testing/vp/images/apple-touch-icon.png" />
-	<link rel="stylesheet" href="//it-dev.sdes.ucf.edu/testing/vp/scss/bootstrap.css" />
-	<link rel="stylesheet" href="//it-dev.sdes.ucf.edu/testing/vp/css/cards.css" media="screen" />
+	<link rel="shortcut icon" href="<?= get_stylesheet_directory_uri(); ?>/images/favicon_black.png" />
+	<link rel="apple-touch-icon" href="<?= get_stylesheet_directory_uri(); ?>/images/apple-touch-icon.png" />
+	<link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/style.css" />
 
 	<!--[if lt IE 10]>	
 	<link rel="stylesheet" href="css/why.css" media="screen" />
@@ -26,13 +25,13 @@
 
 	<script src="//use.fontawesome.com/48342ef48c.js"></script>
 	
-	<script type="text/javascript" src="//it-dev.sdes.ucf.edu/testing/vp/js/tether.min.js"></script>
-	<script type="text/javascript" src="//it-dev.sdes.ucf.edu/testing/vp/js/bootstrap.min.js"></script>	
-	<script type="text/javascript" src="//it-dev.sdes.ucf.edu/testing/vp/js/smoothscroll.js"></script>
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/tether.min.js"></script>
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/smoothscroll.js"></script>
 
 
 	<!--[if lt IE 10]>
-	<script type="text/javascript" src="http://it-dev.sdes.ucf.edu/testing/vp/js/modernizr-custom.js"></script>
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/modernizr-custom.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
 	<![endif]-->
 

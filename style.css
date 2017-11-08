@@ -6,4 +6,5 @@
 	Author URI: https://sdescmsdev.smca.ucf.edu/
 	*/
 
-	@import url('./css/style.css');
+	@import url('./css/bootstrap.css');
+	@import url('./css/cards.css');
