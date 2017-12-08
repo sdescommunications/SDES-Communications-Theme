@@ -14,7 +14,7 @@ get_header();
 
 		<section>
 			<aside>
-				<?= do_shortcode( get_post_meta( $post->ID, 'page_sidecolumn', $single=true ) ); ?>
+				<?= wpautop( do_shortcode( get_post_meta( $post->ID, 'page_sidecolumn', $single=true )) ); ?>
 			</aside>
 			<article>
 				<?php if (have_posts()) :
