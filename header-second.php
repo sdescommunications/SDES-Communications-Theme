@@ -34,7 +34,7 @@
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/modernizr-custom.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
 	<![endif]-->
-
+	<?= wp_head(); ?>
 </head>
 <body>
 	<?php
@@ -95,7 +95,7 @@
 						</span>				
 					</article>
 					<aside class="text-lg-right">
-						<a class="translate" href="#" data-toggle="tooltip" data-placement="right" title="Translate This Page!"><i class="fa fa-globe"></i></a>
+						<a class="translate" href="http://it.sdes.ucf.edu/translate/" data-toggle="tooltip" data-placement="right" title="Translate This Page!"><i class="fa fa-globe"></i></a>
 					</aside>			
 				</section>
 			</div>
