@@ -1,4 +1,5 @@
 <!-- footers -->
+<?php wp_footer(); ?>
 <footer class="site-footer-container">
 	<!-- main footer -->
 	<div class="site-footer">
