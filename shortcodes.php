@@ -595,63 +595,43 @@ class social_media extends ShortcodeBase{
 		<div class="card-columns social mt-3">
 			<?php if (!empty($attr['facebook'])) { ?>
 			<div class="card">
-				<a class="btn btn-block facebook text-lg-center" href="<?= $attr['facebook'] ?>">
-					<span class="fa fa-facebook-official fa-fw fa-lg"></span><span class="sr-only">&emsp;Facebook</span>
-				</a>
+				<a class="btn btn-block facebook text-lg-center" href="<?= $attr['facebook'] ?>"><span class="fa fa-facebook-official fa-fw fa-lg"></span><span class="sr-only">&emsp;Facebook</span></a>
 			</div>
 			<?php } if (!empty($attr['flickr'])) { ?>
 			<div class="card">
-				<a class="btn btn-block flickr text-lg-center" href="<?= $attr['flickr'] ?>">
-					<span class="fa fa-flickr fa-fw fa-lg"></span><span class="sr-only">&emsp;Flickr</span>
-				</a>
+				<a class="btn btn-block flickr text-lg-center" href="<?= $attr['flickr'] ?>"><span class="fa fa-flickr fa-fw fa-lg"></span><span class="sr-only">&emsp;Flickr</span></a>
 			</div>
 			<?php } if (!empty($attr['google_plus'])) { ?>
 			<div class="card">
-				<a class="btn btn-block gplus text-lg-center" href="<?= $attr['google_plus'] ?>">
-					<span class="fa fa-google-plus fa-fw fa-lg"></span><span class="sr-only">&emsp;Google+</span>
-				</a>
+				<a class="btn btn-block gplus text-lg-center" href="<?= $attr['google_plus'] ?>"><span class="fa fa-google-plus fa-fw fa-lg"></span><span class="sr-only">&emsp;Google+</span></a>
 			</div>
 			<?php } if (!empty($attr['instagram'])) { ?>
 			<div class="card">
-				<a class="btn btn-block instagram text-lg-center" href="<?= $attr['instagram'] ?>">
-					<span class="fa fa-instagram fa-fw fa-lg"></span><span class="sr-only">&emsp;Instagram</span>
-				</a>
+				<a class="btn btn-block instagram text-lg-center" href="<?= $attr['instagram'] ?>"><span class="fa fa-instagram fa-fw fa-lg"></span><span class="sr-only">&emsp;Instagram</span></a>
 			</div>
 			<?php } if (!empty($attr['linkedin'])) { ?>
 			<div class="card">
-				<a class="btn btn-block linkedin text-lg-center" href="<?= $attr['linkedin'] ?>">
-					<span class="fa fa-linkedin fa-fw fa-lg"></span><span class="sr-only">&emsp;LinkedIn</span>
-				</a>
+				<a class="btn btn-block linkedin text-lg-center" href="<?= $attr['linkedin'] ?>"><span class="fa fa-linkedin fa-fw fa-lg"></span><span class="sr-only">&emsp;LinkedIn</span></a>
 			</div>
 			<?php } if (!empty($attr['pinterest'])) { ?>
 			<div class="card">
-				<a class="btn btn-block pinterest text-lg-center" href="<?= $attr['pinterest'] ?>">
-					<span class="fa fa-pinterest fa-fw fa-lg"></span><span class="sr-only">&emsp;Pinterest</span>
-				</a>
+				<a class="btn btn-block pinterest text-lg-center" href="<?= $attr['pinterest'] ?>"><span class="fa fa-pinterest fa-fw fa-lg"></span><span class="sr-only">&emsp;Pinterest</span></a>
 			</div>
 			<?php } if (!empty($attr['twitter'])) { ?>
 			<div class="card">
-				<a class="btn btn-block twitter text-lg-center" href="<?= $attr['twitter'] ?>">
-					<span class="fa fa-twitter fa-fw fa-lg"></span><span class="sr-only">&emsp;Twitter</span>
-				</a>
+				<a class="btn btn-block twitter text-lg-center" href="<?= $attr['twitter'] ?>"><span class="fa fa-twitter fa-fw fa-lg"></span><span class="sr-only">&emsp;Twitter</span></a>
 			</div>
 			<?php } if (!empty($attr['tumblr'])) { ?>
 			<div class="card">
-				<a class="btn btn-block tumblr text-lg-center" href="<?= $attr['tumblr'] ?>">
-					<span class="fa fa-tumblr fa-fw fa-lg"></span><span class="sr-only">&emsp;Tumblr</span>
-				</a>
+				<a class="btn btn-block tumblr text-lg-center" href="<?= $attr['tumblr'] ?>"><span class="fa fa-tumblr fa-fw fa-lg"></span><span class="sr-only">&emsp;Tumblr</span></a>
 			</div>
 			<?php } if (!empty($attr['vimeo'])) { ?>
 			<div class="card">
-				<a class="btn btn-block vimeo text-lg-center" href="<?= $attr['vimeo'] ?>">
-					<span class="fa fa-vimeo fa-fw fa-lg"></span><span class="sr-only">&emsp;Vimeo</span>
-				</a>
+				<a class="btn btn-block vimeo text-lg-center" href="<?= $attr['vimeo'] ?>"><span class="fa fa-vimeo fa-fw fa-lg"></span><span class="sr-only">&emsp;Vimeo</span></a>
 			</div>
 			<?php } if (!empty($attr['youtube'])) { ?>
 			<div class="card">
-				<a class="btn btn-block youtube text-lg-center" href="<?= $attr['youtube'] ?>">
-					<span class="fa fa-youtube fa-fw fa-lg"></span><span class="sr-only">&emsp;YouTube</span>
-				</a>
+				<a class="btn btn-block youtube text-lg-center" href="<?= $attr['youtube'] ?>"><span class="fa fa-youtube fa-fw fa-lg"></span><span class="sr-only">&emsp;YouTube</span></a>
 			</div>
 			<?php } ?>
 		</div>		
