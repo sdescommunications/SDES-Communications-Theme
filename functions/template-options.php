@@ -43,4 +43,17 @@
 	    $value = get_option( 'breaker_id', '' );
 	    echo '<input type="text" id="breaker_id" name="breaker_id" value="' . $value . '" />';
 	}
+
+	add_filter('admin_init', 'add_main_site_url'); 
+	function add_main_site_url()
+	{
+	    register_setting('general', 'main_site_url', 'esc_attr');
+	    add_settings_field('main_site_url', '<label for="main_site_url">'.__('Main URL' , 'main_site_url' ).'</label>' , 'main_site_url_setting_html', 'general');
+	}
+	 
+	function main_site_url_setting_html()
+	{
+	    $value = get_option( 'main_site_url', '' );
+	    echo '<input type="text" id="main_site_url" name="main_site_url" value="' . $value . '" />';
+	}
 ?>
