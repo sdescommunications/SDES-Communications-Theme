@@ -89,7 +89,7 @@
 							<?= html_entity_decode(get_bloginfo('name')) ?>
 						</a>
 						<span class="site-subtitle float-left hidden-md-down">
-							<a href="blah">
+							<a href="<?php if(!empty(get_option("main_site_url"))){get_option("main_site_url")} else {echo "//www.sdes.ucf.edu";} ?>">
 								<?= html_entity_decode(get_bloginfo('description')) ?>
 							</a>
 						</span>				
