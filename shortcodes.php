@@ -224,7 +224,7 @@ class sc_events extends ShortcodeBase {
 		if ( null === $attr['id'] ) { return true; }
 		
 		// Open cURL instance for the UCF Event Calendar RSS feed.
-		$ch = curl_init( "http://events.ucf.edu/?calendar_id={$attr['id']}&upcoming=upcoming&format=rss" );
+		$ch = curl_init( "https://events.ucf.edu/?calendar_id={$attr['id']}&upcoming=upcoming&format=rss" );
 
 		// Set cURL options.
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
