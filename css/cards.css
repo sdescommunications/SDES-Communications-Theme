@@ -1,9 +1,6 @@
 .card {
 	position: relative;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
+	display: inline-block;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
@@ -12,6 +9,11 @@
 	background-color: #fff;
 	border: 1px solid rgba(0, 0, 0, 0.125);
 	border-radius: 0.25rem;
+}
+
+.card-columns.social .card{
+	width: 100%;
+  margin-bottom: 0.75rem;
 }
 
 .card-block {
