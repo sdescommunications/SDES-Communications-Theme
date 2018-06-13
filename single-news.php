@@ -28,9 +28,6 @@
 						<?= the_content(); ?>
 					</p>
 				</div>
-				<div>
-					<?php include_once 'social-news.php'; ?>
-				</div>
 			</div>
 			<a class="btn btn-callout float-right mt-3" href="<?= wp_get_referer(); ?>"><i class="fa fa-chevron-left"></i> Back</a>
 		</article>
