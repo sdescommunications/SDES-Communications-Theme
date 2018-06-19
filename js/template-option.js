@@ -4,7 +4,11 @@ $(document).ready(function() {
     var $page_template = $('#page_template'),
         $side = $('#custom_page_metabox'),
         $billboard = $('#billboard-meta-box'),
-        $service = $('#service-meta-box'); 
+        $service = $('#service-meta-box'),
+        $bt = $('#billTag'),
+        $bu = $('#billUrl'),
+        $btb = $('#billTagb'),
+        $bub = $('#billUrlb'); 
 
     $page_template.change(function() {
         if ($(this).val() == 'content-right-sidecol.php') {
@@ -13,9 +17,31 @@ $(document).ready(function() {
             $service.hide();
             
 
-        }else if($(this).val() == 'content-billboard.php'){
+        }else if($(this).val() == 'content-billboard.php' ){
         	$billboard.show();
 			$side.show();
+            $bt.show();
+            $btb.show();
+            $bub.hide();
+            $bu.hide();
+            $service.hide();
+
+        }else if($(this).val() == 'content-billboard-full.php' ){
+            $billboard.show();
+            $side.hide();
+            $bt.show();
+            $btb.show();
+            $bub.hide();
+            $bu.hide();
+            $service.hide();
+
+        }else if($(this).val() == 'content-billboard-video.php' ){
+            $billboard.show();
+            $side.hide();
+            $bt.hide();
+            $btb.hide();
+            $bub.show();
+            $bu.show();
             $service.hide();
            
         }else if($(this).val() == 'content-services.php'){
