@@ -1,5 +1,5 @@
 <?php
-	$GLOBALS['NUMBEROFCARDS'] = 8;
+	$GLOBALS['NUMBEROFCARDS'] = 20;
 
 	function service_meta_box_markup($object)
 	{
