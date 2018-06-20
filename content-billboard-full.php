@@ -12,18 +12,20 @@ get_header();
 
 <!-- content area -->
 <div class="container site-content" id="content">
-	<h2><?= get_the_title() ?></h2>
-	<hr>
+	<?php if ( have_posts() ) :
+		while ( have_posts() ) : the_post();
+	?>
+			<?= (!empty(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
 
-	<div class="row">
-		<br>
-		<div class="col-sm-12">
-			<?php if ( have_posts() ) :
-				while ( have_posts() ) : the_post();
-					the_content();
+			<div class="row">
+				<br>
+				<div class="col-sm-12">
+
+					<?= the_content(); ?>
+			<?php
 				endwhile;			
-			endif;
-			wp_reset_query();
+				endif;
+				wp_reset_query();
 			?>
 		</div>	
 	</div>
