@@ -71,8 +71,8 @@ get_header('second');
 
 	<?php }else{ ?>
 
-		<?= (!empty(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
-		
+		<h1><?php the_title();?></h1>
+		<hr />
 		<div class="row">
 			<div class="col-sm-12">
 				<?php the_content(); ?>

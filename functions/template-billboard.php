@@ -7,14 +7,14 @@
 	    ?>
 	        <div class="inside">
 	          <p>
-	            <strong>Billboard <span id="billTag">Tag</span><span id="billUrl">URL</span></strong>
+	            <strong>Billboard Tag</strong>
 	          </p>
 	          <p>
 	            <label class="screen-reader-text" for="billboard-meta-box-text">Billboard Tag</label>
 	            <input name="billboard-meta-box-text" type="text" value="<?php echo get_post_meta($object->ID, "billboard-meta-box-text", true); ?>">
 	          </p>
 	          <p>
-	            <em>Place the <span id="billTagb">tag</span><span id="billUrlb">URL</span> that you want to appear in this billboard.</em>
+	            <em>Place the tag that you want to appear in this billboard.</em>
 	          </p>
 	        </div>
 	    <?php  
