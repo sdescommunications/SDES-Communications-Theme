@@ -1,4 +1,4 @@
-<?php
+<?php 
 	get_header('second'); the_post();
 
 	$image_url 	= has_post_thumbnail( $post->ID ) ?
@@ -26,7 +26,7 @@
 					<p class="datestamp">Posted <?= get_the_date( 'l, F j, Y @ g:i A', $object->post->ID ); ?></p>
 					<p>
 						<?= the_content(); ?>
-					</p>
+					</p>							
 				</div>
 			</div>
 			<a class="btn btn-callout float-right mt-3" href="<?= wp_get_referer(); ?>"><i class="fa fa-chevron-left"></i> Back</a>
