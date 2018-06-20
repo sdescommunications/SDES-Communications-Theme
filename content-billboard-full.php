@@ -12,7 +12,7 @@ get_header();
 
 <!-- content area -->
 <div class="container site-content" id="content">
-	<?= (is_string(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
+	<?= (is_string(get_the_title($post->ID))) ? '<h1>' . get_the_title($post->ID) . '</h1><hr>' : null ?>
 
 	<div class="row">
 		<br>
