@@ -1,6 +1,6 @@
 <?php
 /**
-* Template Name: Right Sidebar
+* Template Name: Left Sidebar
 */
 use SDES\SDES_Static as SDES_Static;
 
@@ -10,12 +10,9 @@ get_header('second');
 <div class="container site-content" id="content">
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-		<?= (!empty(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
-		
+		<h1><?= get_the_title() ?></h1>
+		<hr>
 		<div class="row">
-			<div class="col-sm-8 col-xs-12">
-				<?php the_content(); ?>
-			</div>
 			<div class="col-sm-4 col-xs-12">
 				<?php
 					$prefix = SDES_Static::get_post_type( get_the_ID() ).'_';
@@ -24,6 +21,9 @@ get_header('second');
 
 				?>
 			</div>
+			<div class="col-sm-8 col-xs-12">
+				<?php the_content(); ?>
+			</div>			
 		</div>
 	<?php endwhile;
 	else: 

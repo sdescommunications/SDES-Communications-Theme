@@ -1,19 +1,18 @@
 <?php
 /**
-* Template Name: Billboard Full
+* Template Name: Billboard Video
 */
 use SDES\SDES_Static as SDES_Static;
 
-get_header(); 
+get_header('third'); 
 
 ?>
 
-<?= do_shortcode( "[billboard-list tags='". get_post_meta($post->ID, "billboard-meta-box-text", true) ."']" ) ?>
-
 <!-- content area -->
 <div class="container site-content" id="content">
-	<?= (!empty(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
 
+	<?= (!empty(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
+	
 	<div class="row">
 		<br>
 		<div class="col-sm-12">
