@@ -12,10 +12,8 @@ get_header();
 
 <!-- content area -->
 <div class="container site-content" id="content">
-	<?php if (!empty(get_the_title())) {
-		echo '<h1>'. get_the_title() . '</h1><hr>';
-	} 
-	?>
+	<h2><?= get_the_title() ?></h2>
+	<hr>
 
 	<div class="row">
 		<br>
