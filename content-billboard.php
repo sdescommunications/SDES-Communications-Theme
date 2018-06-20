@@ -13,8 +13,7 @@ get_header();
 <!-- content area -->
 <div class="container site-content" id="content">
 
-	<h1><?= get_the_title() ?></h1>
-	<hr>
+	<?= (!empty(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
 	
 	<div class="row">
 		<br>

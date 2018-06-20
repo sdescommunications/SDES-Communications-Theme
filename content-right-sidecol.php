@@ -10,8 +10,7 @@ get_header('second');
 <div class="container site-content" id="content">
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-		<h1><?= get_the_title() ?></h1>
-		<hr>
+		<?= (!empty(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
 		
 		<div class="row">
 			<div class="col-sm-8 col-xs-12">
