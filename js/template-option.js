@@ -11,7 +11,7 @@ $(document).ready(function() {
         $bub = $('#billUrlb'); 
 
     $page_template.change(function() {
-        if ($(this).val() == 'content-right-sidecol.php' || $(this).val() == 'content-left-sidecol.php'){
+        if ($(this).val() == 'content-right-sidecol.php') {
             $side.show();
             $billboard.hide();
             $service.hide();
