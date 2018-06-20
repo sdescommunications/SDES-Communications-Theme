@@ -12,8 +12,7 @@ get_header();
 
 <!-- content area -->
 <div class="container site-content" id="content">
-	<h2><?= get_the_title() ?></h2>
-	<hr>
+	<?= (is_string(get_the_title())) ? '<h1>' . get_the_title() . '</h1><hr>' : null ?>
 
 	<div class="row">
 		<br>
