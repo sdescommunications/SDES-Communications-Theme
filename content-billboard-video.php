@@ -3,7 +3,6 @@
 * Template Name: Billboard Video
 */
 use SDES\SDES_Static as SDES_Static;
-the_post();
 get_header('third'); 
 
 ?>
