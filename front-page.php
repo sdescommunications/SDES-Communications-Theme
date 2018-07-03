@@ -4,9 +4,12 @@
  */
 use SDES\SDES_Static as SDES_Static;
 
-get_header();
+$headerlink = get_post_meta($post->ID, "billboard-meta-box-text", true);
+
+(!empty($headerlink)) ? get_header('third') : get_header();
+
 ?>
-	<?= do_shortcode( "[billboard-list tags='home']" ) ?>
+	<?= (empty($headerlink)) ? do_shortcode( "[billboard-list tags='home']" ) : null ?>
 	<br>
 	<div class="container">
 		<h1><?= get_the_title() ?></h1>

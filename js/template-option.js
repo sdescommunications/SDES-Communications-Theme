@@ -8,7 +8,9 @@ $(document).ready(function() {
         $bt = $('#billTag'),
         $bu = $('#billUrl'),
         $btb = $('#billTagb'),
-        $bub = $('#billUrlb'); 
+        $bub = $('#billUrlb'),
+        $isfrontpage = data.isFrontPage,
+        $pagid = data.postID;
 
     $page_template.change(function() {
         if ($(this).val() == 'content-right-sidecol.php' || $(this).val() == 'content-left-sidecol.php'){
@@ -16,6 +18,15 @@ $(document).ready(function() {
             $billboard.hide();
             $service.hide();
             
+
+        }else if ($(this).val() == 'content-billboard-video.php' && $isfrontpage == $pagid){
+            $billboard.show();
+            $side.show();
+            $bt.show();
+            $btb.show();
+            $bub.hide();
+            $bu.hide();
+            $service.hide();
 
         }else if($(this).val() == 'content-billboard.php' ){
         	$billboard.show();
@@ -43,6 +54,7 @@ $(document).ready(function() {
             $bub.show();
             $bu.show();
             $service.hide();
+            
            
         }else if($(this).val() == 'content-services.php'){
             $service.show();
@@ -54,7 +66,7 @@ $(document).ready(function() {
             $side.hide();
             $billboard.hide();
             $service.hide();
-           
+            
         }
     }).change();
 
