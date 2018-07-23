@@ -604,47 +604,22 @@ class Staff extends CustomPostType {
 		protected static function render_objects_to_html( $context ) {
 			ob_start();
 			?>
-			<?php if ( $context['collapse'] ) : ?>
-				<script type="text/javascript">
-					$(function(){
-						var collapsedSize = 60;
-						$(".staff-details").each(function() {
-							var h = this.scrollHeight;
-							var div = $(this);
-							if (h > 30) {
-								div.css("height", collapsedSize);
-								div.after("<a class=\"staff-more\" href=\"\">[Read More]</a>");
-								var link = div.next();
-								link.click(function(e) {
-									e.stopPropagation();
-									e.preventDefault();
-									if (link.text() != "[Collapse]") {
-										link.text("[Collapse]");
-										div.animate({ "height": h });
-									} else {
-										div.animate({ "height": collapsedSize });
-										link.text("[Read More]");
-									}
-								});
-							}
-						});
-					});
-				</script>
-			<?php endif;
-			if ( $context['header'] ) : ?>
+			<?php 
+				if ( $context['header'] ) : 
+			?>
 				<div class="staff-role">
 					<h2><?= $context['header'] ?></h2>
 				</div> 
-		<?php endif; ?>
-		<span class="<?= $context['css_classes'] ?>">
-			<?php foreach ( $context['objects'] as $o ) : ?>
-				<?= static::toHTML( $o ) ?>
-				<div class="hr-blank"></div>
-			<?php endforeach;?>
-		</span>
-		<?php
+			<?php endif; ?>
+			<span class="<?= $context['css_classes'] ?>">
+				<?php foreach ( $context['objects'] as $o ) : ?>
+					<?= static::toHTML( $o ) ?>
+					<div class="hr-blank"></div>
+				<?php endforeach;?>
+			</span>
+			<?php
 
-		return ob_get_clean();
+			return ob_get_clean();
 	}
 
 	public static function toHTML( $post_object ) {
