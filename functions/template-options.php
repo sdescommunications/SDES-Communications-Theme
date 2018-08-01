@@ -2,7 +2,12 @@
 	add_action('admin_enqueue_scripts', 'admin_template_view');
 	function admin_template_view()
 	{
+		global $post;
+		
 	    wp_enqueue_script('show_hide_bill_view', get_bloginfo('template_url').'/js/template-option.js', array('jquery'));
+	    wp_localize_script( 'show_hide_bill_view', 'data', array(
+			'postID' => $post->ID,
+			'isFrontPage' =>  get_option('page_on_front')));
 	}
 
 	add_filter('admin_init', 'add_google_id'); 

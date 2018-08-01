@@ -1,9 +1,6 @@
 .card {
 	position: relative;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
+	display: inline-block;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
@@ -12,6 +9,11 @@
 	background-color: #fff;
 	border: 1px solid rgba(0, 0, 0, 0.125);
 	border-radius: 0.25rem;
+}
+
+.card-columns.social .card{
+	width: 100%;
+  margin-bottom: 0.75rem;
 }
 
 .card-block {
@@ -319,4 +321,41 @@
 		width: 100%;
 		margin-bottom: 0.75rem;
 	}
+}
+
+/* Style the video on billboard video template */
+#myVideo {
+  width: 100%;
+  position: relative;  
+}
+#video-wrapper{
+  overflow: hidden;
+  height: 100%;
+ 
+} 
+@media (max-width: 991px){
+	#myvideo{
+		display: none;
+	}
+	#video-wrapper{
+		display: none;
+	} 
+} 
+@media (min-width: 1024px){
+	#myVideo {
+		bottom: 175px;
+	}
+	#video-wrapper{
+		height: 317px;
+	} 
+}
+@media (min-width: 1200px){
+	#myVideo {
+		bottom: 250px;
+	}
+	#video-wrapper{
+		height: 536px; 
+	}
+
+ 
 }
