@@ -772,8 +772,7 @@ class sc_countdown extends ShortcodeBase{
 			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 			  // Display the result in the element with id="countdown"
-			  document.getElementById("countdown").innerHTML = "<div class='day'><span class='num'>" + weeks + "</span><span class='word'>Weeks</span></div>" + "<div class='day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='hour'><span class='num'>" + hours + "</span><span class='word'>Hours</span></div>"
-			  + "<div class='min'><span class='num'>" + minutes + "</span><span class='word'>Minutes</span></div>" + "<div class='sec'><span class='num'>" + seconds + "</span><span class='word'>Seconds</span></div>";
+			  document.getElementById("countdown").innerHTML = "<div class='day'><span class='num'>" + weeks + "</span><span class='word'>Weeks</span></div>" + "<div class='day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='hour'><span class='num'>" + hours + "</span><span class='word'>Hours</span></div>" + "<div class='min'><span class='num'>" + minutes + "</span><span class='word'>Minutes</span></div>" + "<div class='sec'><span class='num'>" + seconds + "</span><span class='word'>Seconds</span></div>";
 
 			  // If the count down is finished, write some text 
 			  if (distance < 0) {
@@ -781,9 +780,7 @@ class sc_countdown extends ShortcodeBase{
 			  	document.getElementById("countdown").innerHTML = "We are now open";
 			  }
 			}, 1000);
-		</script>
-
-		
+		</script>		
 		
 		<?php
 
