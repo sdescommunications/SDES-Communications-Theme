@@ -716,13 +716,78 @@ class sc_redirect extends ShortcodeBase{
 		
 		);
 
-	public static function callback( $attr ) {
+	public static function callback( $attr, $content = null) {
 
 		echo 'Seems like you have JavaScript turned off please go to <a href="'.$attr['redirect_url'].'">'.$attr['redirect_url'].'</a>';		
 		
 		echo '<script type="text/javascript">
            		window.location = "'.$attr['redirect_url'].'"
       		</script>';
+      				
+	}
+
+}
+
+class sc_countdown extends ShortcodeBase{
+	public
+	$name = 'Countdown', // The name of the shortcode.
+	$command = 'Countdown', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array(
+		array(			
+			'name'      => 'Countdown Date',
+			'id'        => 'countdown_date',
+			'help_text' => 'Format: Jan 5, 2021',
+			'type'      => 'text',
+			),
+		
+		);
+
+	public static function callback( $attr, $content = null) {
+
+		?>
+
+		<script>
+			// Set the date we're counting down to
+			var countDownDate = new Date("<?= $attr['countdown_date'] ?>").getTime();
+
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+
+			  // Get todays date and time
+			  var now = new Date().getTime();
+
+			  // Find the distance between now and the count down date
+			  var distance = countDownDate - now;
+
+			  // Time calculations for days, hours, minutes and seconds
+			  var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
+			  var days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 *60 * 24));
+			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			  // Display the result in the element with id="countdown"
+			  document.getElementById("countdown").innerHTML = "<div class='day'><span class='num'>" + weeks + "</span><span class='word'>Weeks</span></div>" + "<div class='day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='hour'><span class='num'>" + hours + "</span><span class='word'>Hours</span></div>"
+			  + "<div class='min'><span class='num'>" + minutes + "</span><span class='word'>Minutes</span></div>" + "<div class='sec'><span class='num'>" + seconds + "</span><span class='word'>Seconds</span></div>";
+
+			  // If the count down is finished, write some text 
+			  if (distance < 0) {
+			  	clearInterval(x);
+			  	document.getElementById("countdown").innerHTML = "We are now open";
+			  }
+			}, 1000);
+		</script>
+
+		
+		
+		<?php
+
+		echo '<div id="countdown" class="row countdown"></div>';
       				
 	}
 
@@ -737,6 +802,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\social_media',
 		__NAMESPACE__.'\sc_iframe',
 		__NAMESPACE__.'\sc_redirect',
+		__NAMESPACE__.'\sc_countdown',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );

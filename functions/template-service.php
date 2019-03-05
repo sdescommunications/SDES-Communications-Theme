@@ -104,6 +104,8 @@
 	    }
 
 	    update_post_meta($post_id, "billboard-meta-box-text", $_POST["billboard-meta-box-text"]);
+
+	    update_post_meta($post_id, "submenu", $_POST["submenu"]);
 	   
 	}
 

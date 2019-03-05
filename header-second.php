@@ -105,13 +105,27 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<i class="fa falg fa-bars"></i>
 				</button>
-				<?= wp_nav_menu(array(
-											'theme_location' => 'main-menu', 
-											'menu_class' => 'navbar-nav',
-											'container_class' => 'collapse navbar-collapse',
-											'container_id' => 'navbarSupportedContent',
-											'walker' => new Nav_Menu(),
-										)) ?>			
+				<?php
+					$menu = get_post_meta($post->ID, 'submenu', true);
+
+					if (!empty($menu)) {
+						wp_nav_menu(array(
+						'menu' => $menu, 
+						'menu_class' => 'navbar-nav',
+						'container_class' => 'collapse navbar-collapse',
+						'container_id' => 'navbarSupportedContent',
+						'walker' => new Nav_Menu(),
+						));
+					} else {
+						wp_nav_menu(array(
+						'theme_location' => 'main-menu', 
+						'menu_class' => 'navbar-nav',
+						'container_class' => 'collapse navbar-collapse',
+						'container_id' => 'navbarSupportedContent',
+						'walker' => new Nav_Menu(),
+						));
+					}
+				?>			
 			</nav>
 		</div>				
 
