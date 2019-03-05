@@ -49,12 +49,12 @@ function enqueue_scripts_and_styles(){
   wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 }
 
-require_once('functions/menu-walkers.php');
+require_once( 'functions/menu-walkers.php' );
 
-require_once('custom-taxonomies.php');    // Define and Register taxonomies for this theme
-require_once('custom-posttypes.php');  // Define and Register custom post_type's (CPTs) for this theme
+require_once( 'custom-taxonomies.php' );    // Define and Register taxonomies for this theme
+require_once( 'custom-posttypes.php' );  // Define and Register custom post_type's (CPTs) for this theme
 
-require_once('shortcodes.php');
+require_once( 'shortcodes.php' );
 
 require_once( 'functions/class-render-template.php' );
 
@@ -62,6 +62,7 @@ require_once( 'functions/template-options.php' );
 
 require_once( 'functions/template-billboard.php' );
 require_once( 'functions/template-service.php' );
+require_once( 'functions/submenu.php');
 
 require_once( 'functions/filter-bootstrap-classes.php' ); //Adds stock Bootstrap classes where necessary
 
