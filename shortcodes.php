@@ -771,7 +771,7 @@ class sc_countdown extends ShortcodeBase{
 			  var distance = countDownDate - now;
 
 			  // Time calculations for days, hours, minutes and seconds
-			  var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
+			  var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7 ));
 			  var days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 *60 * 24));
 			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -783,7 +783,7 @@ class sc_countdown extends ShortcodeBase{
 			  // If the count down is finished, write some text 
 			  if (distance < 0) {
 			  	clearInterval(x);
-			  	document.getElementById("countdown").innerHTML = "We are now open";
+			  	document.getElementById("countdown").innerHTML = "<h3 style='color: white; text-align: center;'>We are now open</h3>";
 			  }
 			}, 1000);
 		</script>		
