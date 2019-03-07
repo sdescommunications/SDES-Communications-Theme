@@ -736,11 +736,17 @@ class sc_countdown extends ShortcodeBase{
 	$callback    = 'callback',
 	$render      = 'render',
 	$closing_tag = false,
-	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
+	$wysiwyg     = false, // Whether to add it to the shortcode Wysiwyg modal.
 	$params      = array(
 		array(			
 			'name'      => 'Countdown Date',
 			'id'        => 'countdown_date',
+			'help_text' => 'Format: Jan 5, 2021',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Countdown Title',
+			'id'        => 'countdown_title',
 			'help_text' => 'Format: Jan 5, 2021',
 			'type'      => 'text',
 			),
@@ -765,29 +771,26 @@ class sc_countdown extends ShortcodeBase{
 			  var distance = countDownDate - now;
 
 			  // Time calculations for days, hours, minutes and seconds
-			  var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7));
+			  var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7 ));
 			  var days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 *60 * 24));
 			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 			  // Display the result in the element with id="countdown"
-			  document.getElementById("countdown").innerHTML = "<div class='day'><span class='num'>" + weeks + "</span><span class='word'>Weeks</span></div>" + "<div class='day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='hour'><span class='num'>" + hours + "</span><span class='word'>Hours</span></div>"
-			  + "<div class='min'><span class='num'>" + minutes + "</span><span class='word'>Minutes</span></div>" + "<div class='sec'><span class='num'>" + seconds + "</span><span class='word'>Seconds</span></div>";
+			  document.getElementById("countdown").innerHTML = "<div class='col week'><span class='num'>" + weeks + "</span><span class='word'>Wks</span></div>" + "<div class='col day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='col hour'><span class='num'>" + hours + "</span><span class='word'>Hrs</span></div>" + "<div class='col min'><span class='num'>" + minutes + "</span><span class='word'>Mins</span></div>" + "<div class='col sec'><span class='num'>" + seconds + "</span><span class='word'>Secs</span></div>";
 
 			  // If the count down is finished, write some text 
 			  if (distance < 0) {
 			  	clearInterval(x);
-			  	document.getElementById("countdown").innerHTML = "We are now open";
+			  	document.getElementById("countdown").innerHTML = "<h3 style='color: white; text-align: center;'>We are now open</h3>";
 			  }
 			}, 1000);
-		</script>
-
-		
+		</script>		
 		
 		<?php
 
-		echo '<div id="countdown" class="row countdown"></div>';
+		echo '<h3 style="text-align: center;color:white;background: black;margin-bottom: 0px;padding-top: 10px;">'.$attr["countdown_title"] .'</h3><div id="countdown" class="countdown"></div>';
       				
 	}
 

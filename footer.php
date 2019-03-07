@@ -15,17 +15,27 @@
 					<div class="row">
 						<div class="col-sm-12 col-xs-12">
 							<?php 
-								has_nav_menu( 'footer-menu' ) ?
-								wp_nav_menu(array(
-									'theme_location' => 'footer-menu',
-									'menu_class' => 'list-unstyled', 
-								)) :
+								$menu = get_post_meta($post->ID, 'submenu', true);
 
-								wp_nav_menu(array(
-									'theme_location' => 'main-menu',
-									'menu_class' => 'list-unstyled',
-									'depth' => 1, 
-								))
+								if (has_nav_menu( 'footer-menu' )) {
+									wp_nav_menu(array(
+										'theme_location' => 'footer-menu',
+										'menu_class' => 'list-unstyled', 
+									));
+								} elseif (!empty($menu)) {
+									wp_nav_menu(array(
+										'menu' => $menu, 
+										'menu_class' => 'list-unstyled',
+										'depth' => 1,
+									));
+								} else{
+									wp_nav_menu(array(
+										'theme_location' => 'main-menu',
+										'menu_class' => 'list-unstyled',
+										'depth' => 1, 
+									));
+								}
+								
 							?>
 						</div>
 					</div>
