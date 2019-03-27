@@ -747,7 +747,7 @@ class sc_countdown extends ShortcodeBase{
 		array(			
 			'name'      => 'Countdown Title',
 			'id'        => 'countdown_title',
-			'help_text' => 'Format: Jan 5, 2021',
+			'help_text' => '',
 			'type'      => 'text',
 			),
 		
@@ -764,27 +764,26 @@ class sc_countdown extends ShortcodeBase{
 			// Update the count down every 1 second
 			var x = setInterval(function() {
 
-			  // Get todays date and time
-			  var now = new Date().getTime();
+				// Get todays date and time
+				var now = new Date().getTime();
 
-			  // Find the distance between now and the count down date
-			  var distance = countDownDate - now;
+				// Find the distance between now and the count down date
+				var distance = countDownDate - now;
 
-			  // Time calculations for days, hours, minutes and seconds
-			  var weeks = Math.floor(distance / (1000 * 60 * 60 * 24 * 7 ));
-			  var days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 *60 * 24));
-			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+				// Time calculations for days, hours, minutes and seconds
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24 ));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-			  // Display the result in the element with id="countdown"
-			  document.getElementById("countdown").innerHTML = "<div class='col week'><span class='num'>" + weeks + "</span><span class='word'>Wks</span></div>" + "<div class='col day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='col hour'><span class='num'>" + hours + "</span><span class='word'>Hrs</span></div>" + "<div class='col min'><span class='num'>" + minutes + "</span><span class='word'>Mins</span></div>" + "<div class='col sec'><span class='num'>" + seconds + "</span><span class='word'>Secs</span></div>";
+				// Display the result in the element with id="countdown"
+				document.getElementById("countdown").innerHTML = "<div class='col day'><span class='num'>" + days + "</span><span class='word'>Days</span></div>" + "<div class='col hour'><span class='num'>" + hours + "</span><span class='word'>Hrs</span></div>" + "<div class='col min'><span class='num'>" + minutes + "</span><span class='word'>Mins</span></div>" + "<div class='col sec'><span class='num'>" + seconds + "</span><span class='word'>Secs</span></div>";
 
-			  // If the count down is finished, write some text 
-			  if (distance < 0) {
-			  	clearInterval(x);
-			  	document.getElementById("countdown").innerHTML = "<h3 style='color: white; text-align: center;'>We are now open</h3>";
-			  }
+				// If the count down is finished, write some text 
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("countdown").innerHTML = "<h3 style='color: white; text-align: center;'>We are now open</h3>";
+					}
 			}, 1000);
 		</script>		
 		
