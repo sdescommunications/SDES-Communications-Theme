@@ -67,7 +67,7 @@
 					<li class="list-inline-item"><a href="http://www.ucf.edu/pegasus">Pegasus</a></li>
 					<li class="list-inline-item"><a href="http://policies.ucf.edu" target="_blank" >Policies</a></li>
 					<li class="list-inline-item"><a href="http://regulations.ucf.edu/" target="_blank" >Regulations</a></li>
-					<li class="list-inline-item"><a href="http://today.ucf.edu" target="_blank" >UCF News</a></li>
+					<li class="list-inline-item"><a href="https://www.ucf.edu/news/" target="_blank" >UCF News</a></li>
 				</ul>			
 			</div>
 			<p class="ucf-footer-address text-center">
