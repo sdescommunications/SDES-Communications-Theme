@@ -22,7 +22,7 @@ use SDES\SDES_Metaboxes;
 	use SDES\SDES_Static as SDES_Static;
 
 	require_once( get_stylesheet_directory().'/vendor/autoload.php' );
-	use Underscore\Types\Object;
+	//use Underscore\Types\Object_A;
 	use Underscore\Types\Arrays;
 
 /**
@@ -704,36 +704,11 @@ abstract class CustomPostType {
 				ShortcodeBase::$installed_custom_post_types[] = $registered_posttype['instance'];
 			}
 		}
-		static::Register_Thumbnails_Support( $posttype_instances );
+		
 		return $posttype_instances;
 	}
 
-	/**
-	 * Register theme support for any custom post_types with $this->use_thumbnails set to true.
-	 * @param Array $instances Instantiated classes for Custom Post Types.
-	 * @see http://codex.wordpress.org/Function_Reference/add_theme_support Codex: add_theme_support
-	 * @return void
-	 */
-	public static function Register_Thumbnails_Support( $instances ) {
-		// If the key $instances[0]['instance'] exists.
-		if ( Arrays::has( Object::unpack( $instances ), 'instance' ) ) {
-			$instances = Arrays::pluck( $instances, 'instance' );
-		}
-
-		$thumbnail_posttypes
-		= Arrays::from( $instances )
-		->filter( function( $x ) { return true === $x->use_thumbnails; } )
-		->pluck( 'name' )
-		->obtain();
-		add_theme_support( 'post-thumbnails', $thumbnail_posttypes );
-
-		/** Scale thumbnails by default. */ define( 'SDES\\SCALE', false );
-		/** Crop thumbnails by default. */  define( 'SDES\\CROP', true );
-		// For cropping behavior see `add_image_size`, e.g.: http://core.trac.wordpress.org/browser/tags/4.4.2/src/wp-includes/media.php#L228 .
-		set_post_thumbnail_size( 125, 125, CROP );
-		// $crop_from = array( 'top', 'left');
-		// set_post_thumbnail_size( 125, 125, $crop_from );
-	}
+	
 }
 
 CustomPostType::register_meta_boxes_after_title();
