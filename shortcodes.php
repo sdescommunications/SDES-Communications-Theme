@@ -795,6 +795,62 @@ class sc_countdown extends ShortcodeBase{
 
 }
 
+class sc_popup extends ShortcodeBase{
+	public
+	$name = 'Popup', // The name of the shortcode.
+	$command = 'Popup', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = false, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array(
+		array(			
+			'name'      => 'Title',
+			'id'        => 'popup_title',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Content',
+			'id'        => 'popup_content',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		array(			
+			'name'      => 'Image URL',
+			'id'        => 'popup_image',
+			'help_text' => '',
+			'type'      => 'text',
+			),
+		
+		);
+
+	public static function callback( $attr, $content = null) {
+
+		?>
+		
+		<div onclick="location.href='#';" id="popup1" class="overlay" >			
+			<div class="popup">
+				<img class="img-fluid" src="<?= !empty($attr['popup_image']) ? $attr['popup_image'] : get_stylesheet_directory_uri().'/images/popup.jpg' ?>">
+				<a class="close" href="#">&times;</a>
+				<h2><?= !empty($attr['popup_title']) ? $attr['popup_title'] : is_user_logged_in() ? '<div class="alert alert-danger" role="alert"><strong>Please add Title to shortcode</strong></div>' : false ?></h2>
+				<div class="content">
+					<?= !empty($attr['popup_content']) ? $attr['popup_content'] : is_user_logged_in() ? '<div class="alert alert-danger" role="alert"><strong>Please add Content to shortcode</strong></div>' : false ?>
+				</div>				
+			</div>			
+		</div>
+
+		<script>
+			window.location.hash = '#popup1';				
+		</script>
+
+		<?php	
+      				
+	}
+
+}
+
 function register_shortcodes() {
 	ShortcodeBase::Register_Shortcodes(array(
 		__NAMESPACE__.'\sc_alert',		
@@ -805,6 +861,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_iframe',
 		__NAMESPACE__.'\sc_redirect',
 		__NAMESPACE__.'\sc_countdown',
+		__NAMESPACE__.'\sc_popup',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
