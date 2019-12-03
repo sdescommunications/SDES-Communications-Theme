@@ -834,12 +834,16 @@ class sc_popup extends ShortcodeBase{
 			<div class="popup">
 				<img class="img-fluid" src="<?= !empty($attr['popup_image']) ? $attr['popup_image'] : get_stylesheet_directory_uri().'/images/popup.jpg' ?>">
 				<a class="close" href="#">&times;</a>
-				<h2><?= !empty($attr['popup_title']) ? $attr['popup_title'] : is_user_logged_in() ? '<div class="alert alert-danger" role="alert"><strong>Please add Title to shortcode</strong></div>' : false ?></h2>
+				<h2><?= !empty($attr['popup_title']) ? $attr['popup_title'] : false ?></h2>
 				<div class="content">
-					<?= !empty($attr['popup_content']) ? $attr['popup_content'] : is_user_logged_in() ? '<div class="alert alert-danger" role="alert"><strong>Please add Content to shortcode</strong></div>' : false ?>
-				</div>				
+					<?= !empty($attr['popup_content']) ? $attr['popup_content'] : false ?>
+				</div>
+
+				<?= var_dump($attr) ?>				
 			</div>			
 		</div>
+
+
 
 		<script>
 			window.location.hash = '#popup1';				
