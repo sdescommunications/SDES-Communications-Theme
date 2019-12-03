@@ -837,9 +837,7 @@ class sc_popup extends ShortcodeBase{
 				<h2><?= !empty($attr['popup_title']) ? $attr['popup_title'] : false ?></h2>
 				<div class="content">
 					<?= !empty($attr['popup_content']) ? $attr['popup_content'] : false ?>
-				</div>
-
-				<?= var_dump($attr) ?>				
+				</div>			
 			</div>			
 		</div>
 
