@@ -56,7 +56,7 @@ $(document).ready(function() {
             $service.hide();
             
            
-        }else if($(this).val() == 'content-services.php'){
+        }else if($(this).val() == 'content-services.php' || $(this).val() == 'content-services-right-sidecol.php' ){
             $service.show();
             $side.hide();
             $billboard.hide();
