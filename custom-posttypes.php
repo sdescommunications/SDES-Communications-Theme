@@ -107,7 +107,7 @@ class Alert extends CustomPostType {
 			return array(
 				array(
 					'name' => 'Unplanned Alert',
-					'descr' => 'If checked, show the alert as red instead of yellow.',
+					'descr' => 'If checked, show the alert as red instead of blue.',
 					'id' => $prefix.'is_unplanned',
 					'type' => 'checkbox_list',
 					'choices' => array(
@@ -232,7 +232,7 @@ class Alert extends CustomPostType {
 		public static function get_render_context( $alert, $metadata_fields ) {
 
 			$alert_css_classes = ( $metadata_fields['alert_is_unplanned'] )
-			? 'alert-danger' : 'alert-warning';
+			? 'alert-danger' : 'alert-info';
 			
 			$alert_url = ($metadata_fields['alert_url'] == 'http://') ? null : $metadata_fields['alert_url'];
 			$alert_message = wpautop($alert->post_content);
@@ -286,11 +286,13 @@ class Alert extends CustomPostType {
 			ob_start();
 			
 			?>
-			<div class="alert <?= $context['css_classes'] ?>">
-				<span class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
-				<strong><?= $context['title'] ?></strong>
-				<?= $context['message'] ?>
-				
+			<div id="site-alert" class="alert <?= $context['css_classes'] ?>">
+				<div id="site-alert-inner" class="container">	
+					<span id="close" class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+					<strong><?= $context['title'] ?></strong>
+					<?= $context['message'] ?>		
+				</div>				
+									
 			</div>
 			<div class="clearfix"></div>
 			<?php

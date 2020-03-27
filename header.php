@@ -64,6 +64,10 @@
 				location.href = this.href;
 			});
 
+			$('#close').click(function(){
+				$('#site-alert').slideUp();
+			});
+
 		});
 
 		$(document).ready(function() {

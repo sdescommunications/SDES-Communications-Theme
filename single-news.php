@@ -8,13 +8,12 @@
 		$image_url = $image_url[0];
 	}
 
-	$url		= get_post_meta( $post->ID, 'news_url', true);
 	$strapline 	= get_post_meta( $post->ID, 'news_strapline', true );
 ?>
 <br />
 <div class="container">
 	<h1>
-		<?= (!empty($url)) ? '<a href="' . $url . '">'. get_the_title() . '</a>' : get_the_title(); ?>
+		<?= get_the_title(); ?>
 	</h1>
 	<hr />
 	<section>
