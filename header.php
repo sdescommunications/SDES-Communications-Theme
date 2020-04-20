@@ -34,8 +34,7 @@
 	<script src="//use.fontawesome.com/48342ef48c.js"></script>
 	
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/tether.min.js"></script>
-	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script>	
-	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/smoothscroll.js"></script>
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script>
 
 
 	<!--[if lt IE 10]>
