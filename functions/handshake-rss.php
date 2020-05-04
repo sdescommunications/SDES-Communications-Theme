@@ -30,7 +30,6 @@ $limit = count( $xml->channel->item );
 // Set limit if items returned are smaller than limit.
 $count = ( count( $xml->channel->item ) > $limit ) ? $limit : count( $xml->channel->item );
 
-ob_start();
 ?>
 <div class="card">
 	<h3 class="card-header" style="background: 	black; color: #ffcc00; "><?= $xml->channel->title ?> - <?= $count ?></h3>
@@ -50,7 +49,7 @@ ob_start();
 
 				?>
 				<div class="card-block">
-					<h4 class="card-title"><a href="<?= $link ?>" ><?= $title ?> <i class="fa fa-external-link"></i></a></h4>
+					<h4 class="card-title"><a href="<?= $link ?>" ><?= $title ?></a> <i class="fa fa-external-link "></i></h4>
 					<p class="card-text" style="border-bottom: 1px dashed gray;"><?= substr($description, 0, 125) ?> ...<br><small><em><?= substr($pubdate, 0, 17) ?></em></small></p>				
 				</div>
 				<?php

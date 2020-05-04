@@ -872,10 +872,11 @@ class sc_rssread extends ShortcodeBase{
 	);
 
 	public static function callback( $attr, $content = null) {
-		?>
+		ob_start();
+		?>			
 			<div id="loader" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 			<div id="feed"></div>
-
+			
 			<script>
 				$(document).ready(function(){
 					$( "#feed" ).load( "<?= get_stylesheet_directory_uri() ?>/functions/handshake-rss.php", {url: "<?= $attr['url'] ?>"}, function() {
@@ -884,6 +885,7 @@ class sc_rssread extends ShortcodeBase{
 				});
 			</script>
 		<?php
+		return ob_get_clean();
 	}
 }
 
