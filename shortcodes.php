@@ -192,21 +192,21 @@ class sc_events extends ShortcodeBase {
 			'id'        => 'id',
 			'help_text' => 'The calendar_id of the events.ucf.edu calendar.',
 			'type'      => 'text',
-			),
+		),
 		array(
 			'name'      => 'Header',
 			'id'        => 'header',
 			'help_text' => 'A header for this events calendar.',
 			'type'      => 'text',
 			'default'   => 'Upcoming Events',
-			),
+		),
 		array(
 			'name'      => 'Limit',
 			'id'        => 'limit',
 			'help_text' => 'Only show this many items.',
 			'type'      => 'number',
 			'default'   => 6,
-			),
+		),
 	); // The parameters used by the shortcode.
 
 	/**
@@ -219,8 +219,8 @@ class sc_events extends ShortcodeBase {
 				'limit' => 6,
 				'header'    => 'Upcoming Events',
 				'timezone' => 'America/New_York',
-				), $attr
-			);
+			), $attr
+		);
 		if ( null === $attr['id'] ) { return true; }
 		
 		// Open cURL instance for the UCF Event Calendar RSS feed.
@@ -253,58 +253,58 @@ class sc_events extends ShortcodeBase {
 		$count = ( count( $xml->channel->item ) > $attr['limit'] ) ? $attr['limit'] : count( $xml->channel->item );
 		ob_start();
 		?>
-			
-			<h2><?= $attr['header'] ?></h2>
-			<hr>
-			<?= $footer ?>
-			
-				<?php
-					// Check for items.
-				if ( 0 === count( $xml->channel->item ) ) : ?>
-				<p>Sorry, no events could be found.</p>
-				<?php
-				else :
-						// Loop through until limit.
-					for ( $i = 0; $i < $count; $i++ ) {
-							// Prepare xml output to html.
-						$title = htmlentities( $xml->channel->item[ $i ]->title );
-						$title = ( strlen( $title ) > 25) ? substr( $title, 0, 19 ) : $title;
-						$loc = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->name );
-						$map = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->mapurl );
-						$startTime = new \DateTime( $xml->channel->item[ $i ]->children( 'ucfevent', true )->startdate, new \DateTimeZone( $attr['timezone'] ) );
-						$context['datetime'] = $startTime->format( DATE_ISO8601 );
-						$context['month'] = $startTime->format( 'M' );
-						$context['day'] = $startTime->format( 'j' );
-						$context['link'] = htmlentities( $xml->channel->item[ $i ]->link );
 
-						?>    
-						<div class="row event">
-							<div class="col-sm-3 date">								
-								<div class="month"><?= $context['month'] ?></div>
-								<div class="day"><?= $context['day'] ?></div>								
-							</div>
-							<div class="col-sm-8 description">
-								<h3 class="event-title">
-									<a href="<?= $context['link'] ?>">
-									<?= $title ?>
-										
-									</a>
-								</h3>
-								<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>			
-							</div>
-						</div>
-						<?php }
-						endif; ?>
-					
-					<p>
-						<a class="btn btn-callout float-right" href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">More Events</a>
-					</p>
-					<div class="clearfix"></div>
+		<h2><?= $attr['header'] ?></h2>
+		<hr>
+		<?= $footer ?>
+
+		<?php
+					// Check for items.
+		if ( 0 === count( $xml->channel->item ) ) : ?>
+			<p>Sorry, no events could be found.</p>
+			<?php
+		else :
+						// Loop through until limit.
+			for ( $i = 0; $i < $count; $i++ ) {
+							// Prepare xml output to html.
+				$title = htmlentities( $xml->channel->item[ $i ]->title );
+				$title = ( strlen( $title ) > 25) ? substr( $title, 0, 19 ) : $title;
+				$loc = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->name );
+				$map = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->mapurl );
+				$startTime = new \DateTime( $xml->channel->item[ $i ]->children( 'ucfevent', true )->startdate, new \DateTimeZone( $attr['timezone'] ) );
+				$context['datetime'] = $startTime->format( DATE_ISO8601 );
+				$context['month'] = $startTime->format( 'M' );
+				$context['day'] = $startTime->format( 'j' );
+				$context['link'] = htmlentities( $xml->channel->item[ $i ]->link );
+
+				?>    
+				<div class="row event">
+					<div class="col-sm-3 date">								
+						<div class="month"><?= $context['month'] ?></div>
+						<div class="day"><?= $context['day'] ?></div>								
+					</div>
+					<div class="col-sm-8 description">
+						<h3 class="event-title">
+							<a href="<?= $context['link'] ?>">
+								<?= $title ?>
+
+							</a>
+						</h3>
+						<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>			
+					</div>
+				</div>
+			<?php }
+		endif; ?>
+
+		<p>
+			<a class="btn btn-callout float-right" href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">More Events</a>
+		</p>
+		<div class="clearfix"></div>
 		
-				<?php
-				return ob_get_clean();
-			}
-		}
+		<?php
+		return ob_get_clean();
+	}
+}
 
 require_once( get_stylesheet_directory().'/custom-posttypes.php' );
 use SDES\BaseTheme\PostTypes\Alert;
@@ -850,7 +850,43 @@ class sc_popup extends ShortcodeBase{
 		<?php	
       				
 	}
+}
 
+class sc_rssread extends ShortcodeBase{
+	public
+	$name = 'RSS', // The name of the shortcode.
+	$command = 'RSS', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = true, // Whether to add it to the shortcode Wysiwyg modal.
+	$params      = array(
+		array(			
+			'name'      => 'URL',
+			'id'        => 'url',
+			'help_text' => '',
+			'type'      => 'text',
+		),
+		
+	);
+
+	public static function callback( $attr, $content = null) {
+		ob_start();
+		?>			
+			<div id="loader" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+			<div id="feed"></div>
+			
+			<script>
+				$(document).ready(function(){
+					$( "#feed" ).load( "<?= get_stylesheet_directory_uri() ?>/functions/handshake-rss.php", {url: "<?= $attr['url'] ?>"}, function() {
+							$("#loader").hide();
+					});
+				});
+			</script>
+		<?php
+		return ob_get_clean();
+	}
 }
 
 function register_shortcodes() {
@@ -864,6 +900,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_redirect',
 		__NAMESPACE__.'\sc_countdown',
 		__NAMESPACE__.'\sc_popup',
+		__NAMESPACE__.'\sc_rssread',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
