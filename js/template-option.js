@@ -21,7 +21,7 @@ $(document).ready(function() {
 
         }else if ($(this).val() == 'content-billboard-video.php' && $isfrontpage == $pagid){
             $billboard.show();
-            $side.hide();
+            $side.show();
             $bt.hide();
             $btb.hide();
             $bub.show();
