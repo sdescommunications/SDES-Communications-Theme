@@ -10,7 +10,7 @@
 	            <strong>Billboard <span id="billTag">Tag</span><span id="billUrl">URL</span></strong>
 	          </p>
 	          <p>
-	            <label class="screen-reader-text" for="billboard-meta-box-text">Billboard Tag</label>
+	            <label class="screen-reader-text" for="billboard-meta-box-text">Billboard <span id="billTagb">Tag</span><span id="billUrlb">URL</span></label>
 	            <input name="billboard-meta-box-text" type="text" value="<?php echo get_post_meta($object->ID, "billboard-meta-box-text", true); ?>">
 	          </p>
 	          <p>
