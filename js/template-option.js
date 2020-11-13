@@ -21,11 +21,11 @@ $(document).ready(function() {
 
         }else if ($(this).val() == 'content-billboard-video.php' && $isfrontpage == $pagid){
             $billboard.show();
-            $side.show();
-            $bt.show();
-            $btb.show();
-            $bub.hide();
-            $bu.hide();
+            $side.hide();
+            $bt.hide();
+            $btb.hide();
+            $bub.show();
+            $bu.show();
             $service.hide();
 
         }else if($(this).val() == 'content-billboard.php' ){
