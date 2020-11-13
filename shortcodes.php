@@ -874,8 +874,10 @@ class sc_rssread extends ShortcodeBase{
 	public static function callback( $attr, $content = null) {
 		ob_start();
 		?>			
-			<div id="loader" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-			<div id="feed"></div>
+			
+			<div id="feed">
+				<div id="loader" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+			</div>
 			
 			<script>
 				$(document).ready(function(){
@@ -884,6 +886,38 @@ class sc_rssread extends ShortcodeBase{
 					});
 				});
 			</script>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+class sc_thorguard extends ShortcodeBase{
+	public
+	$name = 'Thorguard', // The name of the shortcode.
+	$command = 'Thorg', // The command used to call the shortcode.
+	$description = '', // The description of the shortcode.
+	$callback    = 'callback',
+	$render      = 'render',
+	$closing_tag = false,
+	$wysiwyg     = true; // Whether to add it to the shortcode Wysiwyg modal.
+	
+
+	public static function callback( $attr, $content = null) {
+		ob_start();
+		?>
+		<div id="thorguard"><div id="loader" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+		<script>
+			$(document).ready(function(){								
+				function getThorGuardStatus(){					
+					$( "#thorguard" ).load( "<?= get_stylesheet_directory_uri() ?>/functions/thor.php", function(data){
+					if(data.length <= 169){
+						setTimeout(function() { getThorGuardStatus(); }, 250);
+					}				
+					});
+				};
+				getThorGuardStatus();
+			});
+		</script>
 		<?php
 		return ob_get_clean();
 	}
@@ -901,6 +935,7 @@ function register_shortcodes() {
 		__NAMESPACE__.'\sc_countdown',
 		__NAMESPACE__.'\sc_popup',
 		__NAMESPACE__.'\sc_rssread',
+		__NAMESPACE__.'\sc_thorguard',
 		));
 }
 add_action( 'init', __NAMESPACE__.'\register_shortcodes' );
