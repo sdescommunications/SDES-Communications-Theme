@@ -46,7 +46,7 @@ class Dispatch
         }
 
         // Return correct class
-        if (array_key_exists($subjectType, static::$classmap)) {
+        if (isset(static::$classmap[$subjectType])) {
             return static::TYPES.static::$classmap[$subjectType];
         }
 

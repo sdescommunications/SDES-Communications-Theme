@@ -277,7 +277,7 @@ abstract class CustomPostType {
 		}
 		// Filter and Map fields to custom columns.
 		$field_columns = Arrays::from( $this->fields() )
-		->filter( function( $x ) { return array_key_exists( 'custom_column_order', $x ) && $x['custom_column_order']; } )
+		->filter( function( $x ) { return isset( $x['custom_column_order'] ) && $x['custom_column_order']; } )
 		->each( function( $field ) {
 			$order = isset( $field['custom_column_order'] ) ? $field['custom_column_order'] : 1000;
 			$sortable = isset( $field['custom_column_sortable'] ) ? $field['custom_column_sortable'] : true;
