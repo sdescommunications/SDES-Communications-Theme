@@ -55,8 +55,9 @@ class sc_menuPanel extends ShortcodeBase {
 	function __construct() {
 		$menus = wp_get_nav_menus();
 		$choices = array();
+		
 		foreach ( $menus as $menu ) {
-			if ( ! is_wp_error( $menu ) && ! array_key_exists( 'invalid_taxonomy', $menu ) && ! empty( $menu ) ) {
+			if ( ! is_wp_error( $menu ) && ! property_exists( $menu, 'invalid_taxonomy'  ) && ! empty( $menu ) ) {
 				$choices[] = array( 'value' => $menu->slug, 'name' => $menu->name );
 			}
 		}

@@ -80,13 +80,13 @@ abstract class ChoicesMetaField extends MetaField{
 	 */
 	protected function add_default_to_choices() {
 		if ( isset( $this->default ) ) {
-			if ( ! is_array( $this->default ) && ! array_key_exists( $this->default, $this->choices ) ) {
+			if ( ! is_array( $this->default ) && ! property_exists ( $this->choices, $this->default ) ) {
 				// Exclude arrays of defaults used by CheckboxListMetaField.
 				$this->choices = array( $this->default => '' ) + $this->choices;
 			} else {
 				// Add an array of defaults if they aren't present.
 				foreach ( $this->default as $key => $value ) {
-					if ( ! array_key_exists( $key, $this->choices ) ) {
+					if ( ! property_exists ( $this->choices, $key ) ) {
 						$this->choices = array( $key => $value ) + $this->choices;
 					}
 				}
