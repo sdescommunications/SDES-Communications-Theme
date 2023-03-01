@@ -31,11 +31,10 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" id="ucfhb-script" src="//universityheader.ucf.edu/bar/js/university-header.js"></script>
 
-	<script src="//use.fontawesome.com/48342ef48c.js"></script>
+	<script src="https://kit.fontawesome.com/ed3613e0e8.js" crossorigin="anonymous"></script>
 	
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/tether.min.js"></script>
-	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script>	
-
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script>
 
 	<!--[if lt IE 10]>
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/modernizr-custom.js"></script>
@@ -45,9 +44,9 @@
 </head>
 <body>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD9QPBB"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD9QPBB"	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	
 	<script>
 		jQuery(function($) {
 			$('.navbar .dropdown').hover(function() {

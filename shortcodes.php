@@ -539,8 +539,8 @@ class social_media extends ShortcodeBase{
 			'type'      => 'text',
 			),
 		array(			
-			'name'      => 'Google+ Url',
-			'id'        => 'google_plus',
+			'name'      => 'TikTok Url',
+			'id'        => 'tiktok',
 			'help_text' => '',
 			'type'      => 'text',
 			),
@@ -602,9 +602,9 @@ class social_media extends ShortcodeBase{
 			<div class="card">
 				<a class="btn btn-block flickr text-lg-center" href="<?= $attr['flickr'] ?>"><span class="fa fa-flickr fa-fw fa-lg"></span><span class="sr-only">&emsp;Flickr</span></a>
 			</div>
-			<?php } if (!empty($attr['google_plus'])) { ?>
+			<?php } if (!empty($attr['tiktok'])) { ?>
 			<div class="card">
-				<a class="btn btn-block gplus text-lg-center" href="<?= $attr['google_plus'] ?>"><span class="fa fa-google-plus fa-fw fa-lg"></span><span class="sr-only">&emsp;Google+</span></a>
+				<a class="btn btn-block tiktok text-lg-center" href="<?= $attr['tiktok'] ?>"><span class="fa-brands fa-tiktok fa-fw fa-lg"></span><span class="sr-only">&emsp;TikTok</span></a>
 			</div>
 			<?php } if (!empty($attr['instagram'])) { ?>
 			<div class="card">
