@@ -48,4 +48,18 @@
 	    $value = get_option( 'main_site_url', '' );
 	    echo '<input type="text" id="main_site_url" name="main_site_url" value="' . $value . '" />';
 	}
+
+
+	add_filter('admin_init', 'knightbot'); 
+	function knightbot()
+	{
+	    register_setting('general', 'knightbot', 'esc_attr');
+	    add_settings_field('knightbot', '<label for="knightbot">'.__('Knightbot Token' , 'knightbot' ).'</label>' , 'knightbot_setting_html', 'general');
+	}
+	 
+	function knightbot_setting_html()
+	{
+	    $value = get_option( 'knightbot', '' );
+	    echo '<input type="text" id="knightbot" name="knightbot" value="' . $value . '" />';
+	}
 ?>
