@@ -40,6 +40,13 @@
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/modernizr-custom.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
 	<![endif]-->
+
+	<?php if (!empty(get_option("knightbot", ''))) { ?>		
+		<!-- Mainstay Web Chat -->
+		<script>window.admitHubBot = {botToken: "<?= get_option("knightbot", '') ?>", collegeId: "universityCentralFlorida"};</script> <script async src=https://webbot.mainstay.com/static/js/webchat.js></script>
+		<link rel="stylesheet" type="text/css" href=https://webbot.mainstay.com/static/css/webchat.css>		
+	<?php } ?>
+	
 	<?= wp_head(); ?>
 </head>
 <body>
