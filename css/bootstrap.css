@@ -1274,6 +1274,7 @@ h1 a[href$='.pptx'], h2 a[href$='.pptx'], h3 a[href$='.pptx'] {
           .navbar-dept .navbar-nav .nav-item .subtitle {
             font-size: 14px; } }
       .navbar-dept .navbar-nav .nav-item a {
+        font-weight: bold;
         color: #292b2c; }
       .navbar-dept .navbar-nav .nav-item .subtitle {
         font-family: Georgia, sans-serif !important;
