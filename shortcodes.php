@@ -620,7 +620,7 @@ class social_media extends ShortcodeBase{
 			</div>
 			<?php } if (!empty($attr['twitter'])) { ?>
 			<div class="card">
-				<a class="btn btn-block twitter text-lg-center" href="<?= $attr['twitter'] ?>"><span class="fa-brands fa-twitter fa-fw fa-lg"></span><span class="sr-only">&emsp;Twitter</span></a>
+				<a class="btn btn-block twitter text-lg-center" href="<?= $attr['twitter'] ?>"><span class="fa-brands fa-x-twitter fa-fw fa-lg"></span><span class="sr-only">&emsp;Twitter</span></a>
 			</div>
 			<?php } if (!empty($attr['tumblr'])) { ?>
 			<div class="card">
