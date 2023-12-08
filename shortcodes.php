@@ -448,7 +448,7 @@ class sc_contactblock extends ShortcodeBase{
 				<?php if(!empty($data['contact_Hours'][0])) { ?>
 				<tr>
 					<th scope="row">
-						<i class="fa fa-lg fa-fw fa-clock-o"><span class="sr-only">Phone</span></i>
+						<i class="fa-solid fa-lg fa-fw fa-clock"><span class="sr-only">Phone</span></i>
 					</th>
 					<td><?= $data['contact_Hours'][0] ?></td>
 				</tr>
