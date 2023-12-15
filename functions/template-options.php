@@ -1,6 +1,4 @@
 <?php
-	error_reporting(E_ERROR | E_PARSE);
-
 	add_action('admin_enqueue_scripts', 'admin_template_view');
 	function admin_template_view()
 	{
