@@ -31,8 +31,14 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" id="ucfhb-script" src="//universityheader.ucf.edu/bar/js/university-header.js"></script>
 
-	<script src="https://kit.fontawesome.com/ed3613e0e8.js" crossorigin="anonymous"></script>
-	
+		<!-- our project just needs Font Awesome Solid + Brands -->
+	<link href="<?= get_stylesheet_directory_uri(); ?>/css/fontawesome/fontawesome.css" rel="stylesheet">
+	<link href="<?= get_stylesheet_directory_uri(); ?>/css/fontawesome/brands.css" rel="stylesheet">
+	<link href="<?= get_stylesheet_directory_uri(); ?>/css/fontawesome/solid.css" rel="stylesheet">	
+
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/solid.js"></script>
+	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/brands.js"></script>	
+
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/tether.min.js"></script>
 	<script type="text/javascript" src="<?= get_stylesheet_directory_uri(); ?>/js/bootstrap.min.js"></script>	
 

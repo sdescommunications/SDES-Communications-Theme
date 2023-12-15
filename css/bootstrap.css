@@ -4,24 +4,7 @@
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@font-face {
-  font-family: 'gotham_lightregular';
-  src: url("//assets.sdes.ucf.edu/fonts/gotham/light-webfont.woff") format("woff"); }
-@font-face {
-  font-family: 'gotham_boldregular';
-  src: url("//assets.sdes.ucf.edu/fonts/gotham/bold-webfont.woff") format("woff"); }
-@font-face {
-  font-family: 'gotham_blackregular';
-  src: url("//assets.sdes.ucf.edu/fonts/gotham/black-webfont.woff") format("woff"); }
-@font-face {
-  font-family: 'archer_lightregular';
-  src: url("//assets.sdes.ucf.edu/fonts/archer/light-webfont.woff") format("woff"); }
-@font-face {
-  font-family: 'archer_mediumregular';
-  src: url("//assets.sdes.ucf.edu/fonts/archer/medium-webfont.woff") format("woff"); }
-@font-face {
-  font-family: 'archer_boldregular';
-  src: url("//assets.sdes.ucf.edu/fonts/archer/bold-webfont.woff") format("woff"); }
+
 html,
 body {
   min-height: 100%;
@@ -30,7 +13,7 @@ body {
   margin: 0; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "archer_mediumregular", Georgia, sans-serif !important;
+  font-family: Georgia, sans-serif !important;
   color: #464a4c; }
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     color: #636c72; }
@@ -220,7 +203,7 @@ header .header-break {
       padding-left: 15px;
       padding: 10px 0;
       text-transform: uppercase;
-      font-family: "gotham_boldregular", Arial, sans-serif !important; }
+      font-family: Arial, sans-serif !important; }
       @media (min-width: 576px) {
         .navbar-vp .navbar-nav .nav-item {
           padding-right: 15px;
@@ -270,7 +253,7 @@ header .header-break {
       .navbar-vp .navbar-nav .nav-item a {
         color: #292b2c; }
       .navbar-vp .navbar-nav .nav-item .subtitle {
-        font-family: "archer_mediumregular", Georgia, sans-serif !important;
+        font-family: Georgia, sans-serif !important;
         color: #636c72;
         text-transform: none;
         font-style: italic; }
@@ -305,7 +288,7 @@ header .header-break {
       margin: -1px 0px 0px 0px; }
       .navbar-vp .navbar-nav .megamenu .dropdown-header {
         text-transform: none !important;
-        font-family: "archer_mediumregular", Georgia, sans-serif !important;
+        font-family: Georgia, sans-serif !important;
         font-size: 16px;
         margin-left: 0px;
         padding-left: 0px;
@@ -315,7 +298,7 @@ header .header-break {
           margin-top: 20px; }
           .navbar-vp .navbar-nav .megamenu .dropdown-header ul li {
             padding: 3px 0px;
-            font-family: "gotham_boldregular", Arial, sans-serif !important;
+            font-family: Arial, sans-serif !important;
             text-transform: uppercase; }
             .navbar-vp .navbar-nav .megamenu .dropdown-header ul li a {
               color: #636c72 !important;
@@ -364,7 +347,7 @@ header .header-break {
   font-size: 22px;
   line-height: 25px;
   letter-spacing: .5px;
-  font-family: "gotham_boldregular", Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
   margin: 20px 0px 20px 0px; }
   .site-title a {
     color: black; }
@@ -375,7 +358,7 @@ header .header-break {
     position: absolute;
     font-size: 15px;
     line-height: 20px;
-    font-family: "gotham_lightregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     margin-left: 20px;
     padding-left: 20px;
     border-left: 5px solid #ffcc00;
@@ -403,7 +386,7 @@ header .header-break {
     border: 5px solid white !important;
     background: rgba(0, 0, 0, 0.5); }
     .callout .card-deck .card .card-block h1, .callout .card-deck .card .card-block h2, .callout .card-deck .card .card-block h3, .callout .card-deck .card .card-block h4, .callout .card-deck .card .card-block h5, .callout .card-deck .card .card-block h6 {
-      font-family: "gotham_boldregular", Arial, sans-serif !important;
+      font-family: Arial, sans-serif !important;
       color: white !important;
       letter-spacing: 10% !important; }
     .callout .card-deck .card .card-block p {
@@ -472,7 +455,7 @@ header .header-break {
         text-align: left;
         background: rgba(0, 0, 0, 0.8); }
         .not-home .carousel .carousel-inner .carousel-item .carousel-caption h1, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h2, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h3, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h4, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h5, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h6 {
-          font-family: "gotham_boldregular", Arial, sans-serif !important;
+          font-family: Arial, sans-serif !important;
           color: white !important;
           font-size: 30px; }
           .not-home .carousel .carousel-inner .carousel-item .carousel-caption h1 a, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h2 a, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h3 a, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h4 a, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h5 a, .not-home .carousel .carousel-inner .carousel-item .carousel-caption h6 a {
@@ -495,7 +478,7 @@ header .header-break {
 .btn-callout {
   background: #ffcc00;
   color: black;
-  font-family: "gotham_boldregular", Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 1px;
   font-size: 12px; }
@@ -507,7 +490,7 @@ header .header-break {
 .btn-dark {
   background: black;
   color: #ffcc00;
-  font-family: "gotham_boldregular", Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 1px;
   font-size: 12px; }
@@ -551,7 +534,7 @@ header .header-break {
     border: 2px solid black;
     padding: 0;
     width: 100% !important;
-    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     text-align: center;
     margin-left: 15px;
     max-height: 90px; }
@@ -568,12 +551,12 @@ header .header-break {
       padding: 0px;
       margin-top: -3px; }
   .event .description .event-title a {
-    font-family: "archer_mediumregular", Georgia, sans-serif !important;
+    font-family: Georgia, sans-serif !important;
     text-transform: none;
     font-size: 24px; }
   .event .description .location {
     line-height: 12px;
-    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 14px; }
@@ -584,7 +567,7 @@ header .header-break {
   display: inline-block !important;
   width: auto;
   text-transform: uppercase;
-  font-family: "gotham_boldregular", Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
   letter-spacing: 2px;
   color: white;
   background: black;
@@ -599,7 +582,7 @@ header .header-break {
     border-right: none; }
     .menu .list-group li .list-group-item {
       color: black;
-      font-family: "archer_mediumregular", Georgia, sans-serif !important;
+      font-family: Georgia, sans-serif !important;
       border: none;
       background: none;
       border-radius: 0em; }
@@ -656,7 +639,7 @@ header .header-break {
     padding: 25px 0px;
     border-bottom: 0.25px dotted #636c72; }
     .yellow .media h4 {
-      font-family: "gotham_boldregular", Arial, sans-serif !important; }
+      font-family: Arial, sans-serif !important; }
       .yellow .media h4 a {
         color: black; }
       .yellow .media h4 a:hover {
@@ -690,12 +673,12 @@ header .header-break {
     .card .card-yellow .muted {
       color: white !important; }
   .card .card-title {
-    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     text-transform: uppercase;
     font-size: 1rem;
     letter-spacing: 1px; }
   .card .card-text .muted {
-    font-family: "archer_mediumregular", Georgia, sans-serif !important; }
+    font-family: Georgia, sans-serif !important; }
 
 .dept {
   border-bottom: 1px solid #eceeef;
@@ -717,7 +700,7 @@ header .header-break {
     background: black !important;
     color: white;
     padding: 10px 15px;
-    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     text-transform: uppercase;
     font-size: 1rem;
     letter-spacing: 2px; }
@@ -746,7 +729,7 @@ header .header-break {
     background: black !important;
     color: white;
     padding: 10px 15px;
-    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     text-transform: uppercase;
     font-size: 1rem;
     letter-spacing: 2px; }
@@ -853,7 +836,7 @@ footer {
   color: white !important;
   line-height: 36px; }
   footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
-    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     color: white !important;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -861,7 +844,7 @@ footer {
   footer i {
     color: #ffcc00; }
   footer a {
-    font-family: "gotham_boldregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     color: white !important;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -873,7 +856,7 @@ footer {
     color: black !important;
     margin: 25px 0px; }
   footer .site-title {
-    font-family: "archer_mediumregular", Georgia, sans-serif !important;
+    font-family: Georgia, sans-serif !important;
     text-transform: none; }
   footer .event {
     background: black;
@@ -882,7 +865,7 @@ footer {
       border: 2px solid white;
       padding: 0;
       width: 100% !important;
-      font-family: "gotham_boldregular", Arial, sans-serif !important;
+      font-family: Arial, sans-serif !important;
       text-align: center;
       margin-left: 15px;
       max-height: 75px; }
@@ -898,7 +881,7 @@ footer {
         font-size: 36px;
         padding: 5px; }
     footer .event .description .event-title a {
-      font-family: "archer_mediumregular", Georgia, sans-serif !important;
+      font-family: Georgia, sans-serif !important;
       text-transform: none;
       font-size: 24px; }
     footer .event .description .location {
@@ -909,10 +892,10 @@ footer {
     background: #292b2c;
     padding: 50px 0px 25px 0px;
     margin: 30px 0px 0px 0px;
-    font-family: "gotham_lightregular", Arial, sans-serif !important;
+    font-family: Arial, sans-serif !important;
     font-size: 10pt; }
     footer .site-sub-footer a {
-      font-family: "gotham_lightregular", Arial, sans-serif !important;
+      font-family: Arial, sans-serif !important;
       text-transform: none;
       font-size: 10pt; }
     footer .site-sub-footer .list-inline-item:after {
@@ -1264,7 +1247,7 @@ h1 a[href$='.pptx'], h2 a[href$='.pptx'], h3 a[href$='.pptx'] {
     .navbar-dept .navbar-nav .nav-item {
       padding: 10px 10px;
       text-transform: uppercase;
-      font-family: "gotham_boldregular", Arial, sans-serif !important; }
+      font-family: Arial, sans-serif !important; }
       @media (min-width: 1200px) {
         .navbar-dept .navbar-nav .nav-item {
           letter-spacing: .5px; }
@@ -1291,9 +1274,10 @@ h1 a[href$='.pptx'], h2 a[href$='.pptx'], h3 a[href$='.pptx'] {
           .navbar-dept .navbar-nav .nav-item .subtitle {
             font-size: 14px; } }
       .navbar-dept .navbar-nav .nav-item a {
+        font-weight: bold;
         color: #292b2c; }
       .navbar-dept .navbar-nav .nav-item .subtitle {
-        font-family: "archer_mediumregular", Georgia, sans-serif !important;
+        font-family: Georgia, sans-serif !important;
         color: #636c72;
         text-transform: none;
         font-style: italic; }
@@ -1328,7 +1312,7 @@ h1 a[href$='.pptx'], h2 a[href$='.pptx'], h3 a[href$='.pptx'] {
       margin: -1px 0px 0px 0px; }
       .navbar-dept .navbar-nav .megamenu .dropdown-header {
         text-transform: none !important;
-        font-family: "archer_mediumregular", Georgia, sans-serif !important;
+        font-family: Georgia, sans-serif !important;
         font-size: 16px;
         margin-left: 0px;
         padding-left: 0px;
@@ -1338,7 +1322,7 @@ h1 a[href$='.pptx'], h2 a[href$='.pptx'], h3 a[href$='.pptx'] {
           margin-top: 20px; }
           .navbar-dept .navbar-nav .megamenu .dropdown-header ul li {
             padding: 3px 0px;
-            font-family: "gotham_boldregular", Arial, sans-serif !important;
+            font-family: Arial, sans-serif !important;
             text-transform: uppercase; }
             .navbar-dept .navbar-nav .megamenu .dropdown-header ul li a {
               color: #636c72 !important;
@@ -1664,7 +1648,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: "gotham_lightregular", Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
@@ -5185,7 +5169,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "gotham_lightregular", Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5267,7 +5251,7 @@ button.close {
   display: block;
   max-width: 276px;
   padding: 1px;
-  font-family: "gotham_lightregular", Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
