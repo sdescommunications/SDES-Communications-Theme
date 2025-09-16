@@ -749,6 +749,7 @@ class News extends CustomPostType {
 				'css_classes' => '',
 				'orderby' => 'date',
 				'order'   => 'DESC',
+				'excerpt' => "",
 				);
 			if ( is_array( $attr ) ) {
 				$attr = array_merge( $default_attrs, $attr );
@@ -1043,100 +1044,122 @@ class Contact extends CustomPostType {
  * An employee associated with this site.
  */
 class FAQ extends CustomPostType {
-	public
-	$name           = 'faq',
-	$plural_name    = 'FAQs',
-	$singular_name  = 'FAQ',
-	$add_new_item   = 'Add New FAQ',
-	$edit_item      = 'Edit FAQ',
-	$new_item       = 'New FAQ',
-		$public         = true,  // I dunno...leave it true
-		$use_title      = true,  // Title field
-		$use_editor     = true,  // WYSIWYG editor, post content field
-		$use_revisions  = true,  // Revisions on post content and titles
-		$use_thumbnails = false,  // Featured images
-		$use_order      = true, // Wordpress built-in order meta data
-		$use_metabox    = false, // Enable if you have custom fields to display in admin
-		$use_shortcode  = true, // Auto generate a shortcode for the post type
-		                         // (see also objectsToHTML and toHTML methods).
-		$taxonomies     = array( 'org_groups' ),
-		$menu_icon      = 'dashicons-editor-help',
-		$built_in       = false,
-		// Optional default ordering for generic shortcode if not specified by user.
-		$default_orderby = null,
-		$default_order   = null,
-		$sc_interface_fields = array();
+    // Store a per-render UID so items get unique IDs within their accordion
+    protected static $current_uid;
 
-		public function shortcode( $attr ) {
-			$prefix = $this->options( 'name' ).'_';
-			$default_attrs = array(
-				'type' => $this->options( 'name' ),
-				);
-			if ( is_array( $attr ) ) {
-				$attr = array_merge( $default_attrs, $attr );
-			} else {
-				$attr = $default_attrs;
-			}
+    public
+    $name           = 'faq',
+    $plural_name    = 'FAQs',
+    $singular_name  = 'FAQ',
+    $add_new_item   = 'Add New FAQ',
+    $edit_item      = 'Edit FAQ',
+    $new_item       = 'New FAQ',
+    $public         = true,
+    $use_title      = true,
+    $use_editor     = true,
+    $use_revisions  = true,
+    $use_thumbnails = false,
+    $use_order      = true,
+    $use_metabox    = false,
+    $use_shortcode  = true,
+    $taxonomies     = array( 'org_groups' ),
+    $menu_icon      = 'dashicons-editor-help',
+    $built_in       = false,
+    $default_orderby = null,
+    $default_order   = null,
+    $sc_interface_fields = array();
 
-			$args = array( 'classname' => __CLASS__, 'objects_only' => true );
-			$objects = parent::sc_object_list( $attr, $args );			
+    public function shortcode( $attr ) {
+        $default_attrs = array(
+            'type' => $this->options( 'name' ),
+        );
+        $attr    = is_array( $attr ) ? array_merge( $default_attrs, $attr ) : $default_attrs;
+        $args    = array( 'classname' => __CLASS__, 'objects_only' => true );
+        $objects = parent::sc_object_list( $attr, $args );
 
-			$context['objects'] = $objects;
+        // Unique ID per shortcode render (per instance on page)
+        $uid = function_exists('wp_unique_id') ? wp_unique_id('faq-') : ('faq-' . uniqid());
 
-			return static::render_objects_to_html( $context );
-		}
+        $context = array(
+            'uid'     => $uid,
+            'objects' => $objects,
+        );
+        return static::render_objects_to_html( $context );
+    }
 
-		public function objectsToHTML( $objects, $css_classes ) {
-			if ( count( $objects ) < 1 ) { return (WP_DEBUG) ? '<!-- No objects were provided to objectsToHTML. -->' : '';}
-			$context['objects'] = $objects;
-			return static::render_objects_to_html( $context );
-		}
+    public function objectsToHTML( $objects, $css_classes ) {
+        if ( count( $objects ) < 1 ) {
+            return (WP_DEBUG) ? '<!-- No objects were provided to objectsToHTML. -->' : '';
+        }
+        // Also support direct calls by creating a UID here
+        $uid = function_exists('wp_unique_id') ? wp_unique_id('faq-') : ('faq-' . uniqid());
+        $context = array(
+            'uid'     => $uid,
+            'objects' => $objects,
+        );
+        return static::render_objects_to_html( $context );
+    }
 
-		protected static function render_objects_to_html( $context ) {
-			ob_start();
+    protected static function render_objects_to_html( $context ) {
+        $uid = isset($context['uid'])
+            ? $context['uid']
+            : (function_exists('wp_unique_id') ? wp_unique_id('faq-') : ('faq-' . uniqid()));
 
-			?>
-			<div id="accordion" role="tablist" aria-multiselectable="true">
-				<?php foreach ( $context['objects'] as $o ) : ?>
-					<?= static::toHTML( $o ) ?>
-					<div class="hr-blank"></div>
-				<?php endforeach;?>
-			</div>
-			<?php
+        static::$current_uid = $uid;
 
-			return ob_get_clean();
-		}
+        ob_start(); ?>
+        <div id="accordion-<?= esc_attr($uid) ?>" class="accordion" role="tablist" aria-multiselectable="true">
+            <?php foreach ( $context['objects'] as $o ) : ?>
+                <?= static::toHTML( $o ) ?>
+                <div class="hr-blank"></div>
+            <?php endforeach; ?>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
 
-		public static function toHTML( $post_object ) {
-			$context['Post_ID'] = $post_object->ID;
-			$context['title'] = get_the_title( $post_object );
-			$context['content'] = wpautop($post_object->post_content);
-			return static::render_to_html( $context );
-		}
+    public static function toHTML( $post_object ) {
+        $context = array(
+            'Post_ID' => $post_object->ID,
+            'title'   => get_the_title( $post_object ),
+            'content' => wpautop($post_object->post_content),
+            'uid'     => static::$current_uid, // pass the instance UID down
+        );
+        return static::render_to_html( $context );
+    }
 
-		protected static function render_to_html( $context ) {
-			ob_start();
-			?>
-			<div class="card">
-				<div class="card-header" role="tab" id="heading-<?= $context['Post_ID'] ?>">
-					<h5 class="mb-0">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-<?= $context['Post_ID'] ?>" aria-expanded="true" aria-controls="collapse-<?= $context['Post_ID'] ?>">
-							<?= $context['title'] ?> <span class="float-xs-right"><i class="fa fa-angle-double-down"></i></span>
-						</a>
-					</h5>
-				</div>
-				<div id="collapse-<?= $context['Post_ID'] ?>" class="collapse" role="tabpanel" aria-labelledby="heading-<?= $context['Post_ID'] ?>">
-					<div class="card-block">
-						<?= $context['content'] ?>	
-					</div>
-				</div>
-			</div>
+    protected static function render_to_html( $context ) {
+        ob_start(); ?>
+        <div class="card">
+            <div class="card-header" role="tab" id="<?= esc_attr($context['uid']) ?>-heading-<?= esc_attr($context['Post_ID']) ?>">
+                <h5 class="mb-0">
+                    <a
+                        data-toggle="collapse"
+                        data-parent="#accordion-<?= esc_attr($context['uid']) ?>"
+                        href="#<?= esc_attr($context['uid']) ?>-collapse-<?= esc_attr($context['Post_ID']) ?>"
+                        aria-expanded="true"
+                        aria-controls="<?= esc_attr($context['uid']) ?>-collapse-<?= esc_attr($context['Post_ID']) ?>">
+                        <?= esc_html($context['title']) ?>
+                        <span class="float-xs-right"><i class="fa fa-angle-double-down"></i></span>
+                    </a>
+                </h5>
+            </div>
+            <div
+                id="<?= esc_attr($context['uid']) ?>-collapse-<?= esc_attr($context['Post_ID']) ?>"
+                class="collapse"
+                role="tabpanel"
+                aria-labelledby="<?= esc_attr($context['uid']) ?>-heading-<?= esc_attr($context['Post_ID']) ?>">
+                <div class="card-block">
+                    <?= $context['content'] ?>
+                </div>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+}
 
-			<?php
 
-			return ob_get_clean();
-		}
-	}
 
 /**
  * Register custom post types when the theme is initialized.

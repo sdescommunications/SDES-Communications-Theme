@@ -49,6 +49,21 @@ function enqueue_scripts_and_styles(){
   wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 }
 
+add_action('wp_enqueue_scripts', function () {
+  // Load WP’s own jQuery (not a CDN)
+  wp_enqueue_script('jquery');
+
+  // Load Bootstrap JS that matches theme (3.x/4.x)
+  // Adjust the path to where theme stores it.
+  wp_enqueue_script(
+    'bootstrap',
+    get_stylesheet_directory_uri() . '/js/bootstrap.min.js',
+    array('jquery'),  // Bootstrap 3/4 needs jQuery
+    null,
+    true
+  );
+});
+
 require_once( 'functions/menu-walkers.php' );
 
 require_once( 'custom-taxonomies.php' );    // Define and Register taxonomies for this theme

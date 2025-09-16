@@ -276,9 +276,11 @@ class Shortcode_CustomPostType_Wrapper extends ShortcodeBase implements IShortco
 			foreach ( $cpt_instance->taxonomies as $tax ) {
 				$choices = array( array( 'value' => '', 'name' => '' ) );
 				$terms = get_terms( $tax );
-				// if( 'staff' == $cpt_instance->options('name') && 'org_groups' == $tax ) wp_die(var_dump($terms));
+				// if( 'staff' == $cpt_instance->options('name') && 'org_groups' == $tax ) wp_die(var_dump($terms));				
 				foreach ( $terms as $term ) {
-					if ( ! is_wp_error( $term ) && ! property_exists( $term, 'invalid_taxonomy' ) && ! empty( $term ) ) {
+					// Normalize: if a term array was returned (e.g., from get_terms), use the first item.
+					$term = is_array($term) ? reset($term) : $term;
+					if ( ! is_wp_error( $term ) && ! empty( $term ) && $term instanceof \WP_Term ) {
 						// wp_die(var_dump($terms));
 						// var_dump($term);
 						$choices[] = array( 'value' => $term->slug, 'name' => $term->name );

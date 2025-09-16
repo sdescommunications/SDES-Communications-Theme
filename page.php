@@ -5,6 +5,7 @@
 use SDES\SDES_Static as SDES_Static;
 
 get_header('second');
+$location = isset($location) ? $location : '';
 ?>
 <!-- content area -->
 

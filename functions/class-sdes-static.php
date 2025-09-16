@@ -221,27 +221,29 @@ class DOMDocument_Smart extends \DOMDocument {
 		static::$IsLibxmlModern = defined('\LIBXML_HTML_NOIMPLIED') && defined('\LIBXML_HTML_NODEFDTD');
 	}
 	/** Load contents after wrapping it in a span tag. */
-	public function loadHTML( $contents, $options = 0 ) {
-		if ( static::$IsLibxmlModern ) {
-			// use http://stackoverflow.com/a/31426408
-			// Tell libxml not to load html, body, or doctype definition, then load contents into a span tag.
-			if ( 0 === $options ) { $options = \LIBXML_HTML_NOIMPLIED | \LIBXML_HTML_NODEFDTD; }
-			parent::loadHTML( "<span>{$contents}</span>", $options );
-		} else {
-			// Load contents into a span tag, remove the doctype, then replace the html tag with the span tag.
-			parent::loadHTML( "<span>{$contents}</span>", $options );
-			// http://stackoverflow.com/a/6953808
-			$this->removeChild( $this->doctype ); // Remove <!DOCTYPE.
-			$newnode = $this->firstChild->firstChild->firstChild; // html>body>span.
-			$this->replaceChild( $newnode, $this->firstChild ); // Replace first node with span wrapper.
-		}
-	}
+public function loadHTML(string $contents, int $options = 0, ?string $encoding = null): bool {
+    if ( static::$IsLibxmlModern ) {
+        if ( $options === 0 ) { $options = \LIBXML_HTML_NOIMPLIED | \LIBXML_HTML_NODEFDTD; }
+        parent::loadHTML("<span>{$contents}</span>", $options, $encoding);
+    } else {
+        parent::loadHTML("<span>{$contents}</span>", $options, $encoding);
+        $this->removeChild($this->doctype);
+        $newnode = $this->firstChild->firstChild->firstChild;
+        $this->replaceChild($newnode, $this->firstChild);
+    }
+    return true;
+}
 
 	/** Return HTML content without the span wrapper. */
-	public function saveHTML() {
-		$with_span = parent::saveHTML();
-		return static::remove_span_wrapper( $with_span );
-	}
+public function saveHTML(?\DOMNode $node = null): string|false {
+    // If a specific node was requested, defer to the parent implementation.
+    if ($node !== null) {
+        return parent::saveHTML($node);
+    }
+    // Otherwise return HTML without the <span> wrapper we add in loadHTML().
+    $with_span = parent::saveHTML();
+    return static::remove_span_wrapper($with_span);
+}
 	/** Remove '<span>' from the front of a string and remove '</span>' from its end.*/
 	public static function remove_span_wrapper( $wrapped_text ) {
 		// return substr( $document->saveHTML(), strlen('<span>'), -1*strlen('</span>')-1 );
@@ -253,5 +255,7 @@ class DOMDocument_Smart extends \DOMDocument {
 		return $this->saveHTML();
 	}
 	/** Call the default DOMDocument::saveHTML method. */
-	public static function saveHTML_dumb( $node = null, $options ) { return parent::saveHTML( $node, $options ); }
+	public static function saveHTML_dumb(?\DOMNode $node = null): string|false { 
+    return parent::saveHTML($node); 
+}
 }

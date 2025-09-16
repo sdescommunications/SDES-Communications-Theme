@@ -1,74 +1,50 @@
-(function($){
-$(document).ready(function() {
+// template-option.js
+jQuery(function($){
+  var postId  = parseInt(window.data && data.postID, 10) || 0;
+  var isFront = parseInt(window.data && data.isFrontPage, 10) || 0;
 
-    var $page_template = $('#page_template'),
-        $side = $('#custom_page_metabox'),
-        $billboard = $('#billboard-meta-box'),
-        $service = $('#service-meta-box'),
-        $bt = $('#billTag'),
-        $bu = $('#billUrl'),
-        $btb = $('#billTagb'),
-        $bub = $('#billUrlb'),
-        $isfrontpage = data.isFrontPage,
-        $pagid = data.postID;
+  // meta box elements (adjust IDs if they differ)
+  var $side = $('#custom_page_metabox');      // side column box
+  var $bill = $('#billboard-meta-box');       // billboard box
+  var $svc  = $('#service-meta-box');         // services box
+  var $bt   = $('#billTag'),  $btb = $('#billTagb'); // tag fields
+  var $bu   = $('#billUrl'),  $bub = $('#billUrlb'); // url fields
 
-    $page_template.change(function() {
-        if ($(this).val() == 'content-right-sidecol.php' || $(this).val() == 'content-left-sidecol.php'){
-            $side.show();
-            $billboard.hide();
-            $service.hide();
-            
+  function hideAll(){ $side.hide(); $bill.hide(); $svc.hide(); }
 
-        }else if ($(this).val() == 'content-billboard-video.php' && $isfrontpage == $pagid){
-            $billboard.show();
-            $side.show();
-            $bt.hide();
-            $btb.hide();
-            $bub.show();
-            $bu.show();
-            $service.hide();
+  function applyFor(template){
+    // Show/hide EXACTLY as theme expects:
+    if (template === 'content-right-sidecol.php' || template === 'content-left-sidecol.php') {
+      $side.show(); $bill.hide(); $svc.hide();
+    } else if (template === 'content-billboard.php') {
+      $bill.show(); $side.show(); $svc.hide(); $bt.show(); $btb.show(); $bu.hide(); $bub.hide();
+    } else if (template === 'content-billboard-full.php') {
+      $bill.show(); $side.hide(); $svc.hide(); $bt.show(); $btb.show(); $bu.hide(); $bub.hide();
+    } else if (template === 'content-billboard-video.php' && isFront === postId) {
+      $bill.show(); $side.show(); $svc.hide(); $bt.hide(); $btb.hide(); $bu.show(); $bub.show();
+    } else if (template === 'content-billboard-video.php') {
+      $bill.show(); $side.hide(); $svc.hide(); $bt.hide(); $btb.hide(); $bu.show(); $bub.show();
+    } else if (template === 'content-services.php' || template === 'content-services-right-sidecol.php') {
+      $svc.show(); $side.hide(); $bill.hide();
+    } else {
+      hideAll();
+    }
+  }
 
-        }else if($(this).val() == 'content-billboard.php' ){
-        	$billboard.show();
-			$side.show();
-            $bt.show();
-            $btb.show();
-            $bub.hide();
-            $bu.hide();
-            $service.hide();
+  // 1) React to changes (when you pick a template)
+  $(document).on('change', '#page_template', function(){
+    applyFor(this.value || '');
+  });
 
-        }else if($(this).val() == 'content-billboard-full.php' ){
-            $billboard.show();
-            $side.hide();
-            $bt.show();
-            $btb.show();
-            $bub.hide();
-            $bu.hide();
-            $service.hide();
+  // 2) Initialize once on load (when editing an existing page)
+  function initOnce(){
+    var el = document.getElementById('page_template');
+    if (!el) return;
+    applyFor(el.value || '');
+  }
 
-        }else if($(this).val() == 'content-billboard-video.php' ){
-            $billboard.show();
-            $side.hide();
-            $bt.hide();
-            $btb.hide();
-            $bub.show();
-            $bu.show();
-            $service.hide();
-            
-           
-        }else if($(this).val() == 'content-services.php' || $(this).val() == 'content-services-right-sidecol.php' ){
-            $service.show();
-            $side.hide();
-            $billboard.hide();
-           
-        }
-        else {
-            $side.hide();
-            $billboard.hide();
-            $service.hide();
-            
-        }
-    }).change();
-
+  // Run after DOM ready and after all meta boxes are in the DOM
+  initOnce();
+  $(window).on('load', initOnce);
+  setTimeout(initOnce, 0); // in case meta boxes mount async
 });
-})(jQuery);

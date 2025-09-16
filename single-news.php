@@ -22,7 +22,7 @@
 				<img src="<?= !empty($image_url)? $image_url :  get_stylesheet_directory_uri() . '/images/blank.png' ?>" class="img-fluid">
 				<div class="news-content">
 					<h3 class="news-strapline"><?= $strapline ?></h3>
-					<p class="datestamp">Posted <?= get_the_date( 'l, F j, Y @ g:i A', $object->post->ID ); ?></p>
+					<p class="datestamp">Posted <?= get_the_date( 'l, F j, Y @ g:i A', get_the_ID() ); ?></p>
 					<p>
 						<?= the_content(); ?>
 					</p>

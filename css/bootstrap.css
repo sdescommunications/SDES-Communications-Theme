@@ -910,25 +910,25 @@ footer {
     footer .col-lg-4, footer .col-lg-3 {
       margin-bottom: 25px; } }
 
-#accordion .card {
+#accordion, [id^="accordion-"], .accordion .card {
   border: none;
   border-bottom: 1px solid #eee; }
-  #accordion .card .card-header {
+  #accordion, [id^="accordion-"], .accordion .card .card-header {
     border: none;
     background: none; }
-    #accordion .card .card-header a {
+    #accordion, [id^="accordion-"], .accordion .card .card-header a {
       color: #000; }
-      #accordion .card .card-header a i {
+      #accordion, [id^="accordion-"], .accordion .card .card-header a i {
         color: #ffcc00; }
-    #accordion .card .card-header a:link {
+    #accordion, [id^="accordion-"], .accordion .card .card-header a:link {
       text-decoration: none; }
-    #accordion .card .card-header a:hover {
+    #accordion, [id^="accordion-"], .accordion .card .card-header a:hover {
       text-decoration: none;
       color: #ffcc00; }
-    #accordion .card .card-header a:active {
+    #accordion, [id^="accordion-"], .accordion .card .card-header a:active {
       text-decoration: none;
       color: #636c72; }
-    #accordion .card .card-header a:visited {
+    #accordion, [id^="accordion-"], .accordion .card .card-header a:visited {
       text-decoration: none; }
 
 .alert {

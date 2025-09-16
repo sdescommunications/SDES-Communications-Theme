@@ -28,7 +28,6 @@
 	<link rel="stylesheet" href="css/why.css" media="screen" />
 	<![endif]-->	
 
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" id="ucfhb-script" src="//universityheader.ucf.edu/bar/js/university-header.js"></script>
 
 	<!-- our project just needs Font Awesome Solid + Brands -->

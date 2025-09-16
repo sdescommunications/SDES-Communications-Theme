@@ -216,60 +216,60 @@ class sc_events extends ShortcodeBase {
 	public static function callback( $attr, $content = '' ) {
 		$attr = shortcode_atts(
 			array(
-				'id' => 41, // SDES Events calendar.
-				'limit' => 6,
-				'header'    => 'Upcoming Events',
+				'id'       => 41,
+				'limit'    => 6,
+				'header'   => 'Upcoming Events',
 				'timezone' => 'America/New_York',
 			), $attr
 		);
-		if ( null === $attr['id'] ) { return true; }
-		
-		// Open cURL instance for the UCF Event Calendar RSS feed.
-		$ch = curl_init( "https://events.ucf.edu/?calendar_id={$attr['id']}&upcoming=upcoming&format=rss" );
 
-		// Set cURL options.
+		if ( null === $attr['id'] ) {
+			return true;
+		}
+
+		$has_error = false;
+		$xml = null;
+
+	// Fetch RSS feed
+		$ch = curl_init( "https://events.ucf.edu/?calendar_id={$attr['id']}&upcoming=upcoming&format=rss" );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $ch, CURLOPT_HEADER, 0 );
 		curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
 		$rss = curl_exec( $ch );
-		curl_close( $ch );
-		$rss = @utf8_encode( $rss );
-		// Disable libxml errors and allow user to fetch error information as needed.
-		libxml_use_internal_errors( true );
-		try {
-			$xml = new SimpleXMLElement( $rss, LIBXML_NOCDATA );
-		} catch ( Exception $e ) { }
-		// If there are errors.
-		if ( libxml_get_errors() ) {
-			ob_start();
-			?>
-			<li>Failed loading XML</li>
-			<?php foreach ( libxml_get_errors() as $error ) : ?>
-				<li><?= htmlentities( $error->message ) ?></li>
-			<?php endforeach;
-			return ob_get_clean();
-		}		
 
-		// Set limit if items returned are smaller than limit.
-		$count = ( count( $xml->channel->item ) > $attr['limit'] ) ? $attr['limit'] : count( $xml->channel->item );
+		if ( $rss === false || curl_errno( $ch ) ) {
+			$has_error = true;
+		} else {
+			$rss = @utf8_encode( $rss );
+			libxml_use_internal_errors( true );
+			try {
+				$xml = new SimpleXMLElement( $rss, LIBXML_NOCDATA );
+			} catch ( Exception $e ) {
+				$has_error = true;
+			}
+			if ( libxml_get_errors() ) {
+				libxml_clear_errors();
+				$has_error = true;
+			}
+		}
+
+		curl_close( $ch );
+
 		ob_start();
 		?>
 
 		<h2><?= $attr['header'] ?></h2>
 		<hr>
-		<?= $footer ?>
 
-		<?php
-					// Check for items.
-		if ( 0 === count( $xml->channel->item ) ) : ?>
+		<?php if ( $has_error ): ?>
+			<p>Something went wrong with events.ucf.edu, please try again.</p>
+		<?php elseif ( count( $xml->channel->item ) === 0 ): ?>
 			<p>Sorry, no events could be found.</p>
-			<?php
-		else :
-						// Loop through until limit.
-			for ( $i = 0; $i < $count; $i++ ) {
-							// Prepare xml output to html.
+		<?php else:
+			$count = min( count( $xml->channel->item ), $attr['limit'] );
+			for ( $i = 0; $i < $count; $i++ ):
 				$title = htmlentities( $xml->channel->item[ $i ]->title );
-				$title = ( strlen( $title ) > 25) ? substr( $title, 0, 19 ) : $title;
+				$title = ( strlen( $title ) > 25 ) ? substr( $title, 0, 19 ) : $title;
 				$loc = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->name );
 				$map = htmlentities( $xml->channel->item[ $i ]->children( 'ucfevent', true )->location->children( 'ucfevent', true )->mapurl );
 				$startTime = new \DateTime( $xml->channel->item[ $i ]->children( 'ucfevent', true )->startdate, new \DateTimeZone( $attr['timezone'] ) );
@@ -277,34 +277,31 @@ class sc_events extends ShortcodeBase {
 				$context['month'] = $startTime->format( 'M' );
 				$context['day'] = $startTime->format( 'j' );
 				$context['link'] = htmlentities( $xml->channel->item[ $i ]->link );
-
-				?>    
+				?>
 				<div class="row event">
-					<div class="col-sm-3 date">								
+					<div class="col-sm-3 date">
 						<div class="month"><?= $context['month'] ?></div>
-						<div class="day"><?= $context['day'] ?></div>								
+						<div class="day"><?= $context['day'] ?></div>
 					</div>
 					<div class="col-sm-8 description">
 						<h3 class="event-title">
-							<a href="<?= $context['link'] ?>">
-								<?= $title ?>
-
-							</a>
+							<a href="<?= $context['link'] ?>"><?= $title ?></a>
 						</h3>
-						<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>			
+						<h4 class="location"><a href="<?= $context['link'] ?>"><?= $loc ?></a></h4>
 					</div>
 				</div>
-			<?php }
-		endif; ?>
+			<?php endfor; ?>
 
-		<p>
-			<a class="btn btn-callout float-right" href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">More Events</a>
-		</p>
-		<div class="clearfix"></div>
-		
-		<?php
+			<p>
+				<a class="btn btn-callout float-right" href="//events.ucf.edu/?calendar_id=<?= $attr['id'] ?>&amp;upcoming=upcoming">More Events</a>
+			</p>
+			<div class="clearfix"></div>
+
+		<?php endif;
+
 		return ob_get_clean();
 	}
+
 }
 
 require_once( get_stylesheet_directory().'/custom-posttypes.php' );
@@ -687,7 +684,7 @@ class sc_iframe extends ShortcodeBase{
 			<?php
 				} else {
 			?>
-				<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no" ></iframe>
+				<iframe src="<?= $attr['if_url'] ?>" width="<?= $attr['if_width'] ?>" height="<?= $attr['if_height'] ?>" frameborder="0" scrolling="no" allowfullscreen></iframe>
 			<?php
 				}
 			?>
@@ -881,12 +878,31 @@ class sc_rssread extends ShortcodeBase{
 			</div>
 			
 			<script>
-				$(document).ready(function(){
-					$( "#feed" ).load( "<?= get_stylesheet_directory_uri() ?>/functions/handshake-rss.php", {url: "<?= $attr['url'] ?>"}, function() {
-							$("#loader").hide();
-					});
+				document.addEventListener('DOMContentLoaded', function () {
+				var feedEl   = document.getElementById('feed');
+				var loaderEl = document.getElementById('loader');
+
+				var endpoint = "<?= esc_url( get_stylesheet_directory_uri() ); ?>/functions/handshake-rss.php";
+				var feedUrl  = "<?= esc_js( $attr['url'] ); ?>";
+
+				fetch(endpoint, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+					body: new URLSearchParams({ url: feedUrl }).toString()
+				})
+				.then(function (res) { return res.text(); })
+				.then(function (html) {
+					if (feedEl) feedEl.innerHTML = html;
+				})
+				.catch(function (err) {
+					console.error('Feed load failed:', err);
+				})
+				.finally(function () {
+					if (loaderEl) loaderEl.style.display = 'none';
+				});
 				});
 			</script>
+
 		<?php
 		return ob_get_clean();
 	}
